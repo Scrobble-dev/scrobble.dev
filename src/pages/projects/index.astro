@@ -126,7 +126,7 @@ const schema = [
                   data-license={project.license ? 'Published licence' : 'No licence verified'}
                   data-checked-at={project.checkedAt}
                 >
-                  <th scope="row"><a href={project.url}>{project.name}</a><span>{project.summary}</span></th>
+                  <th scope="row"><a href={project.url} aria-label={project.id === 'fasti' ? 'Open Fasti documentation' : undefined}>{project.name}</a><span>{project.summary}</span></th>
                   <td>{project.media.join(', ')}</td>
                   <td>{project.category}</td>
                   <td>{project.capture}</td>

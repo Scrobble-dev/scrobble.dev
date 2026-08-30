@@ -187,7 +187,7 @@ pre { margin: 0 0 34px; padding: 28px; overflow: auto; border-left: 5px solid va
 .catalogue th[aria-sort="ascending"] .sort-button::after { content: "↑"; }
 .catalogue th[aria-sort="descending"] .sort-button::after { content: "↓"; }
 .catalogue tbody th { font-family: Arial, sans-serif; }
-.catalogue tbody th a { display: block; width: fit-content; font-family: Georgia, serif; font-size: 1.28rem; }
+.catalogue tbody th a { min-height: 44px; display: inline-flex; align-items: center; width: fit-content; font-family: Georgia, serif; font-size: 1.28rem; }
 .catalogue tbody th span, .catalogue td span { display: block; margin-top: 7px; color: var(--ink-soft); font-size: 14px; font-weight: 400; }
 .catalogue td { font-size: 14px; }
 .catalogue td:last-child > span:first-child { margin-top: 0; }
