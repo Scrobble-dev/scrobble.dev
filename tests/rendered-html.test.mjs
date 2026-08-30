@@ -31,6 +31,7 @@ test('builds the knowledge-first field guide and catalogue', async () => {
   assert.match(projects, /More filters/);
   assert.match(projects, /Reset all/);
   assert.match(projects, /pinned v0\.2 specification/);
+  assert.match(projects, /href="https:\/\/fasti\.scrobble\.dev\/" aria-label="Open Fasti documentation">Fasti<\/a>/);
   assert.match(faq, /Why is anime a separate catalogue facet/);
   assert.match(draft, /not an adopted industry standard/);
   assert.match(about, /A maintained reference for scrobbling and media activity/);

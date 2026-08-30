@@ -30,6 +30,8 @@ test('keeps primary navigation compact and task-oriented', () => {
 });
 
 test('centralizes every required footer reference', () => {
+  assert.deepEqual(SITE.footerSections.map(({ label }) => label), ['Field guide', 'Projects', 'Support the maintainer']);
+
   const configuredLinks = [
     ...SITE.footerSections.flatMap(({ links }) => links),
     ...SITE.footerActions
@@ -38,6 +40,12 @@ test('centralizes every required footer reference', () => {
   for (const [label, href] of requiredFooterLinks) {
     assert.ok(configuredLinks.some(([configuredLabel, configuredHref]) => configuredLabel === label && configuredHref === href));
   }
+});
+
+test('keeps catalogue project links touch-sized', async () => {
+  const styles = await readFile(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+
+  assert.match(styles, /\.catalogue tbody th a \{[^}]*min-height: 44px;/);
 });
 
 test('keeps Danny with Floppy and Ryan with Scrobble.dev maintenance', () => {
