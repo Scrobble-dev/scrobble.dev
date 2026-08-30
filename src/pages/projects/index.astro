@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CATALOGUE_CHECKED_AT, CATEGORIES, LICENSE_STATES, MEDIA, PROJECTS, SOURCE_STATES } from '../../data/projects.mjs';
+import { CATALOGUE_UPDATED_AT, CATEGORIES, LICENSE_STATES, MEDIA, PROJECTS, SOURCE_STATES } from '../../data/projects.mjs';
 
 const title = 'Scrobbling project catalogue — Scrobble.dev';
-const description = 'A source-linked catalogue of scrobbling services, trackers, clients and connectors, filterable by media type and project category.';
+const description = 'A source-linked catalogue of scrobbling services, record systems, trackers, clients and connectors, filterable by media type and project category.';
 const dataset = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -11,8 +11,8 @@ const dataset = {
   name: 'Scrobbling project catalogue',
   description,
   url: 'https://scrobble.dev/projects/',
-  version: '0.3',
-  dateModified: CATALOGUE_CHECKED_AT,
+  version: '0.4',
+  dateModified: CATALOGUE_UPDATED_AT,
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
   isAccessibleForFree: true,
   keywords: ['scrobbling', 'media tracking', 'watch history', 'listening history', 'open source'],
@@ -58,18 +58,18 @@ const schema = [
   }
 ];
 ---
-<BaseLayout {title} {description} type="CollectionPage" schema={schema} markdown="/knowledge/projects.md" modified={CATALOGUE_CHECKED_AT} status="stable">
+<BaseLayout {title} {description} type="CollectionPage" schema={schema} markdown="/knowledge/projects.md" modified={CATALOGUE_UPDATED_AT} status="stable">
   <article class="shell catalogue-hero h-entry">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><span aria-current="page">Projects</span></nav>
     <p class="kicker">Project catalogue</p>
     <h1 class="p-name">Scrobbling projects, compared by what they record.</h1>
     <p class="standfirst e-summary">This catalogue records what each project's own documentation or repository described when checked. Inclusion is not an endorsement.</p>
-    <p class="catalogue-method">Catalogue checked {CATALOGUE_CHECKED_AT}. An unknown lifecycle means the checked source did not establish whether the project is active or archived.</p>
+    <p class="catalogue-method">Catalogue updated {CATALOGUE_UPDATED_AT}. Each row gives its source check date. An unknown lifecycle means the checked source did not establish whether the project is active or archived.</p>
   </article>
 
   <section class="catalogue-band" aria-labelledby="catalogue-title">
     <div class="shell section">
-      <div class="catalogue-heading"><p class="section-label">{PROJECTS.length} documented projects</p><h2 id="catalogue-title">Find a tracker, client or connector</h2></div>
+      <div class="catalogue-heading"><p class="section-label">{PROJECTS.length} documented projects</p><h2 id="catalogue-title">Find a record system, tracker, client or connector</h2></div>
       <div class="catalogue">
         <form class="catalogue-filters" id="catalogue-filters" aria-label="Filter project catalogue">
           <label>Search projects<input id="query-filter" name="q" type="search" autocomplete="off" placeholder="Name, medium or capture method" /></label>

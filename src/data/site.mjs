@@ -15,7 +15,8 @@ export const SITE = {
         { label: 'Floppy', href: 'https://github.com/dannyvfilms/Floppy' },
         { label: 'Work on Floppy', href: 'https://github.com/dannyvfilms/Floppy/issues' },
         { label: 'Sponsor Danny', href: 'https://github.com/sponsors/dannyvfilms' },
-        { label: 'FloppyDesktop', href: 'https://github.com/Electric-Town/FloppyDesktop' }
+        { label: 'FloppyDesktop', href: 'https://github.com/Electric-Town/FloppyDesktop' },
+        { label: 'Fasti documentation', href: 'https://fasti.scrobble.dev/' }
       ]
     },
     {
