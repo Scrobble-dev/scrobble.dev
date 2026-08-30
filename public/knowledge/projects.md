@@ -1,16 +1,17 @@
 ---
 type: Dataset
 title: Scrobbling project catalogue
-description: Source-linked descriptions of scrobbling services, trackers, clients and connectors.
+description: Source-linked descriptions of scrobbling services, record systems, trackers, clients and connectors.
 resource: https://scrobble.dev/projects/
 tags: [scrobbling, media-tracking, projects]
 status: stable
 stale_after: 2026-11-11
-generated: { by: process:scrobble-dev-generate, at: 2026-08-11T23:00:00Z }
-verified: { by: process:project-source-review, at: 2026-08-11T23:00:00Z }
+generated: { by: process:scrobble-dev-generate, at: 2026-08-30T13:28:00Z }
+verified: { by: process:project-source-review, at: 2026-08-30T13:28:00Z }
 sources:
   - { id: floppy-floppy-repository, resource: "https://github.com/dannyvfilms/Floppy", title: "Floppy repository", retrieved_at: 2026-08-11 }
   - { id: floppy-desktop-floppy-desktop-repository, resource: "https://github.com/Electric-Town/FloppyDesktop", title: "FloppyDesktop repository", retrieved_at: 2026-08-11 }
+  - { id: fasti-fasti-readme, resource: "https://github.com/Scrobble-dev/Fasti/blob/9511a46b6177c1ec27aa9398ac222e3b719b41ea/README.md", title: "Fasti repository status and scope", retrieved_at: 2026-08-30 }
   - { id: trakt-trakt-scrobble-docs, resource: "https://docs.trakt.tv/reference/about-scrobble", title: "Trakt scrobble documentation", retrieved_at: 2026-08-11 }
   - { id: simkl-simkl-service, resource: "https://simkl.com/", title: "Simkl service", retrieved_at: 2026-08-11 }
   - { id: letterboxd-letterboxd-welcome, resource: "https://letterboxd.com/welcome/", title: "Letterboxd welcome guide", retrieved_at: 2026-08-11 }
@@ -30,12 +31,13 @@ sources:
 
 # Scrobbling project catalogue
 
-This catalogue records what each project's own documentation or repository described when checked on 2026-08-11. Inclusion is not an endorsement. `Unknown` means the checked source did not establish a lifecycle state.
+This catalogue was updated on 2026-08-30. Each row records when its source was checked. Inclusion is not an endorsement. `Unknown` means the checked source did not establish a lifecycle state.
 
 | Project | Media | Category | Capture | Source state | Licence | Lifecycle | Checked | Evidence and contribution |
 |---|---|---|---|---|---|---|---|---|
 | Floppy | Film, Television, Anime, Books, Manga, Comics, Music, Podcasts, Video games, Board games | Tracker | Manual entry, imports and integrations | Open source | AGPL-3.0 | active | 2026-08-11 | [Source][^floppy-floppy-repository] · [Contribute](https://github.com/dannyvfilms/Floppy/issues) |
 | FloppyDesktop | Film, Television, Anime, Books, Manga, Comics, Music, Podcasts, Video games, Board games | Client | Desktop client | Open source | AGPL-3.0 | active | 2026-08-11 | [Source][^floppy-desktop-floppy-desktop-repository] · [Contribute](https://github.com/Electric-Town/FloppyDesktop/issues) |
+| Fasti | Film, Television, Anime, Books, Music, Podcasts, Video games | Record system | Authenticated API observations and governed imports | Open source | AGPL-3.0-or-later | active | 2026-08-30 | [Source][^fasti-fasti-readme] · [Contribute](https://github.com/Scrobble-dev/Fasti/issues) |
 | Trakt | Film, Television | Service | Manual history and media-centre scrobbling | No public source repository verified | No licence verified | unknown | 2026-08-11 | [Source][^trakt-trakt-scrobble-docs] · [Contribute](https://forums.trakt.tv/) |
 | Simkl | Film, Television, Anime | Service | Automatic trackers, imports, API and manual updates | No public source repository verified | No licence verified | unknown | 2026-08-11 | [Source][^simkl-simkl-service] · [Contribute](https://support.simkl.org/) |
 | Letterboxd | Film | Service | Manual logging and CSV import | No public source repository verified | No licence verified | unknown | 2026-08-11 | [Source][^letterboxd-letterboxd-welcome] · [Contribute](https://letterboxd.com/contact/) |
@@ -64,6 +66,7 @@ This catalogue records what each project's own documentation or repository descr
 
 [^floppy-floppy-repository]: [Floppy repository](https://github.com/dannyvfilms/Floppy), checked 2026-08-11.
 [^floppy-desktop-floppy-desktop-repository]: [FloppyDesktop repository](https://github.com/Electric-Town/FloppyDesktop), checked 2026-08-11.
+[^fasti-fasti-readme]: [Fasti repository status and scope](https://github.com/Scrobble-dev/Fasti/blob/9511a46b6177c1ec27aa9398ac222e3b719b41ea/README.md), checked 2026-08-30.
 [^trakt-trakt-scrobble-docs]: [Trakt scrobble documentation](https://docs.trakt.tv/reference/about-scrobble), checked 2026-08-11.
 [^simkl-simkl-service]: [Simkl service](https://simkl.com/), checked 2026-08-11.
 [^letterboxd-letterboxd-welcome]: [Letterboxd welcome guide](https://letterboxd.com/welcome/), checked 2026-08-11.

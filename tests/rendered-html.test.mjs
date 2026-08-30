@@ -54,12 +54,38 @@ test('filters and sorts the evidence registry without changing its source', () =
     filterProjects(PROJECTS, { media: 'Film', category: 'Connector', sourceState: 'Open source' }).map(({ name }) => name),
     ['Movary Kodi add-on']
   );
-  assert.equal(filterProjects(PROJECTS, { media: 'Books' }).length, 2);
+  assert.equal(filterProjects(PROJECTS, { media: 'Books' }).length, 3);
   assert.equal(filterProjects(PROJECTS, { sourceState: 'No public source repository verified' }).length, 4);
   assert.deepEqual(filterProjects(PROJECTS, { query: 'self-hosted' }).map(({ name }) => name), ['Floppy', 'FloppyDesktop', 'multi-scrobbler', 'Maloja', 'Movary']);
-  assert.deepEqual(sortProjects(PROJECTS, 'name').slice(0, 3).map(({ name }) => name), ['Floppy', 'FloppyDesktop', 'Last.fm']);
+  assert.deepEqual(sortProjects(PROJECTS, 'name').slice(0, 3).map(({ name }) => name), ['Fasti', 'Floppy', 'FloppyDesktop']);
   assert.deepEqual(sortProjects(PROJECTS, 'name', 'desc').slice(0, 2).map(({ name }) => name), ['WeTrakr', 'Web Scrobbler']);
   assert.deepEqual(PROJECTS.map(({ id }) => id), [...PROJECTS].map(({ id }) => id));
+  assert.deepEqual(
+    PROJECTS.find(({ id }) => id === 'fasti'),
+    {
+      id: 'fasti',
+      name: 'Fasti',
+      summary: 'Local-first media Record and observation service. No supported public release exists.',
+      media: ['Film', 'Television', 'Anime', 'Books', 'Music', 'Podcasts', 'Video games'],
+      category: 'Record system',
+      capture: 'Authenticated API observations and governed imports',
+      sourceState: 'Open source',
+      license: 'AGPL-3.0-or-later',
+      url: 'https://fasti.scrobble.dev/',
+      repository: 'https://github.com/Scrobble-dev/Fasti',
+      contribute: 'https://github.com/Scrobble-dev/Fasti/issues',
+      lifecycle: 'active',
+      checkedAt: '2026-08-30',
+      sources: [
+        {
+          id: 'fasti-readme',
+          title: 'Fasti repository status and scope',
+          url: 'https://github.com/Scrobble-dev/Fasti/blob/9511a46b6177c1ec27aa9398ac222e3b719b41ea/README.md',
+          checkedAt: '2026-08-30'
+        }
+      ]
+    }
+  );
 });
 
 test('keeps catalogue distributions and visible structured data in parity', async () => {
@@ -83,6 +109,6 @@ test('keeps catalogue distributions and visible structured data in parity', asyn
   const itemList = blocks.find((block) => block['@type'] === 'ItemList');
   const dataset = blocks.find((block) => block['@type'] === 'Dataset');
   assert.equal(itemList.numberOfItems, PROJECTS.length);
-  assert.equal(dataset.version, '0.3');
-  assert.equal(dataset.dateModified, parsed.checkedAt);
+  assert.equal(dataset.version, '0.4');
+  assert.equal(dataset.dateModified, parsed.updatedAt);
 });

@@ -1,8 +1,9 @@
 export const CATALOGUE_CHECKED_AT = '2026-08-11';
+export const CATALOGUE_UPDATED_AT = '2026-08-30';
 
 export const MEDIA = ['Film', 'Television', 'Anime', 'Books', 'Manga', 'Comics', 'Music', 'Podcasts', 'Video games', 'Board games'];
 
-const source = (id, title, url) => ({ id, title, url, checkedAt: CATALOGUE_CHECKED_AT });
+const source = (id, title, url, checkedAt = CATALOGUE_CHECKED_AT) => ({ id, title, url, checkedAt });
 
 /**
  * Catalogue facts are deliberately descriptive. `unknown` means the checked
@@ -58,6 +59,29 @@ export const PROJECTS = [
     lifecycle: 'active',
     checkedAt: CATALOGUE_CHECKED_AT,
     sources: [source('floppy-desktop-repository', 'FloppyDesktop repository', 'https://github.com/Electric-Town/FloppyDesktop')]
+  },
+  {
+    id: 'fasti',
+    name: 'Fasti',
+    summary: 'Local-first media Record and observation service. No supported public release exists.',
+    media: ['Film', 'Television', 'Anime', 'Books', 'Music', 'Podcasts', 'Video games'],
+    category: 'Record system',
+    capture: 'Authenticated API observations and governed imports',
+    sourceState: 'Open source',
+    license: 'AGPL-3.0-or-later',
+    url: 'https://fasti.scrobble.dev/',
+    repository: 'https://github.com/Scrobble-dev/Fasti',
+    contribute: 'https://github.com/Scrobble-dev/Fasti/issues',
+    lifecycle: 'active',
+    checkedAt: CATALOGUE_UPDATED_AT,
+    sources: [
+      source(
+        'fasti-readme',
+        'Fasti repository status and scope',
+        'https://github.com/Scrobble-dev/Fasti/blob/9511a46b6177c1ec27aa9398ac222e3b719b41ea/README.md',
+        CATALOGUE_UPDATED_AT
+      )
+    ]
   },
   {
     id: 'trakt',

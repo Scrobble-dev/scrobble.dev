@@ -15,6 +15,7 @@ const requiredFooterLinks = [
   ['Scrobble.dev source', 'https://github.com/Electric-Town/scrobble.dev'],
   ['Floppy', 'https://github.com/dannyvfilms/Floppy'],
   ['FloppyDesktop', 'https://github.com/Electric-Town/FloppyDesktop'],
+  ['Fasti documentation', 'https://fasti.scrobble.dev/'],
   ['Improve this field guide', 'https://github.com/Electric-Town/scrobble.dev/issues/new'],
   ['Work on Floppy', 'https://github.com/dannyvfilms/Floppy/issues'],
   ['Sponsor Danny', 'https://github.com/sponsors/dannyvfilms'],
