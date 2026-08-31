@@ -13,20 +13,28 @@ const description = 'Add source-backed scrobbling knowledge to Scrobble.dev or b
 
     <section class="section" aria-labelledby="paths">
       <div class="section-intro"><p class="section-label">Two ways in</p><h2 id="paths">Knowledge on one side. Software on the other.</h2></div>
-      <div class="contribution-lanes">
-        <article>
-          <p class="project-type">Scrobble.dev</p>
-          <h3>Add or correct knowledge</h3>
-          <p>Bring a first-party source, a factual summary and one missing or incorrect claim. Project catalogue entries must name the media type, role, capture method, source availability and contribution route.</p>
-          <ul><li>Use plain Markdown and stable links.</li><li>Keep one topic or correction per change.</li><li>Separate documented behaviour from interpretation.</li></ul>
-          <div class="project-links"><a class="button primary" href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Suggest a site change</a><a href="https://github.com/Scrobble-dev/scrobble.dev">Edit the repository</a></div>
+      <div class="row g-4 contribution-lanes">
+        <article class="col-lg-6">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <p class="project-type">Scrobble.dev</p>
+              <h3 class="card-title">Add or correct knowledge</h3>
+              <p class="card-text">Bring a first-party source, a factual summary and one missing or incorrect claim. Project catalogue entries must name the media type, role, capture method, source availability and contribution route.</p>
+              <ul><li>Use plain Markdown and stable links.</li><li>Keep one topic or correction per change.</li><li>Separate documented behaviour from interpretation.</li></ul>
+              <div class="project-links mt-auto"><a class="btn btn-primary" href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Suggest a site change</a><a class="btn btn-outline-secondary" href="https://github.com/Scrobble-dev/scrobble.dev">Edit the repository</a></div>
+            </div>
+          </div>
         </article>
-        <article>
-          <p class="project-type">Fasti</p>
-          <h3>Fix a tracking failure</h3>
-          <p>Name the media identity, the observed event, what the software recorded and what should survive a retry, correction, import or export.</p>
-          <ul><li>Add an anonymized example or reproducible sequence.</li><li>Name provider identifiers and numbering schemes.</li><li>Include a round-trip test when code changes behaviour.</li></ul>
-          <div class="project-links"><a class="button primary" href="https://github.com/Scrobble-dev/Fasti/issues">Browse Fasti issues</a><a href="https://github.com/Scrobble-dev/Fasti/blob/dev/CONTRIBUTING.md">Read the contribution guide</a></div>
+        <article class="col-lg-6">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <p class="project-type">Fasti</p>
+              <h3 class="card-title">Fix a tracking failure</h3>
+              <p class="card-text">Name the media identity, the observed event, what the software recorded and what should survive a retry, correction, import or export.</p>
+              <ul><li>Add an anonymized example or reproducible sequence.</li><li>Name provider identifiers and numbering schemes.</li><li>Include a round-trip test when code changes behaviour.</li></ul>
+              <div class="project-links mt-auto"><a class="btn btn-primary" href="https://github.com/Scrobble-dev/Fasti/issues">Browse Fasti issues</a><a class="btn btn-outline-secondary" href="https://github.com/Scrobble-dev/Fasti/blob/dev/CONTRIBUTING.md">Read the contribution guide</a></div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
