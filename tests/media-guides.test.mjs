@@ -31,7 +31,7 @@ test('builds source-linked audio, podcast, game and anime guides', async () => {
   assert.match(games, /CHScrobbler/);
 
   assert.match(anime, /Anime catalogues can disagree before playback starts/);
-  assert.match(anime, /animeApi issue #11/);
+  assert.match(anime, /Why catalogue disagreement matters/);
   assert.match(anime, /Missing event times/);
   assert.match(anime, /Require explicit deletion/);
 

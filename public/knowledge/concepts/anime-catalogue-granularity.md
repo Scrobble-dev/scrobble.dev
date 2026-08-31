@@ -8,7 +8,7 @@ status: stable
 stale_after: 2027-02-28
 verified: { by: process:project-source-review, at: 2026-08-31T12:00:00Z }
 sources:
-  - { id: animeapi-issue-11, resource: "https://github.com/nattadasu/animeApi/issues/11", title: "animeApi issue 11: anime tracking and catalogue interoperability discussion" }
+  - { id: animeapi-issue-11, resource: "https://github.com/nattadasu/animeApi/issues/11", title: "animeApi issue 11: request for feedback on anime mapping and tracking" }
 ---
 
 # Anime catalogue granularity
