@@ -1305,6 +1305,9 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 .project-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
 .project-actions .btn { min-height: 44px; display: inline-flex; align-items: center; }
 .task-list { margin: 0 0 24px; }
+.task-list .card { color: var(--ink); transition: border-color .12s ease, box-shadow .12s ease; }
+.task-list .card:hover { border-color: rgb(32 107 196 / 45%); box-shadow: 0 8px 20px rgb(24 36 51 / 8%); }
+.task-list .card-body { padding: 18px 20px; }
 .task-list .list-group-item { padding: 18px 20px; }
 .task-list strong, .task-list span { display: block; }
 .task-list strong { margin-bottom: 4px; font-family: Georgia, serif; font-size: 1.18rem; }
