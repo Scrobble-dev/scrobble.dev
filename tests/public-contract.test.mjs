@@ -69,6 +69,12 @@ test('keeps page status and modification dates opt-in', async () => {
   assert.match(layout, /\(status \|\| modified\)/);
 });
 
+test('keeps visited links legible in the dark homepage definition band', async () => {
+  const styles = await readFile(new URL('../src/styles/global.css', import.meta.url), 'utf8');
+
+  assert.match(styles, /\.definition-band a:visited\s*\{\s*color: white;\s*\}/);
+});
+
 test('renders desktop and native small-screen navigation landmarks', async () => {
   const home = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
   const desktop = home.match(/<nav class="shell nav desktop-nav" aria-label="Primary navigation">([\s\S]*?)<\/nav>/)?.[1];
