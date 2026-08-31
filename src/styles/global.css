@@ -1314,6 +1314,8 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 .principles-accordion .accordion-button { min-height: 56px; }
 .principle-number { margin-right: 12px; color: var(--accent-dark); font-family: "Courier New", monospace; font-size: 12px; }
 
+[data-theme="dark"] .principles-accordion .accordion-body { color: #cbd5e1; }
+
 @media (max-width: 640px) {
   .project-actions .btn { width: 100%; justify-content: center; }
   .field-notes.card > div { grid-template-columns: 1fr; gap: 6px; }
