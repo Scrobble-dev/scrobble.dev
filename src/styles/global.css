@@ -1268,6 +1268,7 @@ h4 { font-size: 1.15rem; }
 .definition-band .section-label { color: #d7e0ff; }
 .definition-band h2 { max-width: 28ch; }
 .definition-band p { max-width: var(--reading); color: #d8d5cd; }
+.definition-band a:visited { color: white; }
 .source-link { min-height: 40px; display: inline-flex; align-items: center; color: white; font-weight: 600; }
 .path-list { border-top: 3px solid currentColor; }
 .path-list article { display: grid; grid-template-columns: minmax(150px, .45fr) minmax(0, 1fr) auto; gap: 20px; align-items: start; padding-block: 18px; border-bottom: 1px solid #555; }
