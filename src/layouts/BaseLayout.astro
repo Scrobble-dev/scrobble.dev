@@ -23,6 +23,7 @@ const sourcePath = cleanPath === ''
   ? 'src/pages/index.astro'
   : (cleanPath.endsWith('.astro') ? `src/pages/${cleanPath}` : `src/pages/${cleanPath}/index.astro`);
 const githubEditUrl = `https://github.com/Scrobble-dev/scrobble.dev/blob/main/${sourcePath}`;
+const pageEditLabel = pathname === '/' ? 'home page' : pathname;
 
 // Dynamic BreadcrumbList generation for Google Search Gallery
 const pathSegments = pathname.split('/').filter(Boolean);
@@ -181,7 +182,7 @@ const baseSchema = [
           <div class="shell footer-bottom">
             <nav class="footer-actions" aria-label="Contribution links">
               <span>Contribute</span>
-              <a href={githubEditUrl} target="_blank" rel="noopener noreferrer">Edit this page on GitHub ↗</a>
+              <a href={githubEditUrl} target="_blank" rel="noopener noreferrer" aria-label={`Edit ${pageEditLabel} source on GitHub`}>Edit {pageEditLabel} on GitHub ↗</a>
               {SITE.footerActions.map((link) => <a href={link.href}>{link.label}</a>)}
             </nav>
             {(status || modified) && (
