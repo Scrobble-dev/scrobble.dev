@@ -30,9 +30,9 @@ const schema = [{
       <p class="kicker">Scrobble.dev discussion draft 0.1</p>
       <h1>Eight draft principles for exchanging scrobble data.</h1>
       <p class="standfirst">Scrobble.dev publishes these principles for testing and comment. They are not an adopted industry standard, and no implementation is required to use them.</p>
-      <dl class="principles-list">
-        {principles.map(([name, detail], index) => <div><dt><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{name}</dt><dd>{detail}</dd></div>)}
-      </dl>
+      <div class="accordion principles-accordion" aria-label="Draft principles">
+        {principles.map(([name, detail], index) => <details class="accordion-item" open={index === 0}><summary class="accordion-button"><span><span class="principle-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{name}</span></summary><div class="accordion-body"><p>{detail}</p></div></details>)}
+      </div>
       <h2>Privacy limits the exchange</h2>
       <p>Media history can expose habits and routines. A format cannot enforce consent by naming a visibility field. Implementations remain responsible for authorization, retention, deletion and preventing one person's history from reaching another account.</p>
       <h2>What this draft does not define</h2>

@@ -25,7 +25,7 @@ const schema = [{
       <p>A player reports that an episode is playing. After twelve minutes it reports a position. The tracker later records a durable watch event. If the source declares the episode complete, the tracker may also record completion according to that source's policy.</p>
 
       <h2 id="records">Four records with different jobs</h2>
-      <dl class="field-notes">
+      <dl class="field-notes card">
         <div><dt>Now playing</dt><dd>Temporary state. It can disappear when the player stops and need never enter history.</dd></div>
         <div><dt>Progress</dt><dd>Mutable position in a native unit such as seconds, pages, chapters or turns.</dd></div>
         <div><dt>Scrobble</dt><dd>Durable history with an event time, media identity and provenance.</dd></div>

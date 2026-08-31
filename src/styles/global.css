@@ -1,3 +1,5 @@
+@import '@tabler/core/dist/css/tabler.min.css';
+
 :root {
   --surface: #f6f8fb;
   --paper: #ffffff;
@@ -23,6 +25,21 @@ body {
   font-size: 16px;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
+}
+
+body.layout-boxed {
+  background: #e9eef5;
+}
+
+body.layout-boxed > .page {
+  max-width: 1440px;
+  margin-inline: auto;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px rgb(24 36 51 / 8%), 0 16px 48px rgb(24 36 51 / 10%);
+}
+
+@media (max-width: 1439px) {
+  body.layout-boxed > .page { box-shadow: none; }
 }
 a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: .2em; }
 main a:visited:not(.btn):not(.button):not(.tabler-demo-badge):not(.tabler-export-link) { color: #5a3e7a; }
@@ -1275,6 +1292,32 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 .knowledge-layout > div:last-child > p { color: #e6eaff; }
 .file-links { display: grid; margin-top: 20px; border-top: 1px solid rgb(255 255 255 / .55); }
 .file-links a { border-bottom: 1px solid rgb(255 255 255 / .55); color: white; min-height: 38px; display: inline-flex; align-items: center; }
+
+/* Tabler content patterns for information-dense field-guide pages. */
+.lifecycle-card { margin-bottom: 20px; overflow: hidden; }
+.lifecycle-card .table { margin: 0; }
+.lifecycle-card th { font-family: "Courier New", monospace; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+.media-groups { margin: 0 0 24px; }
+.media-groups .card { height: 100%; }
+.media-groups .card-title { margin-bottom: 8px; }
+.media-groups .card-text { margin: 0; color: var(--ink-soft); }
+.project-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.project-actions .btn { min-height: 44px; display: inline-flex; align-items: center; }
+.task-list { margin: 0 0 24px; }
+.task-list .list-group-item { padding: 18px 20px; }
+.task-list strong, .task-list span { display: block; }
+.task-list strong { margin-bottom: 4px; font-family: Georgia, serif; font-size: 1.18rem; }
+.task-list span { color: var(--ink-soft); }
+.field-notes.card { margin-bottom: 28px; overflow: hidden; }
+.field-notes.card > div { padding: 16px 20px; }
+.principles-accordion { margin-bottom: 32px; }
+.principles-accordion .accordion-button { min-height: 56px; }
+.principle-number { margin-right: 12px; color: var(--accent-dark); font-family: "Courier New", monospace; font-size: 12px; }
+
+@media (max-width: 640px) {
+  .project-actions .btn { width: 100%; justify-content: center; }
+  .field-notes.card > div { grid-template-columns: 1fr; gap: 6px; }
+}
 
 /* Friends Page (slashfriends.org) */
 .friends-grid {

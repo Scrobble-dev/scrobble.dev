@@ -34,7 +34,7 @@ const schema = [
       <p class="standfirst">A launcher, a platform import and a local session recorder can all show “playtime.” They do not provide the same evidence, event boundaries or portability. A connected account or cumulative total is not proof of session-level scrobbling.</p>
 
       <h2 id="roles">Five roles to keep separate</h2>
-      <dl class="field-notes">
+      <dl class="field-notes card">
         <div><dt>Session capture</dt><dd>Observes a start and stop boundary and records one play session.</dd></div>
         <div><dt>Playtime state</dt><dd>Stores a current total, last-played time or status. It may not retain the sessions that produced the total.</dd></div>
         <div><dt>Platform ingestion</dt><dd>Imports account data already held by a storefront or console platform.</dd></div>
@@ -66,7 +66,7 @@ const schema = [
       </ol>
 
       <h2 id="event">Minimum event context</h2>
-      <dl class="field-notes">
+      <dl class="field-notes card">
         <div><dt>Game subject</dt><dd>A namespaced game or release identifier, platform and edition when known. A display title is not sufficient identity.</dd></div>
         <div><dt>Event kind</dt><dd>Session started, session ended, achievement, progress or explicit completion.</dd></div>
         <div><dt>Duration</dt><dd>Active time and wall-clock time kept separate when the source can provide both.</dd></div>

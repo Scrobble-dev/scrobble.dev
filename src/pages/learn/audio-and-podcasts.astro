@@ -34,7 +34,7 @@ const schema = [
       <p class="standfirst">Music has mature clients that submit track plays to independent history services. Podcast projects usually synchronize subscriptions, playback position or completion inside a smaller set of compatible applications.</p>
 
       <h2 id="roles">Four roles to keep separate</h2>
-      <dl class="field-notes">
+      <dl class="field-notes card">
         <div><dt>Capture client</dt><dd>Observes playback and submits an event to another system.</dd></div>
         <div><dt>Destination</dt><dd>Stores listening history independently of the player that created it.</dd></div>
         <div><dt>Bridge</dt><dd>Receives one source's playback data and forwards or normalizes it for another destination.</dd></div>
@@ -71,7 +71,7 @@ const schema = [
       </div>
 
       <h2 id="event">What a portable podcast event needs</h2>
-      <dl class="field-notes">
+      <dl class="field-notes card">
         <div><dt>Episode subject</dt><dd>Feed URL, episode GUID and any source-local identifiers known when playback occurred.</dd></div>
         <div><dt>Event kind</dt><dd>Started, progress, completed, abandoned or corrected. A current position is not automatically a completed listen.</dd></div>
         <div><dt>Time</dt><dd>The time represented by the event, kept separate from import or receipt time.</dd></div>
