@@ -48,8 +48,8 @@ const schema = [
         </table>
       </div>
 
-      <h2 id="issue-11">Why catalogue disagreement matters</h2>
-      <p>These are connected import risks. One-to-one correspondence can lose specials and split entries. A provider can also move or remove a record after an import. The safe response is to retain source context and make a later correspondence explicit.</p>
+      <h2 id="issue-11">What animeApi issue #11 adds</h2>
+      <p>The discussion reports four connected problems. Several community data projects inherited a common archived baseline. Provider APIs can be restricted, incomplete or difficult to operate at scale. One-to-one correspondence loses specials and split entries. Third-party records can also become stale after a provider moves or removes an item.</p>
       <p>These are not only metadata problems. They can change which episode a historical event appears to describe, whether a completed item becomes incomplete after import, and whether a retry creates a duplicate against a different target record.</p>
 
       <h2 id="import">Safe import behavior</h2>
@@ -65,10 +65,10 @@ const schema = [
       <h2 id="example">Example: one watched item, three destination entries</h2>
       <p>A source export reports episode 12 of one item as watched. The destination catalogue stores the same material as three separate parts. The importer can preserve the source event immediately, but it should not select a destination part from title similarity alone. The event remains unresolved until exact evidence or a user correction identifies the represented part.</p>
 
-      <p class="source-note">Discussion checked 31 August 2026: <a href="https://github.com/nattadasu/animeApi/issues/11">nattadasu/animeApi issue #11</a> asks for input on anime mapping and tracking. The examples on this page are editorial interoperability guidance; they do not define a provider catalogue or rank a data source.</p>
+      <p class="source-note">Primary discussion checked 31 August 2026: <a href="https://github.com/nattadasu/animeApi/issues/11">nattadasu/animeApi issue #11</a>, including the examples about specials, split parts, episode counts, stale provider records and lost watch timestamps. The page summarizes reported interoperability risks; it does not define a provider catalogue or rank a data source.</p>
 
-      <p class="contribution-note">Found a reproducible import case? Report the source service, destination service, entry grain, episode coordinate, available event time and expected result through <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Scrobble.dev</a>.</p>
+      <p class="contribution-note">Found a reproducible import case? Report the source service, destination service, entry grain, episode coordinate, available event time and expected result through <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Scrobble.dev</a>.</p>
     </div>
-    <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#differences">Differences</a></li><li><a href="#issue-11">Why it matters</a></li><li><a href="#import">Safe import</a></li><li><a href="#example">Example</a></li></ul></aside>
+    <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#differences">Differences</a></li><li><a href="#issue-11">Issue #11</a></li><li><a href="#import">Safe import</a></li><li><a href="#example">Example</a></li></ul></aside>
   </article>
 </BaseLayout>
