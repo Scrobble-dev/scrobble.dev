@@ -25,7 +25,7 @@ const schema = [{
       <p>A player reports that an episode is playing. After twelve minutes it reports a position. The tracker later records a durable watch event. If the source declares the episode complete, the tracker may also record completion according to that source's policy.</p>
 
       <h2 id="records">Four records with different jobs</h2>
-      <dl class="field-notes">
+      <dl class="field-notes card">
         <div><dt>Now playing</dt><dd>Temporary state. It can disappear when the player stops and need never enter history.</dd></div>
         <div><dt>Progress</dt><dd>Mutable position in a native unit such as seconds, pages, chapters or turns.</dd></div>
         <div><dt>Scrobble</dt><dd>Durable history with an event time, media identity and provenance.</dd></div>
@@ -38,7 +38,7 @@ const schema = [{
       <h2 id="practice">Recommended practice</h2>
       <p>Preserve the source event and its native unit. Name the represented time. Give durable events stable identity. Record why completion was inferred or declared. Let users correct or remove the resulting history.</p>
 
-      <p class="contribution-note">Building this flow? <a href="/build/">Read the implementation path</a>. Found a reproducible failure? <a href="https://github.com/dannyvfilms/Floppy/issues">Contribute the case to Floppy</a>.</p>
+      <p class="contribution-note">Building this flow? <a href="/build/">Read the implementation path</a>. Found a reproducible failure? <a href="https://github.com/Scrobble-dev/Fasti/issues">Contribute the case to Fasti</a>.</p>
     </div>
     <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#example">Example</a></li><li><a href="#records">Four records</a></li><li><a href="#why">Why it matters</a></li><li><a href="#practice">Recommended practice</a></li></ul></aside>
   </article>

@@ -4,89 +4,140 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const title = 'Frequently asked questions about scrobbling — Scrobble.dev';
 const description = 'Why anime has a separate catalogue facet, how common trackers differ, what portable scrobble records preserve, and how catalogue data can be reused.';
 const questions = [
-  ['Why is anime a separate catalogue facet?', 'Anime is a separate filter because it helps people find projects that track episodes, specials, split releases, continuing titles and rewatches. It is a navigation choice, not a claim that anime sits outside film or television.'],
-  ['How do common tracking projects differ?', 'Projects differ in media scope, capture method, hosting model and the records they keep. Some receive playback events, some provide a diary, some keep listening history, and some store a self-hosted record across several media.'],
-  ['What should a portable scrobble preserve?', 'A portable record should preserve stable event identity, source-local media identity, event and recorded times, native progress, provenance, correction or deletion state, and enough retry information to avoid duplicate history.'],
-  ['Can the Scrobble.dev catalogue be reused commercially?', 'Yes. Scrobble.dev releases the catalogue under CC0. That dedication covers the catalogue published by Scrobble.dev; linked projects, repositories and upstream data retain their own terms.'],
-  ['How can I contribute?', 'Use the Scrobble.dev issue tracker for a factual correction or project update. Use the Floppy or FloppyDesktop issue tracker for changes to those applications. Include the claim, primary source and date checked.']
+  {
+    id: 'anime',
+    q: 'Why is anime a separate catalogue facet?',
+    a: 'Anime is a separate filter because it helps people find projects that track episodes, specials, split releases, continuing titles and rewatches. It is a navigation choice, not a claim that anime sits outside film or television. A project can appear under anime and another media type.'
+  },
+  {
+    id: 'trackers',
+    q: 'How do common tracking projects differ?',
+    a: 'Projects differ in media scope, capture method, hosting model and the records they keep. Some receive playback events, some provide a diary, some keep listening history, and some store a self-hosted record across several media.'
+  },
+  {
+    id: 'portable-record',
+    q: 'What should a portable scrobble preserve?',
+    a: 'A portable record should preserve stable event identity, source-local media identity, event and recorded times, native progress in the medium\'s native unit, provenance (playback vs import vs manual), correction or deletion state, and idempotent deduplication keys.'
+  },
+  {
+    id: 'licensing',
+    q: 'Can the Scrobble.dev catalogue be reused commercially?',
+    a: 'Yes. Scrobble.dev releases the catalogue under CC0 Public Domain Dedication. Linked projects, repositories and upstream data retain their own terms.'
+  },
+  {
+    id: 'contribute',
+    q: 'How can I contribute to the ecosystem?',
+    a: 'Use the Scrobble.dev GitHub repository to submit corrections, add new projects, or propose draft specifications. Use the Fasti issue tracker for changes to the reference implementation.'
+  }
 ];
+
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': 'https://scrobble.dev/faq/#questions',
-    mainEntity: questions.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }))
+    '@id': 'https://scrobble.dev/faq/#faqpage',
+    mainEntity: questions.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a
+      }
+    }))
   },
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Scrobble.dev', item: 'https://scrobble.dev/' },
-      { '@type': 'ListItem', position: 2, name: 'Frequently asked questions', item: 'https://scrobble.dev/faq/' }
+      { '@type': 'ListItem', position: 2, name: 'Frequently Asked Questions', item: 'https://scrobble.dev/faq/' }
     ]
   }
 ];
 ---
-<BaseLayout {title} {description} type="WebPage" schema={schema} markdown="/knowledge/faq.md">
-  <article class="shell section article h-entry">
-    <div class="article-body e-content">
+<BaseLayout {title} {description} type="FAQPage" schema={schema} markdown="/knowledge/faq.md" status="stable" modified="2026-08-31">
+  <div class="container-xl">
+    <article class="catalogue-hero h-entry" style="margin-bottom: 24px;">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><span aria-current="page">FAQ</span></nav>
       <p class="kicker">Frequently asked questions</p>
       <h1 class="p-name">Questions about scrobbling, trackers and portable records.</h1>
       <p class="standfirst e-summary">Start with the practical difference. Follow the project link when an answer depends on current behaviour.</p>
+    </article>
 
-      <h2 id="anime">Why is anime a separate catalogue facet?</h2>
-      <p>Anime is a separate filter because it helps people find projects that track episodes, specials, split releases, continuing titles and rewatches. It is a navigation choice, not a claim that anime sits outside film or television.</p>
-      <p>A project can appear under anime and another media type. The facet should remain only while it helps people find relevant tools and tracking behaviour.</p>
-
-      <h2 id="trackers">How do common tracking projects differ?</h2>
-      <p>Projects differ in media scope, capture method, hosting model and the records they keep. Some receive playback events, some provide a diary, some keep listening history, and some store a self-hosted record across several media.</p>
-      <p class="catalogue-scroll-hint" id="tracker-table-hint">Swipe the table sideways to compare every column.</p>
-      <div class="catalogue-scroll" role="region" aria-label="Common tracker comparison" aria-describedby="tracker-table-hint" tabindex="0">
-        <table>
-          <thead><tr><th scope="col">Project</th><th scope="col">Main scope</th><th scope="col">Typical record</th><th scope="col">Useful when</th></tr></thead>
-          <tbody>
-            <tr><th scope="row"><a href="https://github.com/dannyvfilms/Floppy">Floppy</a></th><td>Ten media types</td><td>Library, history and progress</td><td>A self-hosted, cross-media record is required.</td></tr>
-            <tr><th scope="row"><a href="https://www.last.fm/about/trackmymusic">Last.fm</a></th><td>Music</td><td>Submitted listens</td><td>Players and services submit listening activity.</td></tr>
-            <tr><th scope="row"><a href="https://listenbrainz.org/">ListenBrainz</a></th><td>Music</td><td>Open listening history</td><td>An open-source service and exportable listening data are required.</td></tr>
-            <tr><th scope="row"><a href="https://trakt.tv/">Trakt</a></th><td>Film and television</td><td>History, progress and playback events</td><td>Media applications report playback activity.</td></tr>
-            <tr><th scope="row"><a href="https://simkl.com/">Simkl</a></th><td>Film, television and anime</td><td>History, lists and episode state</td><td>One service covers its three advertised media areas.</td></tr>
-            <tr><th scope="row"><a href="https://letterboxd.com/welcome/">Letterboxd</a></th><td>Film</td><td>Dated diary entry, rating, review or list</td><td>The task is film logging rather than live playback progress.</td></tr>
-            <tr><th scope="row"><a href="https://github.com/wetrakr/wetrakr-kodi">WeTrakr</a></th><td>Film and television</td><td>Kodi playback events</td><td>Kodi playback is sent to a tracking service.</td></tr>
-          </tbody>
-        </table>
+    <div class="row g-4" style="margin-bottom: 40px;">
+      <div class="col-lg-8">
+        <div class="accordion" id="faq-accordion">
+          {questions.map((item, idx) => (
+            <div class="accordion-item" id={item.id}>
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  aria-expanded="true"
+                  aria-controls={`faq-collapse-${idx}`}
+                >
+                  {item.q}
+                </button>
+              </h2>
+              <div id={`faq-collapse-${idx}`} class="accordion-collapse show">
+                <div class="accordion-body">
+                  <p>{item.a}</p>
+                  {item.id === 'trackers' && (
+                    <div class="table-responsive mt-3">
+                      <table class="table table-vcenter card-table">
+                        <thead>
+                          <tr>
+                            <th>Project</th>
+                            <th>Main scope</th>
+                            <th>Typical record</th>
+                            <th>Useful when</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><th><a href="https://github.com/Scrobble-dev/Fasti">Fasti</a></th><td>11 media types</td><td>Library, history and progress</td><td>A local-first, self-hosted cross-media record is required.</td></tr>
+                          <tr><th><a href="https://www.last.fm/about/trackmymusic">Last.fm</a></th><td>Music</td><td>Submitted listens</td><td>Players and services submit listening activity.</td></tr>
+                          <tr><th><a href="https://listenbrainz.org/">ListenBrainz</a></th><td>Music</td><td>Open listening history</td><td>An open-source service and exportable listening data are required.</td></tr>
+                          <tr><th><a href="https://trakt.tv/">Trakt</a></th><td>Film & TV</td><td>History, progress and playback</td><td>Media applications report playback activity.</td></tr>
+                          <tr><th><a href="https://simkl.com/">Simkl</a></th><td>Film, TV & Anime</td><td>History, lists and episode state</td><td>One service covers its three advertised media areas.</td></tr>
+                          <tr><th><a href="https://letterboxd.com/welcome/">Letterboxd</a></th><td>Film</td><td>Dated diary entry, rating, list</td><td>The task is film logging rather than live playback progress.</td></tr>
+                          <tr><th><a href="https://ryot.io/">Ryot</a></th><td>All Media & Fitness</td><td>Multi-media tracking & workouts</td><td>Comprehensive self-hosted tracking with fitness.</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                  {item.id === 'portable-record' && (
+                    <ul class="mt-2 mb-0" style="padding-left: 20px; line-height: 1.6;">
+                      <li><strong>Stable event identifier:</strong> Content-addressed hash or UUIDv7.</li>
+                      <li><strong>Source-local media identity:</strong> MusicBrainz, TMDB, OpenLibrary, or source provider coordinates.</li>
+                      <li><strong>Event & recorded times:</strong> ISO 8601 timestamps capturing both the actual playback moment and storage commit.</li>
+                      <li><strong>Native progress:</strong> Elapsed seconds, page counts, or episode offset before percentage loss.</li>
+                      <li><strong>Provenance:</strong> Explicit indication of capture method (active playback, diary import, batch sync).</li>
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <p>The <a href="/projects/">project catalogue</a> records source availability, licences and contribution routes. It describes projects; it does not rank them.</p>
 
-      <h2 id="portable-record">What should a portable scrobble preserve?</h2>
-      <p>A portable record should preserve enough information to identify, interpret, retry and correct the event:</p>
-      <ul>
-        <li>A stable event identifier.</li>
-        <li>The media type and the source-local identity known when the event was recorded.</li>
-        <li>The event time and, when different, the recorded time.</li>
-        <li>Progress in the medium's native unit before a percentage is derived.</li>
-        <li>Provenance, including whether the record came from playback, manual entry, import or synchronization.</li>
-        <li>Correction or deletion state and enough retry information to prevent duplicate history.</li>
-      </ul>
-      <p>These fields do not guarantee that two systems will make the same decision. They preserve enough context to explain a difference and correct the resulting history.</p>
-
-      <h2 id="licensing">Can the Scrobble.dev catalogue be reused commercially?</h2>
-      <p>Yes. Scrobble.dev releases its project catalogue under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, which permits copying, modification and commercial reuse without asking Scrobble.dev for permission.</p>
-      <p>That dedication covers the catalogue published by Scrobble.dev. Linked projects, repositories and upstream data retain their own terms. A software licence does not automatically grant rights to data used by that software. The <a href="https://digital-strategy.ec.europa.eu/en/policies/protection-databases">European Commission's database-protection summary</a> explains the separate rights that may apply in the European Union. This is an editorial summary, not legal advice.</p>
-
-      <h2 id="contribute">How can I contribute?</h2>
-      <p>For a factual correction or project update, <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">open a Scrobble.dev issue</a>. Include the claim, a primary source and the date checked. The <a href="/about/">editorial method</a> explains how claims and draft proposals are labelled.</p>
-      <p>For application changes, use the <a href="https://github.com/dannyvfilms/Floppy/issues">Floppy issue tracker</a> or the <a href="https://github.com/Electric-Town/FloppyDesktop/issues">FloppyDesktop issue tracker</a>. Include the media type, event sequence, observed result, expected result and a private-data-safe example.</p>
+      <div class="col-lg-4">
+        <div class="card card-stacked">
+          <div class="card-body">
+            <h3 class="card-title">Looking for something else?</h3>
+            <p class="text-secondary" style="font-size: 13.5px; line-height: 1.5;">
+              Explore the source-linked catalogue of 27+ scrobbling tools, read the architecture specifications, or check the friends ring.
+            </p>
+            <div class="d-flex flex-column gap-2 mt-3">
+              <a href="/projects/" class="btn btn-primary w-100">Browse Project Catalogue →</a>
+              <a href="/about/" class="btn btn-outline-secondary w-100">Editorial Method & About</a>
+              <a href="/friends/" class="btn btn-outline-secondary w-100">Slashfriends (/friends)</a>
+              <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new" class="btn btn-outline-secondary w-100" target="_blank" rel="noopener noreferrer">Submit a Question ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <aside class="toc" aria-label="On this page">
-      <strong>On this page</strong>
-      <ul>
-        <li><a href="#anime">Why anime?</a></li>
-        <li><a href="#trackers">Tracker differences</a></li>
-        <li><a href="#portable-record">Portable records</a></li>
-        <li><a href="#licensing">Catalogue licensing</a></li>
-        <li><a href="#contribute">Contribute</a></li>
-      </ul>
-    </aside>
-  </article>
+  </div>
 </BaseLayout>
+

@@ -8,8 +8,8 @@ status: stable
 verified: { by: OpenAI/Codex-2026-08-11, at: 2026-08-11T20:58:36Z }
 stale_after: 2027-02-11
 sources:
-  - { id: scrobble-dev-repository, resource: "https://github.com/Electric-Town/scrobble.dev", title: "Scrobble.dev repository" }
-  - { id: contributing-guide, resource: "https://github.com/Electric-Town/scrobble.dev/blob/main/CONTRIBUTING.md", title: "Scrobble.dev contributing guide" }
+  - { id: scrobble-dev-repository, resource: "https://github.com/Scrobble-dev/scrobble.dev", title: "Scrobble.dev repository" }
+  - { id: contributing-guide, resource: "https://github.com/Scrobble-dev/scrobble.dev/blob/main/CONTRIBUTING.md", title: "Scrobble.dev contributing guide" }
   - { id: okf-spec, resource: "https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md", title: "Open Knowledge Format v0.2 specification" }
 ---
 
@@ -52,11 +52,10 @@ Unresolved questions may be published with their evidence and consequences. Edit
 
 ## Contribution routes
 
-- Scrobble.dev facts and documentation: https://github.com/Electric-Town/scrobble.dev/issues/new
-- Floppy application work: https://github.com/dannyvfilms/Floppy/issues
-- FloppyDesktop application work: https://github.com/Electric-Town/FloppyDesktop/issues
+- Scrobble.dev facts and documentation: https://github.com/Scrobble-dev/scrobble.dev/issues/new
+- Fasti application work: https://github.com/Scrobble-dev/Fasti/issues
 
-Maintainer work can be supported at https://github.com/sponsors/dannyvfilms and https://github.com/sponsors/ryan-winkler.
+Maintainer work can be supported at https://github.com/sponsors/ryan-winkler.
 
 ## Related documents
 

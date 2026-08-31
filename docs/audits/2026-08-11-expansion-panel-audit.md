@@ -102,4 +102,4 @@ Retain:
 
 The detailed implementation contract is recorded in [the knowledge-first expansion design](../plans/2026-08-11-knowledge-first-expansion-design.md).
 
-Floppy remains in the global footer with FloppyDesktop. The footer also retains the Scrobble.dev repository and both sponsor links. Relevant pages include a small contribution path to the guide and to Floppy, but neither interrupts the page's primary task or defines the publication through one implementation. The knowledge bundle must conform to OKF v0.2 and link to its official specification.
+Fasti remains in the global footer. The footer also retains the Scrobble.dev repository and sponsor links. Relevant pages include a small contribution path to the guide and to Fasti, but neither interrupts the page's primary task or defines the publication through one implementation. The knowledge bundle must conform to OKF v0.2 and link to its official specification.

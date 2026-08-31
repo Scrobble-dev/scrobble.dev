@@ -29,7 +29,7 @@ const schema = [{
   ]
 }];
 ---
-<BaseLayout schema={schema} markdown="/knowledge/concepts/scrobbling.md" modified="2026-08-11" status="stable">
+<BaseLayout schema={schema} markdown="/knowledge/concepts/scrobbling.md" modified="2026-08-31" status="stable">
   <section class="shell home-hero" id="definition" aria-labelledby="hero-title">
     <div>
       <p class="kicker">Scrobbling, in plain language</p>
@@ -72,9 +72,13 @@ const schema = [{
       <h2 id="lifecycle-title">One media session can produce four different records.</h2>
       <p>The distinction matters when a track repeats, an import runs twice or a person fixes the wrong entry.</p>
     </div>
-    <div class="measure-table" role="table" aria-label="Media activity lifecycle">
-      <div class="measure-row measure-head" role="row"><span role="columnheader">Record</span><span role="columnheader">Meaning</span><span role="columnheader">Boundary</span></div>
-      {lifecycle.map(([record, meaning, boundary]) => <div class="measure-row" role="row"><strong role="cell">{record}</strong><span role="cell">{meaning}</span><span role="cell">{boundary}</span></div>)}
+    <div class="card lifecycle-card">
+      <div class="table-responsive">
+        <table class="table table-vcenter card-table" aria-label="Media activity lifecycle">
+          <thead><tr><th>Record</th><th>Meaning</th><th>Boundary</th></tr></thead>
+          <tbody>{lifecycle.map(([record, meaning, boundary]) => <tr><th scope="row">{record}</th><td>{meaning}</td><td>{boundary}</td></tr>)}</tbody>
+        </table>
+      </div>
     </div>
     <p><a href="/learn/lifecycle/">Read the lifecycle guide</a>.</p>
   </section>
@@ -86,9 +90,9 @@ const schema = [{
         <h2 id="media-title">A page is not a second. Keep the unit that explains what happened.</h2>
         <p>A percentage is handy on a progress bar. The original unit lets a person understand, resume and correct the record.</p>
       </div>
-      <dl class="media-groups">
-        {mediaGroups.map(([group, detail]) => <div><dt>{group}</dt><dd>{detail}</dd></div>)}
-      </dl>
+      <div class="row row-cards media-groups">
+        {mediaGroups.map(([group, detail]) => <div class="col-md-6"><article class="card"><div class="card-body"><h3 class="card-title">{group}</h3><p class="card-text">{detail}</p></div></article></div>)}
+      </div>
       <p>The <a href="/standard/">draft principles</a> carry that rule into timestamps, identity, provenance, retry, correction and export. They are published for testing and comment, not as an adopted industry standard.</p>
     </div>
   </section>
@@ -99,11 +103,11 @@ const schema = [{
       <h2 id="projects-title">{PROJECTS.length} projects. Start with the job you need done.</h2>
       <p>A project might listen to a player, offer a diary, synchronize another service or hold a self-hosted history. The catalogue compares what each source establishes and leaves the ranking to you.</p>
     </div>
-    <div class="project-actions">
-      <a class="button primary" href="/projects/">Compare {PROJECTS.length} projects</a>
-      <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Add or correct a project</a>
-      <a href="https://github.com/dannyvfilms/Floppy/issues">Take a reproducible case to Floppy</a>
+    <div class="project-actions" aria-label="Project catalogue actions">
+      <a class="btn btn-primary" href="/projects/">Compare {PROJECTS.length} projects</a>
+      <a class="btn btn-outline-primary" href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Add or correct a project</a>
+      <a class="btn btn-outline-primary" href="https://github.com/Scrobble-dev/Fasti/issues">Take a reproducible case to Fasti</a>
     </div>
-    <p class="reference-note">Floppy and FloppyDesktop appear as working software in the same catalogue. They also provide a place to turn a reproducible tracking failure into a test or code change.</p>
+    <p class="reference-note">Fasti appears as working software in the same catalogue. It also provides a place to turn a reproducible tracking failure into a test or code change.</p>
   </section>
 </BaseLayout>

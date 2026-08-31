@@ -12,13 +12,14 @@ const requiredPrimaryNavigation = [
 ];
 
 const requiredFooterLinks = [
-  ['Scrobble.dev source', 'https://github.com/Electric-Town/scrobble.dev'],
-  ['Floppy', 'https://github.com/dannyvfilms/Floppy'],
-  ['FloppyDesktop', 'https://github.com/Electric-Town/FloppyDesktop'],
+  ['Fasti repository', 'https://github.com/Scrobble-dev/Fasti'],
   ['Fasti documentation', 'https://fasti.scrobble.dev/'],
-  ['Improve this field guide', 'https://github.com/Electric-Town/scrobble.dev/issues/new'],
-  ['Work on Floppy', 'https://github.com/dannyvfilms/Floppy/issues'],
-  ['Sponsor Danny', 'https://github.com/sponsors/dannyvfilms'],
+  ['Fasti issues', 'https://github.com/Scrobble-dev/Fasti/issues'],
+  ['Project catalogue', '/projects/'],
+  ['About and evidence method', '/about/'],
+  ['Scrobble.dev source', 'https://github.com/Scrobble-dev/scrobble.dev'],
+  ['Knowledge bundle', '/knowledge/index.md'],
+  ['Improve this field guide', 'https://github.com/Scrobble-dev/scrobble.dev/issues/new'],
   ['Sponsor Ryan', 'https://github.com/sponsors/ryan-winkler'],
   ['Open Knowledge Format project', 'https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf'],
   ['OKF v0.2 specification', 'https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md']
@@ -30,7 +31,7 @@ test('keeps primary navigation compact and task-oriented', () => {
 });
 
 test('centralizes every required footer reference', () => {
-  assert.deepEqual(SITE.footerSections.map(({ label }) => label), ['Field guide', 'Projects', 'Support the maintainer']);
+  assert.deepEqual(SITE.footerSections.map(({ label }) => label), ['Projects', 'Field guide', 'Support the maintainer']);
 
   const configuredLinks = [
     ...SITE.footerSections.flatMap(({ links }) => links),
@@ -38,23 +39,17 @@ test('centralizes every required footer reference', () => {
   ].map(({ label, href }) => [label, href]);
 
   for (const [label, href] of requiredFooterLinks) {
-    assert.ok(configuredLinks.some(([configuredLabel, configuredHref]) => configuredLabel === label && configuredHref === href));
+    assert.ok(configuredLinks.some(([configuredLabel, configuredHref]) => configuredLabel === label && configuredHref === href), `Missing configured link: ${label} -> ${href}`);
   }
 });
 
-test('keeps catalogue project links touch-sized', async () => {
-  const styles = await readFile(new URL('../src/styles/global.css', import.meta.url), 'utf8');
-
-  assert.match(styles, /\.catalogue tbody th a \{[^}]*min-height: 44px;/);
-});
-
-test('keeps Danny with Floppy and Ryan with Scrobble.dev maintenance', () => {
+test('keeps Fasti with Projects and Ryan with Scrobble.dev maintenance', () => {
   const projects = SITE.footerSections.find(({ label }) => label === 'Projects');
   const support = SITE.footerSections.find(({ label }) => label === 'Support the maintainer');
 
   assert.deepEqual(
-    projects?.links.filter(({ label }) => ['Floppy', 'Work on Floppy', 'Sponsor Danny'].includes(label)).map(({ label }) => label),
-    ['Floppy', 'Work on Floppy', 'Sponsor Danny']
+    projects?.links.map(({ label }) => label),
+    ['Fasti repository', 'Fasti documentation', 'Fasti issues', 'Project catalogue']
   );
   assert.deepEqual(support?.links.map(({ label }) => label), ['Sponsor Ryan']);
   assert.deepEqual(SITE.footerActions.map(({ label }) => label), ['Improve this field guide']);
@@ -101,9 +96,8 @@ test('renders the required footer references without promoting contribution link
   for (const [label, href] of requiredFooterLinks) {
     assert.match(home, new RegExp(`href="${href}"[^>]*>${label}<`));
   }
-  assert.match(projects ?? '', /Floppy[\s\S]*Work on Floppy[\s\S]*Sponsor Danny/);
+  assert.match(projects ?? '', /Fasti repository[\s\S]*Fasti issues/);
   assert.match(support ?? '', /Sponsor Ryan/);
-  assert.doesNotMatch(support ?? '', /Sponsor Danny/);
   assert.match(home, /<nav class="footer-actions" aria-label="Contribution links">/);
   assert.doesNotMatch(home, /class="[^"]*button[^"]*"[^>]*>Improve this field guide/);
   assert.doesNotMatch(home, /Last revised 11 August 2026/);

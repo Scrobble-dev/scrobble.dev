@@ -4,7 +4,7 @@ Design: [2026-08-11-knowledge-first-expansion-design.md](./2026-08-11-knowledge-
 
 ## Outcome
 
-Ship a calmer, evidence-led Scrobble.dev release whose human and machine views agree, whose knowledge bundle conforms to OKF v0.2, whose catalogue facts expose their verification state, and whose contribution paths keep Floppy present without making it the definition.
+Ship a calmer, evidence-led Scrobble.dev release whose human and machine views agree, whose knowledge bundle conforms to OKF v0.2, whose catalogue facts expose their verification state, and whose contribution paths keep Fasti present without making it the definition.
 
 The release uses the existing Astro stack and native browser controls. It does not add a search service, component framework, schema registry or new content-management system.
 
@@ -20,7 +20,7 @@ Work:
 
 1. Centralize the five primary destinations, footer links, sponsor links and official OKF links.
 2. Render those shared records in the header and footer.
-3. Add contract tests for Scrobble.dev source, Floppy, FloppyDesktop, both contribution paths, both sponsor links and the OKF project/specification.
+3. Add contract tests for Scrobble.dev source, Fasti, both contribution paths, sponsor link and the OKF project/specification.
 4. Accept a page-specific modification date instead of assigning one global date.
 5. Use a native mobile disclosure while retaining an ordinary navigation landmark.
 
@@ -135,7 +135,7 @@ Acceptance:
 
 - The first viewport answers what scrobbling is and offers two next steps.
 - Primary navigation contains at most five choices.
-- Floppy appears as software used to test guidance, never as the definition.
+- Fasti appears as a reference architecture, never as the definition.
 - No content region contains more than four equal cards.
 
 ## Task 6: improve the project catalogue interaction
@@ -177,7 +177,7 @@ Work:
 1. Publish the evidence method, correction path, narrator contract and status vocabulary.
 2. Publish minimal decision authority, review, conflict, version and security-reporting rules.
 3. Keep About out of primary navigation and link it from the footer and claim-status context.
-4. Add issue templates or prefilled issue URLs for a site correction, project correction and Floppy failure report.
+4. Add issue templates or prefilled issue URLs for a site correction, project correction and Fasti failure report.
 
 Acceptance:
 
