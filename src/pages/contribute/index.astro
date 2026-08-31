@@ -5,13 +5,13 @@ const description = 'Add source-backed scrobbling knowledge to Scrobble.dev or b
 ---
 <BaseLayout {title} {description}>
   <div class="shell">
-    <section class="hero" aria-labelledby="contribute-title">
+    <section class="hero contribute-hero" aria-labelledby="contribute-title">
       <p class="eyebrow">Contribute</p>
       <h1 id="contribute-title">Contribute to the guide or the software.</h1>
       <p class="lede">Bring evidence to the guide. Bring a reproducible failure to Fasti. The first changes what people know; the second changes what software does.</p>
     </section>
 
-    <section class="section" aria-labelledby="paths">
+    <section class="section contribution-paths" aria-labelledby="paths">
       <div class="section-intro"><p class="section-label">Two ways in</p><h2 id="paths">Knowledge on one side. Software on the other.</h2></div>
       <div class="row g-4 contribution-lanes">
         <article class="col-lg-6">
@@ -39,16 +39,18 @@ const description = 'Add source-backed scrobbling knowledge to Scrobble.dev or b
       </div>
     </section>
 
-    <section class="section article" aria-labelledby="issue-title">
+    <section class="section article contribution-issue" aria-labelledby="issue-title">
       <div class="article-body">
         <p class="section-label">A useful issue</p>
         <h2 id="issue-title">Make the problem reconstructable.</h2>
-        <div class="definition"><strong>Context</strong><span>Media type, player, tracker, integration direction and relevant versions.</span></div>
-        <div class="definition"><strong>Identity</strong><span>Provider IDs and titles, with personal account identifiers removed.</span></div>
-        <div class="definition"><strong>Observed</strong><span>The event or state that actually occurred.</span></div>
-        <div class="definition"><strong>Expected</strong><span>The event or state that should have resulted and why.</span></div>
-        <div class="definition"><strong>Round trip</strong><span>What happens after export, repeat synchronization, correction and import.</span></div>
-        <div class="definition"><strong>Evidence</strong><span>Logs, API payloads, fixtures, screenshots or documentation sufficient to verify the claim.</span></div>
+        <dl class="field-notes card contribution-checklist">
+          <div><dt>Context</dt><dd>Media type, player, tracker, integration direction and relevant versions.</dd></div>
+          <div><dt>Identity</dt><dd>Provider IDs and titles, with personal account identifiers removed.</dd></div>
+          <div><dt>Observed</dt><dd>The event or state that actually occurred.</dd></div>
+          <div><dt>Expected</dt><dd>The event or state that should have resulted and why.</dd></div>
+          <div><dt>Round trip</dt><dd>What happens after export, repeat synchronization, correction and import.</dd></div>
+          <div><dt>Evidence</dt><dd>Logs, API payloads, fixtures, screenshots or documentation sufficient to verify the claim.</dd></div>
+        </dl>
       </div>
     </section>
 

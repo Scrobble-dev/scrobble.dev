@@ -1243,6 +1243,12 @@ h4 { font-size: 1.15rem; }
 /* Home / Learn / Build other bands */
 .home-hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, .45fr); gap: clamp(36px, 6vw, 80px); align-items: end; padding-block: clamp(36px, 5vw, 60px); }
 .hero { padding-block: clamp(36px, 5vw, 60px); border-bottom: 1px solid var(--rule); }
+.contribute-hero { padding-block: clamp(28px, 3vw, 40px); }
+.contribution-paths { padding-top: clamp(24px, 3vw, 36px); }
+.contribution-paths .section-intro { margin-bottom: clamp(20px, 2.5vw, 32px); }
+.contribution-issue { padding-top: clamp(32px, 4vw, 48px); }
+.contribution-checklist { margin-top: 20px; }
+.contribution-checklist > div { grid-template-columns: minmax(120px, .3fr) minmax(0, 1fr); }
 .hero-brief { padding-block: 14px; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); }
 .hero-brief dl { margin: 0; }
 .hero-brief dl div { display: grid; grid-template-columns: 85px 1fr; gap: 14px; padding-block: 10px; border-top: 1px solid var(--rule); }
