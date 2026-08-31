@@ -504,6 +504,14 @@ h4 { font-size: 1.15rem; }
   margin-bottom: 2px;
   line-height: 1.2;
 }
+.fasti-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.fasti-title-row h2 { margin: 0; }
+.fasti-reference-badge { min-height: 24px; }
 .fasti-title-group p {
   color: var(--ink-soft);
   margin-bottom: 0;
