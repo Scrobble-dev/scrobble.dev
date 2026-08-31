@@ -10,11 +10,14 @@ const schema = [{
   description,
   hasPart: [
     { '@type': 'TechArticle', name: 'What is scrobbling?', url: 'https://scrobble.dev/learn/scrobbling/' },
-    { '@type': 'TechArticle', name: 'The media activity lifecycle', url: 'https://scrobble.dev/learn/lifecycle/' }
+    { '@type': 'TechArticle', name: 'The media activity lifecycle', url: 'https://scrobble.dev/learn/lifecycle/' },
+    { '@type': 'TechArticle', name: 'Audio and podcast activity records', url: 'https://scrobble.dev/learn/audio-and-podcasts/' },
+    { '@type': 'TechArticle', name: 'Game activity records', url: 'https://scrobble.dev/learn/games/' },
+    { '@type': 'TechArticle', name: 'Anime catalogue granularity', url: 'https://scrobble.dev/learn/anime-catalogues/' }
   ]
 }];
 ---
-<BaseLayout {title} {description} type="CollectionPage" schema={schema} modified="2026-08-11" status="stable">
+<BaseLayout {title} {description} type="CollectionPage" schema={schema} modified="2026-08-31" status="stable">
   <article class="shell section article">
     <div class="article-body">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><span aria-current="page">Learn</span></nav>
@@ -22,13 +25,16 @@ const schema = [{
       <h1>Start with the record. Then choose the tool.</h1>
       <p class="standfirst">Project names can wait. First, see how a fleeting play, watch, read or game session becomes history, and what stays under your control.</p>
       <h2>Start here</h2>
-      <ul class="task-list">
-        <li><a href="/learn/scrobbling/"><strong>What is scrobbling?</strong><span>The definition, history and distinctions from ratings, lists and collections.</span></a></li>
-        <li><a href="/learn/lifecycle/"><strong>When does activity become history?</strong><span>Now playing, progress, scrobbles and completion.</span></a></li>
-        <li><a href="/faq/"><strong>How do tracking projects differ?</strong><span>Anime as a catalogue facet, common projects, portability and catalogue licensing.</span></a></li>
-        <li><a href="/projects/"><strong>Which projects record this media?</strong><span>A source-linked, filterable catalogue.</span></a></li>
-      </ul>
-      <p class="contribution-note">Found an unclear definition or better primary source? <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Suggest one focused correction</a>.</p>
+      <nav class="list-group task-list" aria-label="Learn guides">
+        <a class="list-group-item list-group-item-action" href="/learn/scrobbling/"><strong>What is scrobbling?</strong><span>The definition, history and distinctions from ratings, lists and collections.</span></a>
+        <a class="list-group-item list-group-item-action" href="/learn/lifecycle/"><strong>When does activity become history?</strong><span>Now playing, progress, scrobbles and completion.</span></a>
+        <a class="list-group-item list-group-item-action" href="/learn/audio-and-podcasts/"><strong>How do audio and podcast projects differ?</strong><span>Music capture, history destinations, bridges and podcast playback-state synchronization.</span></a>
+        <a class="list-group-item list-group-item-action" href="/learn/games/"><strong>What does a game tracker actually record?</strong><span>Sessions, cumulative playtime, platform snapshots, achievements and manual state.</span></a>
+        <a class="list-group-item list-group-item-action" href="/learn/anime-catalogues/"><strong>Why do anime imports become ambiguous?</strong><span>Specials, split parts, season boundaries, episode coordinates and missing event times.</span></a>
+        <a class="list-group-item list-group-item-action" href="/faq/"><strong>How do tracking projects differ?</strong><span>Anime as a catalogue facet, common projects, portability and catalogue licensing.</span></a>
+        <a class="list-group-item list-group-item-action" href="/projects/"><strong>Which projects record this media?</strong><span>A source-linked, filterable catalogue.</span></a>
+      </nav>
+      <p class="contribution-note">Found an unclear definition or better primary source? <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Suggest one focused correction</a>.</p>
     </div>
   </article>
 </BaseLayout>

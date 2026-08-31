@@ -1,0 +1,37 @@
+---
+# Codacy Configuration for scrobble.dev
+# Ref: https://docs.codacy.com/repositories-configure/codacy-configuration-file/
+
+engines:
+  duplication:
+    exclude_paths:
+      - "dist/**"
+      - "node_modules/**"
+      - "tests/**"
+  eslint:
+    enabled: true
+    exclude_paths:
+      - "dist/**"
+      - "node_modules/**"
+  stylelint:
+    enabled: true
+  markdownlint:
+    enabled: true
+  remark-lint:
+    enabled: true
+  shellcheck:
+    enabled: true
+
+languages:
+  typescript:
+    exclude_paths:
+      - "dist/**"
+  javascript:
+    exclude_paths:
+      - "dist/**"
+
+exclude_paths:
+  - "dist/**"
+  - "node_modules/**"
+  - "package-lock.json"
+  - ".astro/**"

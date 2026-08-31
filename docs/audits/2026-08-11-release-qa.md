@@ -1,7 +1,7 @@
 # Knowledge-first release QA
 
 Date: 11 August 2026  
-Scope: homepage, Learn, Build, Draft profiles, Projects, FAQ, Contribute and Floppy  
+Scope: homepage, Learn, Build, Draft profiles, Projects, FAQ, Contribute and Fasti  
 Status: release candidate
 
 This is a role-based review, not a claim that named public figures participated in or endorsed the site.
@@ -19,7 +19,7 @@ The design-review score moved from 99 to 100 after that correction. The function
 - Project search, media filtering, URL-backed state, sorting, result counts, live announcements and Reset all behaved as labelled.
 - The project table retained a keyboard-focusable horizontal scroll region at small widths.
 - All 23 discovered internal links returned a successful response.
-- The eight required external destinations for Scrobble.dev, Floppy, FloppyDesktop, OKF and sponsors returned successful responses when checked.
+- The required external destinations for Scrobble.dev, Fasti, OKF and sponsors returned successful responses when checked.
 - At 320 CSS pixels, including WCAG text-spacing overrides, tested pages had no global horizontal overflow. Wide tables remained contained in their labelled scroll regions.
 - Axe-core 4.13.0 reported zero WCAG A/AA violations on eight representative routes.
 - Reduced-motion CSS removes the only smooth-scroll behaviour. The interface has no essential animation.

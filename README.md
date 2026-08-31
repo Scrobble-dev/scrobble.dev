@@ -1,87 +1,127 @@
 # scrobble.dev
 
-Scrobble.dev is an open knowledge site for scrobbling, media tracking, interoperability, and portable media history. It explains the domain independently of any single product while using [Floppy](https://github.com/dannyvfilms/Floppy) and [FloppyDesktop](https://github.com/Electric-Town/FloppyDesktop) to test the guidance and provide contribution paths.
+[![CI](https://github.com/Scrobble-dev/scrobble.dev/actions/workflows/ci.yml/badge.svg)](https://github.com/Scrobble-dev/scrobble.dev/actions)
+[![Open Knowledge Format v0.2](https://img.shields.io/badge/OKF-v0.2-206bc4)](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md)
+[![License: CC0-1.0](https://img.shields.io/badge/Catalogue-CC0--1.0-2fb344)](https://creativecommons.org/publicdomain/zero/1.0/)
 
-## Goals
+> **The trusted, neutral, implementation-aware knowledge base and field guide for media tracking, scrobbling, and portable history.**
 
-1. Define scrobbling and media-tracking concepts clearly enough for users, developers, researchers, and agents.
-2. Preserve a neutral, constructive view of the ecosystem: explain trade-offs and compatibility without disparaging other tools or mappings.
-3. Make media history portability, provenance, correction, and interoperability normal expectations.
-4. Funnel contributors into concrete Floppy, FloppyDesktop, and scrobble.dev work.
-5. Publish the same knowledge in human-facing pages and machine-friendly Markdown.
+Scrobble.dev documents how media consumption becomes durable, user-owned history. It establishes common interoperability principles across music, films, television, anime, books, comics, podcasts, and video games while referencing [Fasti](https://github.com/Scrobble-dev/Fasti) as an open-source, local-first reference architecture.
 
-## Architecture
+---
 
-- `src/pages/` — canonical human-facing pages.
-- `src/data/projects.mjs` — source for the filterable project catalogue and its structured data.
-- `src/layouts/` — shared semantic layout and structured-data behavior.
-- `src/styles/` — centralized editorial design tokens and accessibility behavior.
-- `public/knowledge/` — conformant Open Knowledge Format v0.2 bundle; stable URLs are part of the interface.
-- `src/pages/projects.json.js` and `src/pages/projects.csv.js` — generated catalogue distributions from the canonical project data.
-- `public/llms.txt` — agent discovery map.
-- `public/robots.txt` — crawler guidance and sitemap discovery.
-- `wrangler.jsonc` — Cloudflare static-assets deployment target.
+## Core Pillars
 
-Content is organized around domain concepts rather than pages or teams. Definitions should be authored once, linked from related concepts, and reused rather than copied into project-specific documentation.
+1. **Domain-Driven Clarity (DDD)**: Explicitly separates playback, event capture, progress state, and collection ownership.
+2. **Tabler-First Craft Floor**: Professional, high-contrast, accessible UI built directly with Tabler design tokens and datatable components.
+3. **Ecosystem Neutrality**: Evaluates trackers and connectors on documented capabilities and verified evidence, without disparaging any tool.
+4. **Machine-Readable Knowledge (OKF v0.2)**: Every concept is published simultaneously as structured HTML, validated Markdown, Schema.org JSON-LD, JSON, and CSV.
+5. **Kathy Sierra Philosophy (*Badass Users*)**: Empowers developers and users to master their media history through concrete failure-case reproduction, instant demo access, and clear data portability.
 
-## Local development
+---
+
+## Domain Boundaries (DDD)
+
+Media tracking systems often conflate separate domain concepts. Scrobble.dev maintains strict boundaries:
+
+| Bounded Context | Core Responsibility | Key Question Answered |
+| :--- | :--- | :--- |
+| **Scrobble Event** | Append-only record of consumed media with cryptographic/verifiable state | *What happened and when?* |
+| **Progress State** | Ephemeral or volatile playback position (seconds, pages, episodes) | *Where do I resume?* |
+| **Media Identity** | Source-local and canonical provider identifiers (MusicBrainz, TMDB, OpenLibrary) | *What specific item was consumed?* |
+| **Collection & Intent** | User ratings, watchlists, backlog queues, and physical/digital ownership | *What do I own or want to consume?* |
+| **Synchronization** | Multi-directional event relay, deduplication, and state reconciliation | *How do records move between systems?* |
+| **Catalogue Registry** | Source-linked directory of ecosystem projects, clients, and services | *Which tools support this workflow?* |
+
+---
+
+## Architecture & Distribution Pipeline
+
+```
+[src/data/projects.mjs] (Canonical Evidence Data)
+        │
+        ├──► Astro Static Site Generator ──► [dist/*.html] (Tabler-First Web UI)
+        ├──► scripts/generate-public.mjs ──► [public/knowledge/projects.md] (OKF v0.2)
+        ├──► src/pages/projects.json.js  ──► [/projects.json] (Machine API)
+        ├──► src/pages/projects.csv.js   ──► [/projects.csv] (Tabular Distribution)
+        └──► Schema.org Injector         ──► [JSON-LD: Dataset & SoftwareApplication]
+```
+
+### Key Repository Paths
+
+- `src/pages/` — Canonical Astro web routes and documentation pages.
+- `src/data/projects.mjs` — Source-of-truth project registry and evidence links.
+- `src/styles/global.css` — Tabler-first design tokens, high-contrast badges, and responsive tables.
+- `public/knowledge/` — [Open Knowledge Format v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md) Markdown bundle.
+- `public/llms.txt` & `public/llms-full.txt` — LLM/Agent discoverability endpoints.
+- `docs/` — In-depth architectural, design, and API reference documentation.
+
+---
+
+## Local Development & Testing
+
+### Prerequisites
+- Node.js $\ge 20.0.0$
+- npm $\ge 10.0.0$
+
+### Quick Start
 
 ```bash
+# Install dependencies
 npm install
+
+# Start local Astro development server (http://localhost:4321)
 npm run dev
 ```
 
-Production check:
+### Verification & Test Suite
+
+Before submitting pull requests, run the canonical offline gate:
 
 ```bash
-npm run build
+npm test
 ```
 
-## Deployment
+The test runner validates:
+1. `npm run generate:public` — Synchronizes `public/knowledge/projects.md` from canonical data.
+2. `astro check` — Static TypeScript and Astro component type checking.
+3. `astro build` — Static HTML rendering into `dist/`.
+4. `scripts/build-sites.mjs` — Builds the Cloudflare Sites worker bundle.
+5. `npm run validate:okf` — Strict JSON-schema verification of 11 Markdown files against OKF v0.2.
+6. `npm run validate:public` — Scans output for prohibited internal scope keywords.
+7. `node --test tests/*.test.mjs` — Executes all 20 contract, rendering, and structured-data assertions.
 
-The site is static Astro output and is intended to be served at `https://scrobble.dev` through Cloudflare. The build output is `dist/` and `wrangler.jsonc` points Cloudflare static assets at that directory.
+---
 
-Cloudflare account/project binding and DNS are intentionally not committed as secrets. Configure the custom domain `scrobble.dev` in Cloudflare after the Worker/Pages project exists.
+## Design & Accessibility Baseline
 
-GitHub remains the canonical source. The deployed commit is published at `https://scrobble.dev/release.json`; the scheduled production-drift check and exact release sequence are documented in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+- **Design System**: Built on Tabler Core (`@tabler/core`) standards: `#e6e7e9` card borders, `#f8fafc` table headers, soft-tint status badges.
+- **Accessibility**: Full compliance with **WCAG 2.2 Level AA** and **EN 301 549** ($\ge 44\text{px}$ interactive hitboxes, $\ge 4.5:1$ text contrast, high-contrast focus rings).
+- **Neurodiversity & Scannability**: Designed for ADHD/AuDHD readability — table-first comparisons, 1-click credential copying, clear action items, and zero decorative layout shifts (`CLS = 0`).
 
-## Content rules
+---
 
-- Prefer primary sources and reproducible behavior.
-- Separate ecosystem concepts from project-specific implementation details.
-- Do not imply a universal mapping when a relationship is ambiguous or provider-specific.
-- Keep event provenance, identity, timestamps, and correction semantics explicit.
-- Avoid unsupported superlatives and competitive put-downs.
-- Write for scanning: direct headings, short paragraphs, concrete examples, and progressive detail.
-- If a concept belongs in the knowledge graph, update its Markdown concept file as well as the rendered page.
+## Reference Implementation
 
-## Accessibility and UX baseline
+[Fasti](https://github.com/Scrobble-dev/Fasti) serves as the pinned, local-first reference architecture and daemon implementation for Scrobble.dev principles:
+- **Offline-First**: Embedded SQLite with append-only ledger.
+- **Zero Telemetry**: Strict privacy floor with zero tracking or phone-home SDKs.
+- **Product Boundary**: *Fasti records, players play.* (No transcoding, decoding, or player lock-in).
 
-- Semantic landmarks and heading order.
-- Visible keyboard focus.
-- 44px minimum interactive targets.
-- Reduced-motion support.
-- Responsive single-column reading paths.
-- No color-only state communication.
-- No attention-seeking animation, ornamental gradients or repeated card chrome.
-- Explicit mobile guidance when a comparison table scrolls horizontally.
-- Nielsen heuristic and Gestalt reviews are expected for material UI changes.
+---
 
-## Structured discovery
+## Documentation & Deep Guides
 
-Pages include canonical metadata and JSON-LD. The project uses specific Schema.org types where they describe the visible content accurately (`WebSite`, `WebPage`, `TechArticle`, `DefinedTerm`, `DefinedTermSet`, `SoftwareApplication`, `CollectionPage`, `ItemList`, `Dataset`, `DataDownload`, `FAQPage`, `BreadcrumbList`). Do not add structured data only to chase rich results; markup must match visible content.
+- [Architecture Guide](docs/ARCHITECTURE.md) — Detailed DDD domain model and data pipelines.
+- [Design Contract](docs/DESIGN.md) — Tabler UI tokens, typography, and accessibility rubric.
+- [API & Schema Reference](docs/API.md) — Distributions, JSON-LD, and OKF v0.2 contracts.
+- [Contributing Guide](CONTRIBUTING.md) — Step-by-step instructions for contributing facts, code, and standard profiles.
+- [Deployment Guide](docs/DEPLOYMENT.md) — Cloudflare Pages and static distribution procedures.
 
-## Open Knowledge Format
+---
 
-`public/knowledge/` conforms to [Open Knowledge Format v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf): Markdown concepts, YAML frontmatter, stable paths, ordinary links, and version-controlled provenance. CI validates the bundle against the [pinned v0.2 specification](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md). `index.md` declares the bundle version. Every other non-reserved Markdown concept has a non-empty `type`.
+## Support & Governance
 
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md). For product implementation work, start with [Floppy issues](https://github.com/dannyvfilms/Floppy/issues).
-
-The catalogue at `/projects/` accepts corrections supported by a first-party project page or repository. The visible table, JSON, CSV, OKF concept and Dataset JSON-LD all derive from the same project records.
-
-## Support the work
-
-- [Sponsor Danny's Floppy work](https://github.com/sponsors/dannyvfilms)
-- [Sponsor Ryan's Scrobble.dev maintenance](https://github.com/sponsors/ryan-winkler)
+- **Maintainer**: [Ryan Winkler](https://github.com/ryan-winkler)
+- **Sponsor the Work**: [GitHub Sponsors](https://github.com/sponsors/ryan-winkler)
+- **Governance**: [public/knowledge/governance.md](public/knowledge/governance.md)

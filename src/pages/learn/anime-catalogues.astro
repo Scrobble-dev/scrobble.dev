@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Why anime imports become ambiguous — Scrobble.dev';
+const description = 'How catalogue structure, specials, split parts, episode numbering and missing timestamps affect anime history imports.';
+const modified = '2026-08-31';
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Anime catalogues can disagree before playback starts',
+    description,
+    dateModified: modified,
+    author: { '@type': 'Organization', name: 'Scrobble.dev' },
+    mainEntityOfPage: 'https://scrobble.dev/learn/anime-catalogues/'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Scrobble.dev', item: 'https://scrobble.dev/' },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: 'https://scrobble.dev/learn/' },
+      { '@type': 'ListItem', position: 3, name: 'Anime catalogues', item: 'https://scrobble.dev/learn/anime-catalogues/' }
+    ]
+  }
+];
+---
+<BaseLayout {title} {description} type="TechArticle" schema={schema} markdown="/knowledge/concepts/anime-catalogue-granularity.md" {modified} status="stable">
+  <article class="shell section article">
+    <div class="article-body">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><a href="/learn/">Learn</a><span aria-hidden="true">/</span><span aria-current="page">Anime catalogues</span></nav>
+      <p class="kicker">Import edge cases</p>
+      <h1>Anime catalogues can disagree before playback starts.</h1>
+      <p class="standfirst">Two services can describe the same release with different entries, episode counts and season boundaries. A safe import keeps the source record intact when that difference cannot be represented exactly.</p>
+
+      <h2 id="differences">Common structural differences</h2>
+      <div class="catalogue-scroll" role="region" aria-label="Anime catalogue differences" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Difference</th><th scope="col">Effect on history</th><th scope="col">Safe treatment</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Specials</th><td>One catalogue can keep specials under the main series while another creates several separate entries.</td><td>Preserve the original entry and episode coordinate. Do not force a one-record-to-one-record assumption.</td></tr>
+            <tr><th scope="row">Split parts</th><td>One catalogue can use one entry while another divides the same material into Part 1, Part 2 and Part 3.</td><td>Keep the source part and count. Treat a translated progress value as a derived claim.</td></tr>
+            <tr><th scope="row">Recaps and inserted episodes</th><td>An extra recap or bonus episode can shift every later episode number.</td><td>Use explicit episode relations when available. A numeric offset alone is not durable evidence.</td></tr>
+            <tr><th scope="row">Season boundaries</th><td>An anime service can create a new entry for an announced part while a television catalogue keeps it inside one season.</td><td>Retain both the source entry and the target series or season context.</td></tr>
+            <tr><th scope="row">Moved or removed entries</th><td>A current lookup can return a different record or no record after a provider changes its catalogue.</td><td>Keep the source identifier recorded with the event and mark later correspondence as stale or disputed rather than rewriting history silently.</td></tr>
+            <tr><th scope="row">Missing event times</th><td>Some exports contain progress or completion without the original watch timestamp.</td><td>Keep event time unknown. Do not spread or invent precise dates to make an import look complete.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="issue-11">Why catalogue disagreement matters</h2>
+      <p>These are connected import risks. One-to-one correspondence can lose specials and split entries. A provider can also move or remove a record after an import. The safe response is to retain source context and make a later correspondence explicit.</p>
+      <p>These are not only metadata problems. They can change which episode a historical event appears to describe, whether a completed item becomes incomplete after import, and whether a retry creates a duplicate against a different target record.</p>
+
+      <h2 id="import">Safe import behavior</h2>
+      <dl class="field-notes">
+        <div><dt>Keep source context</dt><dd>Store the source namespace, source item identifier, source episode or part coordinate and the label used at import time.</dd></div>
+        <div><dt>Name every time</dt><dd>Keep event time, export time, import time and correction time separate. Unknown event time stays unknown.</dd></div>
+        <div><dt>Allow unresolved records</dt><dd>An event can remain useful while its destination subject is unresolved or disputed.</dd></div>
+        <div><dt>Make correction explicit</dt><dd>A later correction should preserve the original import evidence and record why the current interpretation changed.</dd></div>
+        <div><dt>Require explicit deletion</dt><dd>A missing provider entry, empty page or failed lookup is not evidence that the user's history should be removed.</dd></div>
+        <div><dt>Version external evidence</dt><dd>Record the source and checked date used for a correspondence so later changes can be inspected.</dd></div>
+      </dl>
+
+      <h2 id="example">Example: one watched item, three destination entries</h2>
+      <p>A source export reports episode 12 of one item as watched. The destination catalogue stores the same material as three separate parts. The importer can preserve the source event immediately, but it should not select a destination part from title similarity alone. The event remains unresolved until exact evidence or a user correction identifies the represented part.</p>
+
+      <p class="source-note">Discussion checked 31 August 2026: <a href="https://github.com/nattadasu/animeApi/issues/11">nattadasu/animeApi issue #11</a> asks for input on anime mapping and tracking. The examples on this page are editorial interoperability guidance; they do not define a provider catalogue or rank a data source.</p>
+
+      <p class="contribution-note">Found a reproducible import case? Report the source service, destination service, entry grain, episode coordinate, available event time and expected result through <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Scrobble.dev</a>.</p>
+    </div>
+    <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#differences">Differences</a></li><li><a href="#issue-11">Why it matters</a></li><li><a href="#import">Safe import</a></li><li><a href="#example">Example</a></li></ul></aside>
+  </article>
+</BaseLayout>

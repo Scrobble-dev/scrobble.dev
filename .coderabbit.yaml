@@ -1,0 +1,104 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+early_access: false
+enable_free_tier: true
+
+reviews:
+  profile: "chill"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: true
+  sequence_diagrams: true
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  suggested_labels: true
+  fail_commit_status: false
+  enable_prompt_for_ai_agents: true
+
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - "main"
+    ignore_title_keywords:
+      - "WIP"
+      - "wip"
+      - "Draft"
+      - "draft"
+    exclude_users:
+      - "dependabot[bot]"
+      - "github-actions[bot]"
+
+  path_filters:
+    - "!dist/**"
+    - "!node_modules/**"
+    - "!package-lock.json"
+    - "!.astro/**"
+
+  tools:
+    ast-grep:
+      essential_rules: true
+    shellcheck:
+      enabled: true
+    markdownlint:
+      enabled: true
+    yamllint:
+      enabled: true
+    actionlint:
+      enabled: true
+    zizmor:
+      enabled: true
+    gitleaks:
+      enabled: true
+    biome:
+      enabled: true
+    eslint:
+      enabled: true
+    stylelint:
+      enabled: true
+
+  path_instructions:
+    - path: "public/knowledge/**"
+      instructions: |
+        Verify OKF knowledge base standards:
+        - Must conform to OKF v0.2 spec (`type`, `title`, `description`, `resource`, `status`).
+        - Distinct domain boundaries: scrobble event, media entity, user progress, rating, watchlist, collection.
+        - Link rather than duplicate. Progressive disclosure.
+        - Neutral practitioner voice: no marketing hype, no claims of superiority.
+
+    - path: "src/**"
+      instructions: |
+        Verify Astro and accessibility standards:
+        - Design system: Editorial field-guide, Georgia headings, Arial body copy, Courier New labels.
+        - Flat rules, source notes, tables; NO gradients, glow effects, or rounded card containers.
+        - WCAG 2.2 Level AA full compliance, min 44px hit targets, visible focus rings.
+        - Structured data: Schema.org types only where truthfully describing visible content.
+
+    - path: ".github/workflows/**"
+      instructions: |
+        Verify GitHub Actions workflow security:
+        - Least-privilege permissions (`permissions:` defined at workflow/job level).
+        - Flag unpinned actions or insecure script executions.
+
+knowledge_base:
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "AGENTS.md"
+      - "CONTRIBUTING.md"
+      - "README.md"
+  learnings:
+    scope: "auto"
+  issues:
+    scope: "auto"
+  pull_requests:
+    scope: "auto"
+
+chat:
+  art: false
+  auto_reply: true

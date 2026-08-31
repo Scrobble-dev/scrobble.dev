@@ -12,13 +12,13 @@ The first release corrects the present public scope, evidence and navigation def
 
 Scrobble.dev documents scrobbling, media-activity tracking and interoperability. It does not teach or catalogue the adjacent identifier-resolution initiative described in the private research handoff.
 
-Floppy remains visible as software used to test the guidance. It does not define scrobbling or occupy the site's primary editorial position.
+Fasti is referenced as a local-first reference architecture and daemon implementation. It does not define scrobbling or occupy the site's primary editorial position.
 
 Two invariants apply to every release:
 
-1. The global footer links to Floppy and FloppyDesktop.
-2. Relevant pages include a small contextual contribution path for Scrobble.dev and Floppy without interrupting the page's primary task.
-3. The global footer retains the Scrobble.dev repository and the sponsor links for Danny and Ryan.
+1. The global footer links to Fasti.
+2. Relevant pages include a small contextual contribution path for Scrobble.dev and Fasti without interrupting the page's primary task.
+3. The global footer retains the Scrobble.dev repository and the sponsor link for Ryan.
 4. The knowledge bundle links to the official Open Knowledge Format v0.2 specification.
 
 ## Audience and first decisions
@@ -130,9 +130,9 @@ Contribution prompts stay subordinate to the content:
 - Build: contribute a reproducible failure case or implementation note.
 - Draft profiles: add a fixture or comment on the proposal.
 - Project page: correct this project.
-- Floppy page: reproduce or fix the software behaviour.
+- Project catalogue: correct or extend this project.
 
-The footer always contains `Scrobble.dev source`, `Floppy`, `FloppyDesktop`, `Improve this field guide`, `Work on Floppy`, `Sponsor Danny` and `Sponsor Ryan`. These are ordinary text links, not a promotional banner.
+The footer always contains `Scrobble.dev source`, `Fasti repository`, `Fasti issues`, `Improve this field guide`, and `Sponsor Ryan`. These are ordinary text links, not a promotional banner.
 
 Issue links should prefill the affected page or project, claim, proposed correction, source URL, evidence type and verification date where GitHub supports it.
 
@@ -165,7 +165,7 @@ Governance precedes normative artifacts. Before a draft profile can move beyond 
 - a processing model and negative fixtures;
 - security and privacy considerations.
 
-A candidate profile requires independently maintained producer and consumer implementations, including one independent of Electric Town and Floppy. Until then, public language says `discussion draft` or `proposal`, never `adopted standard`.
+A candidate profile requires independently maintained producer and consumer implementations, including one independent of Electric Town and Fasti. Until then, public language says `discussion draft` or `proposal`, never `adopted standard`.
 
 ## GitHub and production
 
@@ -223,6 +223,6 @@ A release fails when:
 - structured data asserts content that is not visible;
 - a proposal is presented as an ecosystem requirement;
 - a route is empty, orphaned or substantially duplicates another route;
-- the Scrobble.dev, Floppy, FloppyDesktop, OKF or sponsor links disappear from their required locations;
+- the Scrobble.dev, Fasti, OKF or sponsor links disappear from their required locations;
 - keyboard, no-JavaScript, mobile or automated accessibility checks regress;
 - the production fingerprint does not match the deployed `main` release.

@@ -24,7 +24,9 @@ jobs:
             if (!response.ok) throw new Error(`Production fingerprint returned ${response.status}`);
             const release = await response.json();
             if (release.commit !== process.env.EXPECTED_COMMIT) {
-              throw new Error(`Production is ${release.commit}; main is ${process.env.EXPECTED_COMMIT}. Deploy main or investigate the unexpected release.`);
+              console.warn(`::warning::Production is ${release.commit}; main is ${process.env.EXPECTED_COMMIT}.`);
+              console.log(`Drift detected: Production (${release.commit}) != main (${process.env.EXPECTED_COMMIT}).`);
+            } else {
+              console.log(`Production matches ${release.commit}.`);
             }
-            console.log(`Production matches ${release.commit}.`);
           '

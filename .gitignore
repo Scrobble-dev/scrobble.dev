@@ -4,3 +4,5 @@ dist/
 .wrangler/
 *.tsbuildinfo
 .gstack/
+.playwright-cli/
+.impeccable/hook.cache.json

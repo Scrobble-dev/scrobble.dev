@@ -8,7 +8,7 @@ status: stable
 verified: { by: OpenAI/Codex-2026-08-11, at: 2026-08-11T20:58:36Z }
 stale_after: 2027-02-11
 sources:
-  - { id: scrobble-dev-repository, resource: "https://github.com/Electric-Town/scrobble.dev", title: "Scrobble.dev repository" }
+  - { id: scrobble-dev-repository, resource: "https://github.com/Scrobble-dev/scrobble.dev", title: "Scrobble.dev repository" }
   - { id: okf-spec, resource: "https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md", title: "Open Knowledge Format v0.2 specification" }
 ---
 
@@ -58,7 +58,7 @@ A correction should identify:
 - the date checked
 - any remaining uncertainty
 
-Open a correction at https://github.com/Electric-Town/scrobble.dev/issues/new.
+Open a correction at https://github.com/Scrobble-dev/scrobble.dev/issues/new.
 
 ## Related documents
 

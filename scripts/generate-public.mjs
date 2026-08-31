@@ -29,7 +29,7 @@ function projectCatalogueMarkdown() {
   const rows = PROJECTS.map((project) => {
     const sourceId = `${project.id}-${project.sources[0].id}`;
     const license = project.license ?? 'No licence verified';
-    return `| ${project.name} | ${project.media.join(', ')} | ${project.category} | ${project.capture} | ${project.sourceState} | ${license} | ${project.lifecycle} | ${project.checkedAt} | [Source][^${sourceId}] · [Contribute](${project.contribute}) |`;
+    return `| ${project.name} | ${project.media.join(', ')} | ${project.category} | ${project.hosting} | ${project.pricing} | ${project.capture} | ${project.sourceState} | ${license} | ${project.lifecycle} | ${project.checkedAt} | [Source][^${sourceId}] · [Contribute](${project.contribute}) |`;
   });
 
   const footnotes = sourceEntries.map((item) => `[^${item.projectId}-${item.id}]: [${item.title}](${item.url}), checked ${item.checkedAt}.`);
@@ -40,8 +40,8 @@ function projectCatalogueMarkdown() {
 
 This catalogue was updated on ${CATALOGUE_UPDATED_AT}. Each row records when its source was checked. Inclusion is not an endorsement. \`Unknown\` means the checked source did not establish a lifecycle state.
 
-| Project | Media | Category | Capture | Source state | Licence | Lifecycle | Checked | Evidence and contribution |
-|---|---|---|---|---|---|---|---|---|
+| Project | Media | Category | Hosting | Pricing | Capture | Source state | Licence | Lifecycle | Checked | Evidence and contribution |
+|---|---|---|---|---|---|---|---|---|---|---|
 ${rows.join('\n')}
 
 ## Distributions
