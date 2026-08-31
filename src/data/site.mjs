@@ -32,6 +32,15 @@ export const SITE = {
       ]
     },
     {
+      label: 'Discovery',
+      links: [
+        { label: 'Sitemap', href: '/sitemap-index.xml' },
+        { label: 'Crawler rules', href: '/robots.txt' },
+        { label: 'LLM index', href: '/llms.txt' },
+        { label: 'Expanded LLM context', href: '/llms-full.txt' }
+      ]
+    },
+    {
       label: 'Support the maintainer',
       links: [
         { label: 'Sponsor Ryan', href: 'https://github.com/sponsors/ryan-winkler' }

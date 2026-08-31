@@ -51,6 +51,27 @@ test('builds the knowledge-first field guide and catalogue', async () => {
   }
 });
 
+test('publishes crawler, sitemap, LLM and structured-data discovery surfaces', async () => {
+  const [home, robots, sitemapIndex, sitemap, llms, expanded] = await Promise.all([
+    dist('index.html'),
+    dist('robots.txt'),
+    dist('sitemap-index.xml'),
+    dist('sitemap-0.xml'),
+    dist('llms.txt'),
+    dist('llms-full.txt')
+  ]);
+
+  assert.match(robots, /^Sitemap: https:\/\/scrobble\.dev\/sitemap-index\.xml$/m);
+  assert.match(sitemapIndex, /https:\/\/scrobble\.dev\/sitemap-0\.xml/);
+  assert.match(sitemap, /https:\/\/scrobble\.dev\/projects\//);
+  assert.match(llms, /^# Scrobble\.dev$/m);
+  assert.match(expanded, /^# Scrobble\.dev: expanded context$/m);
+
+  const schemaTypes = [...home.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)]
+    .map((match) => JSON.parse(match[1])['@type']);
+  assert.deepEqual(schemaTypes, ['WebSite', 'Person', 'WebPage', 'DefinedTermSet']);
+});
+
 test('filters and sorts the evidence registry without changing its source', () => {
   const filmConnectors = filterProjects(PROJECTS, { media: 'Film', category: 'Connector', sourceState: 'Open source' }).map(({ name }) => name);
   assert.ok(filmConnectors.includes('Movary Kodi add-on'));

@@ -19,6 +19,10 @@ const requiredFooterLinks = [
   ['About and evidence method', '/about/'],
   ['Scrobble.dev source', 'https://github.com/Scrobble-dev/scrobble.dev'],
   ['Knowledge bundle', '/knowledge/index.md'],
+  ['Sitemap', '/sitemap-index.xml'],
+  ['Crawler rules', '/robots.txt'],
+  ['LLM index', '/llms.txt'],
+  ['Expanded LLM context', '/llms-full.txt'],
   ['Improve this field guide', 'https://github.com/Scrobble-dev/scrobble.dev/issues/new'],
   ['Sponsor Ryan', 'https://github.com/sponsors/ryan-winkler'],
   ['Open Knowledge Format project', 'https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf'],
@@ -31,7 +35,7 @@ test('keeps primary navigation compact and task-oriented', () => {
 });
 
 test('centralizes every required footer reference', () => {
-  assert.deepEqual(SITE.footerSections.map(({ label }) => label), ['Projects', 'Field guide', 'Support the maintainer']);
+  assert.deepEqual(SITE.footerSections.map(({ label }) => label), ['Projects', 'Field guide', 'Discovery', 'Support the maintainer']);
 
   const configuredLinks = [
     ...SITE.footerSections.flatMap(({ links }) => links),
@@ -45,12 +49,14 @@ test('centralizes every required footer reference', () => {
 
 test('keeps Fasti with Projects and Ryan with Scrobble.dev maintenance', () => {
   const projects = SITE.footerSections.find(({ label }) => label === 'Projects');
+  const discovery = SITE.footerSections.find(({ label }) => label === 'Discovery');
   const support = SITE.footerSections.find(({ label }) => label === 'Support the maintainer');
 
   assert.deepEqual(
     projects?.links.map(({ label }) => label),
     ['Fasti repository', 'Fasti documentation', 'Fasti issues', 'Project catalogue']
   );
+  assert.deepEqual(discovery?.links.map(({ label }) => label), ['Sitemap', 'Crawler rules', 'LLM index', 'Expanded LLM context']);
   assert.deepEqual(support?.links.map(({ label }) => label), ['Sponsor Ryan']);
   assert.deepEqual(SITE.footerActions.map(({ label }) => label), ['Improve this field guide']);
 });
@@ -91,12 +97,14 @@ test('builds every primary navigation destination', async () => {
 test('renders the required footer references without promoting contribution links to buttons', async () => {
   const home = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
   const projects = home.match(/<nav aria-label="Projects">([\s\S]*?)<\/nav>/)?.[1];
+  const discovery = home.match(/<nav aria-label="Discovery">([\s\S]*?)<\/nav>/)?.[1];
   const support = home.match(/<nav aria-label="Support the maintainer">([\s\S]*?)<\/nav>/)?.[1];
 
   for (const [label, href] of requiredFooterLinks) {
     assert.match(home, new RegExp(`href="${href}"[^>]*>${label}<`));
   }
   assert.match(projects ?? '', /Fasti repository[\s\S]*Fasti issues/);
+  assert.match(discovery ?? '', /Sitemap[\s\S]*Expanded LLM context/);
   assert.match(support ?? '', /Sponsor Ryan/);
   assert.match(home, /<nav class="footer-actions" aria-label="Contribution links">/);
   assert.doesNotMatch(home, /class="[^"]*button[^"]*"[^>]*>Improve this field guide/);
