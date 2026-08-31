@@ -1315,6 +1315,8 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 .principle-number { margin-right: 12px; color: var(--accent-dark); font-family: "Courier New", monospace; font-size: 12px; }
 
 [data-theme="dark"] .principles-accordion .accordion-body { color: #cbd5e1; }
+[data-theme="dark"] .media-groups .card-title { color: #f8fafc; }
+[data-theme="dark"] .media-groups .card-text { color: #cbd5e1; }
 
 @media (max-width: 640px) {
   .project-actions .btn { width: 100%; justify-content: center; }
