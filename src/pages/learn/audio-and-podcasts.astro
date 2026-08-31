@@ -34,11 +34,11 @@ const schema = [
       <p class="standfirst">Music has mature clients that submit track plays to independent history services. Podcast projects usually synchronize subscriptions, playback position or completion inside a smaller set of compatible applications.</p>
 
       <h2 id="roles">Four roles to keep separate</h2>
-      <dl class="field-notes card">
+      <dl class="field-notes">
         <div><dt>Capture client</dt><dd>Observes playback and submits an event to another system.</dd></div>
         <div><dt>Destination</dt><dd>Stores listening history independently of the player that created it.</dd></div>
         <div><dt>Bridge</dt><dd>Receives one source's playback data and forwards or normalizes it for another destination.</dd></div>
-        <div><dt>Playback-state sync</dt><dd>Moves subscriptions, position or completion between compatible podcast clients via playback-state sync. It does not automatically create a portable event history.</dd></div>
+        <div><dt>Playback-state sync</dt><dd>Moves subscriptions, position or completion between compatible podcast clients. It does not automatically create a portable event history.</dd></div>
       </dl>
 
       <h2 id="music">Music and general-audio projects</h2>
@@ -71,7 +71,7 @@ const schema = [
       </div>
 
       <h2 id="event">What a portable podcast event needs</h2>
-      <dl class="field-notes card">
+      <dl class="field-notes">
         <div><dt>Episode subject</dt><dd>Feed URL, episode GUID and any source-local identifiers known when playback occurred.</dd></div>
         <div><dt>Event kind</dt><dd>Started, progress, completed, abandoned or corrected. A current position is not automatically a completed listen.</dd></div>
         <div><dt>Time</dt><dd>The time represented by the event, kept separate from import or receipt time.</dd></div>
@@ -82,7 +82,7 @@ const schema = [
 
       <p class="source-note">Sources checked 31 August 2026: the linked project repositories and documentation; <a href="https://github.com/mopidy/mopidy-scrobbler/blob/main/README.md">Mopidy-Scrobbler README</a>; <a href="https://github.com/gpodder/gpodder/blob/master/src/gpodder/my.py">gPodder synchronization implementation</a>; <a href="https://github.com/AntennaPod/AntennaPod/blob/develop/net/sync/service/src/main/java/de/danoeh/antennapod/net/sync/service/SyncService.java">AntennaPod synchronization implementation</a>; and <a href="https://github.com/advplyr/audiobookshelf/blob/master/server/managers/PlaybackSessionManager.js">Audiobookshelf playback-session implementation</a>.</p>
 
-      <p class="contribution-note">A project entry describes documented behavior; it is not a ranking. Correct a role or source through <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Scrobble.dev</a>, or <a href="/projects/?media=Music">compare music projects in the catalogue</a>.</p>
+      <p class="contribution-note">A project entry describes documented behavior; it is not a ranking. Correct a role or source through <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Scrobble.dev</a>, or <a href="/projects/?media=Music">compare music projects in the catalogue</a>.</p>
     </div>
     <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#roles">Roles</a></li><li><a href="#music">Music projects</a></li><li><a href="#podcasts">Podcast projects</a></li><li><a href="#event">Portable event</a></li></ul></aside>
   </article>

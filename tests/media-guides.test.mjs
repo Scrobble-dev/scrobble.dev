@@ -23,7 +23,7 @@ test('builds source-linked audio, podcast, game and anime guides', async () => {
   assert.match(audio, /Audio and podcast projects do not record the same thing/);
   assert.match(audio, /Mopidy-Scrobbler/);
   assert.match(audio, /AntennaPod/);
-  assert.match(audio, /Playback-state sync/);
+  assert.match(audio, /playback-state sync/i);
 
   assert.match(games, /Game activity can be a session, a snapshot or an achievement/);
   assert.match(games, /GameActivity for Playnite/);
@@ -31,7 +31,7 @@ test('builds source-linked audio, podcast, game and anime guides', async () => {
   assert.match(games, /CHScrobbler/);
 
   assert.match(anime, /Anime catalogues can disagree before playback starts/);
-  assert.match(anime, /Why catalogue disagreement matters/);
+  assert.match(anime, /animeApi issue #11/);
   assert.match(anime, /Missing event times/);
   assert.match(anime, /Require explicit deletion/);
 
@@ -59,5 +59,5 @@ test('keeps automatic capture distinct from state and manual tracking', async ()
 
   assert.match(audio, /It does not automatically create a portable event history/);
   assert.match(games, /Those fields do not prove a durable, portable occurrence log/);
-  assert.match(games, /It is a tracker, not automatic capture/);
+  assert.match(games, /It may not retain the sessions that produced the total/);
 });
