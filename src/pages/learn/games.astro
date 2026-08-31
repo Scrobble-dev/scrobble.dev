@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Game scrobbling projects — Scrobble.dev';
+const description = 'A source-linked guide to game-session capture, playtime state, achievement telemetry and adjacent library tools.';
+const modified = '2026-08-31';
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Game activity can be a session, a snapshot or an achievement',
+    description,
+    dateModified: modified,
+    author: { '@type': 'Organization', name: 'Scrobble.dev' },
+    mainEntityOfPage: 'https://scrobble.dev/learn/games/'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Scrobble.dev', item: 'https://scrobble.dev/' },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: 'https://scrobble.dev/learn/' },
+      { '@type': 'ListItem', position: 3, name: 'Games', item: 'https://scrobble.dev/learn/games/' }
+    ]
+  }
+];
+---
+<BaseLayout {title} {description} type="TechArticle" schema={schema} markdown="/knowledge/concepts/game-activity.md" {modified} status="stable">
+  <article class="shell section article">
+    <div class="article-body">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><a href="/learn/">Learn</a><span aria-hidden="true">/</span><span aria-current="page">Games</span></nav>
+      <p class="kicker">Medium guide</p>
+      <h1>Game activity can be a session, a snapshot or an achievement.</h1>
+      <p class="standfirst">A launcher, a platform import and a local session recorder can all show “playtime.” They do not provide the same evidence, event boundaries or portability.</p>
+
+      <h2 id="roles">Five roles to keep separate</h2>
+      <dl class="field-notes">
+        <div><dt>Session capture</dt><dd>Observes a start and stop boundary and records one play session.</dd></div>
+        <div><dt>Playtime state</dt><dd>Stores a current total, last-played time or status. It may not retain the sessions that produced the total.</dd></div>
+        <div><dt>Platform ingestion</dt><dd>Imports account data already held by a storefront or console platform.</dd></div>
+        <div><dt>Achievement telemetry</dt><dd>Records achievement events. It does not by itself describe every play session.</dd></div>
+        <div><dt>Manual tracking</dt><dd>Stores user-entered backlog, status or completion. It is a tracker, not automatic capture.</dd></div>
+      </dl>
+
+      <h2 id="projects">Projects and building blocks</h2>
+      <div class="catalogue-scroll" role="region" aria-label="Game activity project comparison" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Project</th><th scope="col">Classification</th><th scope="col">Documented behavior</th><th scope="col">Boundary</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="https://github.com/Lacro59/playnite-gameactivity-plugin">GameActivity for Playnite</a></th><td>Session capture</td><td>Records session date and elapsed time per game, with optional hardware measurements and CSV export.</td><td>History remains centred on the Playnite extension unless another process exports or synchronizes it.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/rommapp/romm">RomM</a></th><td>Session ingestion</td><td>Accepts start time, end time and duration for play sessions, checks duplicates and updates the user's latest-played state.</td><td>It is a self-hosted game library and player, not a general cross-service game-history protocol.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/angelolz/CHScrobbler">CHScrobbler</a></th><td>Music capture from games</td><td>Reads current-song output from Clone Hero, ScoreSpy or YARG and submits the song to Last.fm after a documented threshold.</td><td>It records the song played inside a rhythm game, not a general game session.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/JosefNemec/Playnite">Playnite</a></th><td>Library and launcher state</td><td>Its game model includes running state, total playtime, play count and completion status.</td><td>Those fields do not prove a durable, portable occurrence log.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/Phalcode/gamevault-backend">GameVault</a></th><td>Progress state</td><td>Stores minutes played, a progress state and last-played time for a user and game.</td><td>The documented progress entity is current state rather than a sequence of session events.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="questions">Questions to ask before calling it a game scrobbler</h2>
+      <ol>
+        <li>What creates the record: a local process observer, launcher, emulator, platform API or user action?</li>
+        <li>Does the record preserve a session start and stop, or only a cumulative total?</li>
+        <li>Can it separate active play from idle, suspended or background time?</li>
+        <li>How does it handle offline play, duplicate delivery and clock differences?</li>
+        <li>Can the user inspect, export, correct and delete the resulting history?</li>
+      </ol>
+
+      <h2 id="event">Minimum event context</h2>
+      <dl class="field-notes">
+        <div><dt>Game subject</dt><dd>A namespaced game or release identifier, platform and edition when known. A display title is not sufficient identity.</dd></div>
+        <div><dt>Event kind</dt><dd>Session started, session ended, achievement, progress or explicit completion.</dd></div>
+        <div><dt>Duration</dt><dd>Active time and wall-clock time kept separate when the source can provide both.</dd></div>
+        <div><dt>Source</dt><dd>Local observation, launcher, emulator, platform import or manual entry.</dd></div>
+        <div><dt>Occurrence identity</dt><dd>A stable event or session key so a retry does not manufacture a second play.</dd></div>
+        <div><dt>Privacy</dt><dd>A private default and visible sharing controls. Game activity can expose routines, social patterns and device use.</dd></div>
+      </dl>
+
+      <p class="source-note">Sources checked 31 August 2026: <a href="https://github.com/Lacro59/playnite-gameactivity-plugin/blob/master/README.md">GameActivity README</a>; <a href="https://github.com/rommapp/romm/blob/master/backend/handler/play_session_handler.py">RomM play-session handler</a>; <a href="https://github.com/angelolz/CHScrobbler/blob/master/README.md">CHScrobbler README</a>; <a href="https://github.com/JosefNemec/Playnite/blob/master/source/PlayniteSDK/Models/Game.cs">Playnite game model</a>; and <a href="https://github.com/Phalcode/gamevault-backend/blob/master/src/modules/progresses/progress.entity.ts">GameVault progress entity</a>.</p>
+
+      <p class="contribution-note">A project entry describes documented behavior; it is not an endorsement. Correct a role or source through <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Scrobble.dev</a>, or <a href="/projects/?media=Video%20games">compare video-game projects in the catalogue</a>.</p>
+    </div>
+    <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#roles">Roles</a></li><li><a href="#projects">Projects</a></li><li><a href="#questions">Questions</a></li><li><a href="#event">Event context</a></li></ul></aside>
+  </article>
+</BaseLayout>

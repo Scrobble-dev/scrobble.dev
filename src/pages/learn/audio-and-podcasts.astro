@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Audio and podcast scrobbling projects — Scrobble.dev';
+const description = 'A source-linked guide to music scrobblers, listening-history destinations, bridges and podcast playback-state systems.';
+const modified = '2026-08-31';
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: 'Audio and podcast projects do not record the same thing',
+    description,
+    dateModified: modified,
+    author: { '@type': 'Organization', name: 'Scrobble.dev' },
+    mainEntityOfPage: 'https://scrobble.dev/learn/audio-and-podcasts/'
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Scrobble.dev', item: 'https://scrobble.dev/' },
+      { '@type': 'ListItem', position: 2, name: 'Learn', item: 'https://scrobble.dev/learn/' },
+      { '@type': 'ListItem', position: 3, name: 'Audio and podcasts', item: 'https://scrobble.dev/learn/audio-and-podcasts/' }
+    ]
+  }
+];
+---
+<BaseLayout {title} {description} type="TechArticle" schema={schema} markdown="/knowledge/concepts/audio-and-podcast-activity.md" {modified} status="stable">
+  <article class="shell section article">
+    <div class="article-body">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><a href="/learn/">Learn</a><span aria-hidden="true">/</span><span aria-current="page">Audio and podcasts</span></nav>
+      <p class="kicker">Medium guide</p>
+      <h1>Audio and podcast projects do not record the same thing.</h1>
+      <p class="standfirst">Music has mature clients that submit track plays to independent history services. Podcast projects usually synchronize subscriptions, playback position or completion inside a smaller set of compatible applications.</p>
+
+      <h2 id="roles">Four roles to keep separate</h2>
+      <dl class="field-notes">
+        <div><dt>Capture client</dt><dd>Observes playback and submits an event to another system.</dd></div>
+        <div><dt>Destination</dt><dd>Stores listening history independently of the player that created it.</dd></div>
+        <div><dt>Bridge</dt><dd>Receives one source's playback data and forwards or normalizes it for another destination.</dd></div>
+        <div><dt>Playback-state sync</dt><dd>Moves subscriptions, position or completion between compatible podcast clients. It does not automatically create a portable event history.</dd></div>
+      </dl>
+
+      <h2 id="music">Music and general-audio projects</h2>
+      <div class="catalogue-scroll" role="region" aria-label="Music and audio project comparison" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Project</th><th scope="col">Role</th><th scope="col">Documented behavior</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="https://www.last.fm/about/trackmymusic">Last.fm</a></th><td>Destination and client family</td><td>Receives submitted track plays and keeps a listening history.</td></tr>
+            <tr><th scope="row"><a href="https://listenbrainz.org/">ListenBrainz</a></th><td>Destination and API</td><td>Accepts timestamped listens through an open submission service and compatible clients.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/krateng/maloja">Maloja</a></th><td>Self-hosted destination</td><td>Stores personal music scrobbles and presents listening statistics.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/web-scrobbler/web-scrobbler">Web Scrobbler</a></th><td>Capture client</td><td>Observes supported web-player playback in the browser and submits it to configured services.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/kawaiiDango/pano-scrobbler">Pano Scrobbler</a></th><td>Capture client</td><td>Observes supported device playback and submits listening events to supported services.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/FoxxMD/multi-scrobbler">multi-scrobbler</a></th><td>Bridge</td><td>Collects playback from supported sources and forwards it to supported destinations.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/mopidy/mopidy-scrobbler">Mopidy-Scrobbler</a></th><td>Player extension</td><td>Submits Mopidy track playback to Last.fm or Libre.fm. Its repository currently asks for a dedicated maintainer.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="podcasts">Podcast projects</h2>
+      <p>These projects solve useful synchronization and resume problems. Their records should not be described as equivalent to a general listening-history destination unless the project documents that behavior.</p>
+      <div class="catalogue-scroll" role="region" aria-label="Podcast project comparison" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Project</th><th scope="col">Role</th><th scope="col">Documented behavior</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="https://github.com/gpodder/gpodder">gPodder</a></th><td>Podcast client and sync participant</td><td>Queues subscription and episode actions, including playback position, for compatible synchronization services.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/AntennaPod/AntennaPod">AntennaPod</a></th><td>Podcast client and sync participant</td><td>Synchronizes subscriptions and episode actions through supported providers while keeping local playback state.</td></tr>
+            <tr><th scope="row"><a href="https://github.com/advplyr/audiobookshelf">Audiobookshelf</a></th><td>Self-hosted application state</td><td>Stores per-user podcast and audiobook playback sessions and progress inside one self-hosted system.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="event">What a portable podcast event needs</h2>
+      <dl class="field-notes">
+        <div><dt>Episode subject</dt><dd>Feed URL, episode GUID and any source-local identifiers known when playback occurred.</dd></div>
+        <div><dt>Event kind</dt><dd>Started, progress, completed, abandoned or corrected. A current position is not automatically a completed listen.</dd></div>
+        <div><dt>Time</dt><dd>The time represented by the event, kept separate from import or receipt time.</dd></div>
+        <div><dt>Progress</dt><dd>Position and duration in seconds when the source supplied them.</dd></div>
+        <div><dt>Provenance</dt><dd>The player, device, account context and whether the record came from observation, import or manual correction.</dd></div>
+        <div><dt>Privacy</dt><dd>A clear private default, deletion path and export path. Listening history can reveal routines and private interests.</dd></div>
+      </dl>
+
+      <p class="source-note">Sources checked 31 August 2026: the linked project repositories and documentation; <a href="https://github.com/mopidy/mopidy-scrobbler/blob/main/README.md">Mopidy-Scrobbler README</a>; <a href="https://github.com/gpodder/gpodder/blob/master/src/gpodder/my.py">gPodder synchronization implementation</a>; <a href="https://github.com/AntennaPod/AntennaPod/blob/develop/net/sync/service/src/main/java/de/danoeh/antennapod/net/sync/service/SyncService.java">AntennaPod synchronization implementation</a>; and <a href="https://github.com/advplyr/audiobookshelf/blob/master/server/managers/PlaybackSessionManager.js">Audiobookshelf playback-session implementation</a>.</p>
+
+      <p class="contribution-note">A project entry describes documented behavior; it is not a ranking. Correct a role or source through <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Scrobble.dev</a>, or <a href="/projects/?media=Music">compare music projects in the catalogue</a>.</p>
+    </div>
+    <aside class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#roles">Roles</a></li><li><a href="#music">Music projects</a></li><li><a href="#podcasts">Podcast projects</a></li><li><a href="#event">Portable event</a></li></ul></aside>
+  </article>
+</BaseLayout>
