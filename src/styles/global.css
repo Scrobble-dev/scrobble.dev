@@ -1,13 +1,13 @@
 :root {
-  --surface: #f4f0e7;
-  --paper: #fffdf8;
-  --ink: #171717;
-  --ink-soft: #5d5a52;
+  --surface: #f6f8fb;
+  --paper: #ffffff;
+  --ink: #182433;
+  --ink-soft: #667382;
   --accent: #206bc4;
-  --accent-dark: #1a569d;
-  --rule: #bfb8aa;
+  --accent-dark: #0054a6;
+  --rule: #dce1e7;
   --rule-light: #e6e7e9;
-  --night: #111;
+  --night: #182433;
   --reading: 70ch;
   --tblr-primary: #206bc4;
   --tblr-primary-rgb: 32, 107, 196;
@@ -417,27 +417,27 @@ h4 { font-size: 1.15rem; }
 .badge-outline { background: transparent; border: 1px solid currentColor; }
 .badge-pill { border-radius: 10rem; padding-inline: 9px; }
 
-/* Soft Tabler Badges for Hosting, Price, Category */
-.badge-selfhosted { background: #e6f7eb; color: #2fb344; border: 1px solid #b7ecc3; }
-.badge-cloud { background: #eaf2ff; color: #206bc4; border: 1px solid #c2dbfe; }
-.badge-local { background: #fdf5e5; color: #d63939; border: 1px solid #fce3b8; }
-.badge-free { background: #e6f7eb; color: #2fb344; border: 1px solid #b7ecc3; }
-.badge-freemium { background: #fdf5e5; color: #d63939; border: 1px solid #fce3b8; }
-.badge-paid { background: #fce8e6; color: #d63939; border: 1px solid #f8b4b4; }
-.badge-category { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; font-weight: 600; }
+/* Soft Tabler Badges for Hosting, Price, Category (WCAG AA Compliant >= 4.5:1) */
+.badge-selfhosted { background: #e6f7eb; color: #1e7e34; border: 1px solid #b7ecc3; }
+.badge-cloud { background: #eaf2ff; color: #1a569d; border: 1px solid #c2dbfe; }
+.badge-local { background: #fff9db; color: #946200; border: 1px solid #ffec99; }
+.badge-free { background: #e6f7eb; color: #1e7e34; border: 1px solid #b7ecc3; }
+.badge-freemium { background: #fff9db; color: #946200; border: 1px solid #ffec99; }
+.badge-paid { background: #fce8e6; color: #b82525; border: 1px solid #f8b4b4; }
+.badge-category { background: #f1f5f9; color: #1e293b; border: 1px solid #cbd5e1; font-weight: 600; }
 
-/* Distinct Soft Pill Badges for All 11 Media Types */
-.badge-media-film { background: #eaf2ff; color: #206bc4; border: 1px solid #c2dbfe; }
-.badge-media-television { background: #e6f7fa; color: #0ca678; border: 1px solid #b3ebe2; }
-.badge-media-anime { background: #fcebf4; color: #d6336c; border: 1px solid #f7c3dc; }
-.badge-media-books { background: #ebfbee; color: #2fb344; border: 1px solid #c3f3ca; }
-.badge-media-manga { background: #f3f0ff; color: #7048e8; border: 1px solid #d8ccfa; }
-.badge-media-comics { background: #fff4e6; color: #f76707; border: 1px solid #ffd8a8; }
-.badge-media-music { background: #ffe3e3; color: #fa5252; border: 1px solid #ffc9c9; }
-.badge-media-podcasts { background: #fff9db; color: #f59f00; border: 1px solid #ffec99; }
-.badge-media-videogames { background: #edf2ff; color: #4263eb; border: 1px solid #bac8ff; }
-.badge-media-boardgames { background: #e6fcf5; color: #099268; border: 1px solid #b2f2bb; }
-.badge-media-fitness { background: #e6fcf5; color: #20c997; border: 1px solid #96f2d7; }
+/* Distinct Soft Pill Badges for All 11 Media Types (WCAG AA Compliant) */
+.badge-media-film { background: #eaf2ff; color: #1a569d; border: 1px solid #c2dbfe; }
+.badge-media-television { background: #e6fcf5; color: #087f5b; border: 1px solid #96f2d7; }
+.badge-media-anime { background: #fcebf4; color: #a61e4d; border: 1px solid #f7c3dc; }
+.badge-media-books { background: #ebfbee; color: #1e7e34; border: 1px solid #c3f3ca; }
+.badge-media-manga { background: #f3f0ff; color: #5f3dc4; border: 1px solid #d8ccfa; }
+.badge-media-comics { background: #fff4e6; color: #d9480f; border: 1px solid #ffd8a8; }
+.badge-media-music { background: #ffe3e3; color: #b82525; border: 1px solid #ffc9c9; }
+.badge-media-podcasts { background: #fff9db; color: #946200; border: 1px solid #ffec99; }
+.badge-media-videogames { background: #edf2ff; color: #2b4acb; border: 1px solid #bac8ff; }
+.badge-media-boardgames { background: #e6fcf5; color: #087f5b; border: 1px solid #96f2d7; }
+.badge-media-fitness { background: #e6fcf5; color: #087f5b; border: 1px solid #96f2d7; }
 
 /* Sections & Hero Layout (Tightened Spacing) */
 .section { padding-block: clamp(24px, 4vw, 48px); }
@@ -1618,41 +1618,41 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 
 [data-theme="dark"] .badge-selfhosted,
 [data-theme="dark"] .badge-free {
-  background-color: #163828;
-  border-color: #1e5a3c;
-  color: #51cf66;
+  background-color: rgba(47, 179, 68, 0.18);
+  border-color: rgba(47, 179, 68, 0.35);
+  color: #8ce99a;
 }
 
 [data-theme="dark"] .badge-cloud {
-  background-color: #1a3254;
-  border-color: #234b7f;
-  color: #74c0fc;
+  background-color: rgba(32, 107, 196, 0.18);
+  border-color: rgba(32, 107, 196, 0.35);
+  color: #90cdf4;
 }
 
 [data-theme="dark"] .badge-local,
 [data-theme="dark"] .badge-freemium {
-  background-color: #382c16;
-  border-color: #5a451e;
-  color: #fcc419;
+  background-color: rgba(245, 159, 0, 0.18);
+  border-color: rgba(245, 159, 0, 0.35);
+  color: #ffe066;
 }
 
 [data-theme="dark"] .badge-paid {
-  background-color: #381a1a;
-  border-color: #5a2424;
-  color: #ff8787;
+  background-color: rgba(214, 57, 57, 0.18);
+  border-color: rgba(214, 57, 57, 0.35);
+  color: #ffa8a8;
 }
 
-[data-theme="dark"] .badge-media-film { background-color: #1a3254; border-color: #234b7f; color: #74c0fc; }
-[data-theme="dark"] .badge-media-television { background-color: #133932; border-color: #1c594e; color: #38d9a9; }
-[data-theme="dark"] .badge-media-anime { background-color: #381628; border-color: #5a203f; color: #f783ac; }
-[data-theme="dark"] .badge-media-books { background-color: #163828; border-color: #1e5a3c; color: #51cf66; }
-[data-theme="dark"] .badge-media-manga { background-color: #2b1d4a; border-color: #432c75; color: #b197fc; }
-[data-theme="dark"] .badge-media-comics { background-color: #3d2413; border-color: #63391b; color: #ffa94d; }
-[data-theme="dark"] .badge-media-music { background-color: #3d1717; border-color: #632222; color: #ff8787; }
-[data-theme="dark"] .badge-media-podcasts { background-color: #383013; border-color: #5c4e1b; color: #ffd43b; }
-[data-theme="dark"] .badge-media-videogames { background-color: #1a2554; border-color: #24357f; color: #91a7ff; }
-[data-theme="dark"] .badge-media-boardgames { background-color: #133932; border-color: #1c594e; color: #38d9a9; }
-[data-theme="dark"] .badge-media-fitness { background-color: #133932; border-color: #1c594e; color: #38d9a9; }
+[data-theme="dark"] .badge-media-film { background-color: rgba(32, 107, 196, 0.18); border-color: rgba(32, 107, 196, 0.35); color: #90cdf4; }
+[data-theme="dark"] .badge-media-television { background-color: rgba(12, 166, 120, 0.18); border-color: rgba(12, 166, 120, 0.35); color: #63e6be; }
+[data-theme="dark"] .badge-media-anime { background-color: rgba(214, 51, 108, 0.18); border-color: rgba(214, 51, 108, 0.35); color: #fcc2d7; }
+[data-theme="dark"] .badge-media-books { background-color: rgba(47, 179, 68, 0.18); border-color: rgba(47, 179, 68, 0.35); color: #8ce99a; }
+[data-theme="dark"] .badge-media-manga { background-color: rgba(112, 72, 232, 0.18); border-color: rgba(112, 72, 232, 0.35); color: #d0bfff; }
+[data-theme="dark"] .badge-media-comics { background-color: rgba(247, 103, 7, 0.18); border-color: rgba(247, 103, 7, 0.35); color: #ffc078; }
+[data-theme="dark"] .badge-media-music { background-color: rgba(214, 57, 57, 0.18); border-color: rgba(214, 57, 57, 0.35); color: #ffa8a8; }
+[data-theme="dark"] .badge-media-podcasts { background-color: rgba(245, 159, 0, 0.18); border-color: rgba(245, 159, 0, 0.35); color: #ffe066; }
+[data-theme="dark"] .badge-media-videogames { background-color: rgba(66, 99, 235, 0.18); border-color: rgba(66, 99, 235, 0.35); color: #a5d8ff; }
+[data-theme="dark"] .badge-media-boardgames { background-color: rgba(12, 166, 120, 0.18); border-color: rgba(12, 166, 120, 0.35); color: #63e6be; }
+[data-theme="dark"] .badge-media-fitness { background-color: rgba(12, 166, 120, 0.18); border-color: rgba(12, 166, 120, 0.35); color: #63e6be; }
 
 [data-theme="dark"] .friends-footer-note {
   background-color: #1a2536;

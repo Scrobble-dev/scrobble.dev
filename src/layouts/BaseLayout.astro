@@ -115,10 +115,7 @@ const baseSchema = [
     <title>{title}</title>
     <script is:inline>
       (function() {
-        var theme = localStorage.getItem('tabler-theme') || localStorage.getItem('theme');
-        if (!theme) {
-          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
+        var theme = localStorage.getItem('tabler-theme') || localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-bs-theme', theme);
       })();
