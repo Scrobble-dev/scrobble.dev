@@ -160,7 +160,7 @@ h4 { font-size: 1.15rem; }
 .nav-link {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
+  min-height: 44px;
   padding: 4px 10px;
   color: var(--ink);
   font-size: 13.5px;
@@ -189,11 +189,12 @@ h4 { font-size: 1.15rem; }
   gap: 8px;
   flex-shrink: 0;
 }
+.header-actions .btn { min-height: 44px; align-items: center; }
 
 /* Theme Toggle Button */
 .theme-toggle {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   display: inline-flex;
   align-items: center;
@@ -225,7 +226,7 @@ h4 { font-size: 1.15rem; }
   .desktop-nav { display: none; }
   .site-menu { display: block; width: 100%; border-top: 1px solid var(--rule); }
   .site-menu summary {
-    min-height: 40px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -246,7 +247,7 @@ h4 { font-size: 1.15rem; }
     gap: 4px;
   }
   .mobile-nav a {
-    min-height: 36px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     color: var(--ink);
@@ -1396,7 +1397,7 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 .footer-grid > div p { max-width: 42ch; margin-top: 10px; color: #bbb8b1; font-size: 14px; }
 .footer-grid nav { display: grid; align-content: start; }
 .footer-grid nav p { margin: 0 0 6px; color: white; font-family: "Courier New", monospace; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-.footer-grid nav a { min-height: 34px; display: flex; align-items: center; color: #d8d5cd; font-size: 13.5px; text-decoration: none; }
+.footer-grid nav a { min-height: 44px; display: flex; align-items: center; color: #d8d5cd; font-size: 13.5px; text-decoration: none; }
 .footer-grid nav a:hover { color: white; text-decoration: underline; }
 
 .footer-bottom {
@@ -1414,7 +1415,7 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 }
 .footer-actions { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
 .footer-actions span { color: white; font-weight: 700; text-transform: uppercase; }
-.footer-actions a { min-height: 32px; display: inline-flex; align-items: center; color: #bbb8b1; text-decoration: none; }
+.footer-actions a { min-height: 44px; display: inline-flex; align-items: center; color: #bbb8b1; text-decoration: none; }
 .footer-actions a:hover { color: white; text-decoration: underline; }
 .footer-page-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; }
 .footer-maintainer { margin-top: 6px; font-size: 12px; color: var(--ink-soft); }
