@@ -504,6 +504,14 @@ h4 { font-size: 1.15rem; }
   margin-bottom: 2px;
   line-height: 1.2;
 }
+.fasti-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.fasti-title-row h2 { margin: 0; }
+.fasti-reference-badge { min-height: 24px; }
 .fasti-title-group p {
   color: var(--ink-soft);
   margin-bottom: 0;
@@ -1572,6 +1580,32 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
   border-color: var(--rule-light);
 }
 
+[data-theme="dark"] .filter-card-header,
+[data-theme="dark"] .tabler-table thead th {
+  background-color: #1a2536;
+  border-color: var(--rule);
+}
+
+[data-theme="dark"] .filter-card-title,
+[data-theme="dark"] .facet-title,
+[data-theme="dark"] .facet-label,
+[data-theme="dark"] .catalogue-count-title {
+  color: var(--ink);
+}
+
+[data-theme="dark"] .filter-search-group label,
+[data-theme="dark"] .catalogue-downloads {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .facet-header { border-bottom-color: var(--rule); }
+[data-theme="dark"] .facet-item:hover { background-color: #243347; }
+[data-theme="dark"] .facet-badge-count {
+  background-color: #182433;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
 [data-theme="dark"] .filter-search-box {
   background-color: #182433;
   border-color: var(--rule);
@@ -1590,10 +1624,13 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
   border-bottom-color: var(--rule-light);
 }
 
-[data-theme="dark"] .tabler-table thead th {
-  background-color: #1a2536;
-  border-bottom-color: var(--rule);
-  color: #94a3b8;
+[data-theme="dark"] .tabler-table thead th { color: #94a3b8; }
+
+[data-theme="dark"] .datatable-card,
+[data-theme="dark"] .tabler-table,
+[data-theme="dark"] .tabler-table tbody tr {
+  background-color: var(--paper);
+  border-color: var(--rule-light);
 }
 
 [data-theme="dark"] .tabler-table td {
@@ -1623,6 +1660,16 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
   background-color: var(--accent);
   color: #ffffff !important;
 }
+
+[data-theme="dark"] .tabler-export-link,
+[data-theme="dark"] .column-toggle-dropdown {
+  background-color: #182433;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .column-toggle-item { color: #cbd5e1; }
+[data-theme="dark"] .column-toggle-item:hover { background-color: #243347; }
 
 [data-theme="dark"] .btn-secondary {
   background-color: #1f2d3d;
