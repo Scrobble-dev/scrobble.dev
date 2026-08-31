@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Changelog & Release History — Scrobble.dev';
+const description = 'Changelog of updates, taxonomy refinements, new project verifications, and architectural guidance published on Scrobble.dev.';
+
+const entries = [
+  {
+    version: 'v0.3.0',
+    date: '2026-08-31',
+    badge: 'Latest',
+    badgeClass: 'bg-primary text-white',
+    title: 'Tabler-First UI, Fitness Tracking & Slashfriends Ring',
+    summary: 'Full migration to Tabler layout standards, extended project catalogue, dynamic column controls, and community slashfriends integration.',
+    changes: [
+      'Migrated entire interface to upstream Tabler layout components, cards, tables, ribbons, and badges.',
+      'Added Fitness media category support with verified tracking details for Ryot.',
+      'Introduced dynamic datatable column visibility toggles (hide/show Media, Category, Hosting, Capture, Links).',
+      'Added Tabler Accordion FAQ surface with Schema.org FAQPage and QAPage structured data.',
+      'Created /friends/ page implementing the slashfriends.org specification with IndieWeb microformats.',
+      'Refreshed pinned Fasti reference card with Tabler top-ribbon and soft-toned category badges.'
+    ]
+  },
+  {
+    version: 'v0.2.0',
+    date: '2026-08-25',
+    badge: 'Milestone',
+    badgeClass: 'bg-secondary text-white',
+    title: 'Open Knowledge Format (OKF v0.2) & Structured Data',
+    summary: 'Validation of knowledge catalog files against OKF v0.2 schema, machine-readable exports, and IndieWeb microformats.',
+    changes: [
+      'Standardized public knowledge files to the pinned OKF v0.2 specification.',
+      'Added automated validation gate for schema conformance and scope leaks.',
+      'Generated machine-readable project exports in JSON, CSV, and OKF Markdown formats.',
+      'Implemented BreadcrumbList and SoftwareApplication JSON-LD schema.'
+    ]
+  },
+  {
+    version: 'v0.1.0',
+    date: '2026-08-11',
+    badge: 'Initial Draft',
+    badgeClass: 'bg-secondary text-white',
+    title: 'Initial Field Guide & Fasti Reference Architecture',
+    summary: 'Launch of the Scrobble.dev knowledge base defining scrobble event boundaries, portable history invariants, and ecosystem catalog.',
+    changes: [
+      'Published domain boundaries distinguishing scrobble events, progress state, ratings, and identities.',
+      'Documented local-first, zero-telemetry Fasti reference architecture.',
+      'Indexed initial catalogue of 20+ scrobbling clients, servers, and connectors.'
+    ]
+  }
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Scrobble.dev', item: 'https://scrobble.dev/' },
+      { '@type': 'ListItem', position: 2, name: 'Changelog', item: 'https://scrobble.dev/changelog/' }
+    ]
+  }
+];
+---
+<BaseLayout {title} {description} type="WebPage" schema={schema} markdown="/knowledge/changelog.md" status="stable" modified="2026-08-31">
+  <div class="container-xl">
+    <article class="catalogue-hero h-entry" style="margin-bottom: 30px;">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><span aria-current="page">Changelog</span></nav>
+      <p class="kicker">Release History</p>
+      <h1 class="p-name">Changelog & Architecture Updates</h1>
+      <p class="standfirst e-summary">A transparent record of taxonomy changes, new project additions, specification refinements, and interface upgrades.</p>
+    </article>
+
+    <div class="row g-4" style="margin-bottom: 40px;">
+      <div class="col-lg-9">
+        <ul class="timeline">
+          {entries.map((entry) => (
+            <li class="timeline-event">
+              <div class="timeline-event-icon bg-primary-lt">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M12 8v4l3 3"/>
+                  <circle cx="12" cy="12" r="9"/>
+                </svg>
+              </div>
+              <div class="timeline-event-card">
+                <div class="timeline-event-header">
+                  <div class="d-flex align-items-center gap-2">
+                    <span class={`badge ${entry.badgeClass}`}>{entry.version}</span>
+                    {entry.badge && <span class="badge badge-outline text-secondary">{entry.badge}</span>}
+                    <h3 class="timeline-event-title mb-0">{entry.title}</h3>
+                  </div>
+                  <time class="timeline-event-time text-secondary" datetime={entry.date}>{entry.date}</time>
+                </div>
+                <p class="text-secondary mt-2 mb-3" style="font-size: 14px;">{entry.summary}</p>
+                <ul style="padding-left: 20px; font-size: 13.5px; line-height: 1.6; color: #334155;">
+                  {entry.changes.map((change) => (
+                    <li>{change}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="card card-stacked">
+          <div class="card-body">
+            <h3 class="card-title">Stay Connected</h3>
+            <p class="text-secondary" style="font-size: 13px; line-height: 1.5;">
+              Scrobble.dev is maintained open source. Track releases, propose updates, or check the friends list.
+            </p>
+            <div class="d-flex flex-column gap-2 mt-3">
+              <a href="/friends/" class="btn btn-outline-secondary btn-sm w-100">Browse /friends/ →</a>
+              <a href="/faq/" class="btn btn-outline-secondary btn-sm w-100">Read the FAQ</a>
+              <a href="https://github.com/Scrobble-dev/scrobble.dev/commits/main" class="btn btn-outline-secondary btn-sm w-100" target="_blank" rel="noopener noreferrer">Commit Log ↗</a>
+              <a href="https://github.com/Scrobble-dev/scrobble.dev/releases" class="btn btn-primary btn-sm w-100" target="_blank" rel="noopener noreferrer">GitHub Releases ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

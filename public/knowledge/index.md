@@ -39,7 +39,6 @@ This directory is the machine- and human-readable knowledge layer for scrobbling
 - https://scrobble.dev/learn/lifecycle/
 - https://scrobble.dev/build/
 - https://scrobble.dev/standard/
-- https://scrobble.dev/projects/floppy/
 - https://scrobble.dev/projects/
 - https://scrobble.dev/faq/
 - https://scrobble.dev/contribute/

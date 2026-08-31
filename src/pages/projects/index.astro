@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CATALOGUE_CHECKED_AT, CATEGORIES, LICENSE_STATES, MEDIA, PROJECTS, SOURCE_STATES } from '../../data/projects.mjs';
+import { CATALOGUE_CHECKED_AT, CATEGORIES, HOSTING_MODELS, MEDIA, PRICING_MODELS, PROJECTS, SOURCE_STATES } from '../../data/projects.mjs';
 
 const title = 'Scrobbling project catalogue — Scrobble.dev';
-const description = 'A source-linked catalogue of scrobbling services, trackers, clients and connectors, filterable by media type and project category.';
+const description = 'A source-linked catalogue of scrobbling services, trackers, clients and connectors, filterable by project category, pricing, media type, and hosting model.';
 const dataset = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
@@ -15,8 +15,8 @@ const dataset = {
   dateModified: CATALOGUE_CHECKED_AT,
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
   isAccessibleForFree: true,
-  keywords: ['scrobbling', 'media tracking', 'watch history', 'listening history', 'open source'],
-  creator: { '@type': 'Organization', name: 'Electric Town', url: 'https://github.com/Electric-Town' },
+  keywords: ['scrobbling', 'media tracking', 'watch history', 'listening history', 'open source', 'self-hosted', 'fitness tracking'],
+  creator: { '@type': 'Organization', name: 'Scrobble.dev', url: 'https://github.com/Scrobble-dev' },
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: 'https://scrobble.dev/projects.json' },
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://scrobble.dev/projects.csv' },
@@ -59,134 +59,505 @@ const schema = [
 ];
 ---
 <BaseLayout {title} {description} type="CollectionPage" schema={schema} markdown="/knowledge/projects.md" modified={CATALOGUE_CHECKED_AT} status="stable">
-  <article class="shell catalogue-hero h-entry">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><span aria-current="page">Projects</span></nav>
-    <p class="kicker">Project catalogue</p>
-    <h1 class="p-name">Scrobbling projects, compared by what they record.</h1>
-    <p class="standfirst e-summary">This catalogue records what each project's own documentation or repository described when checked. Inclusion is not an endorsement.</p>
-    <p class="catalogue-method">Catalogue checked {CATALOGUE_CHECKED_AT}. An unknown lifecycle means the checked source did not establish whether the project is active or archived.</p>
-  </article>
+  <div class="container-xl">
+    <article class="catalogue-hero h-entry">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Field guide</a><span aria-hidden="true">/</span><span aria-current="page">Projects</span></nav>
+      <p class="kicker">Project catalogue</p>
+      <h1 class="p-name">Scrobbling projects, compared by what they record.</h1>
+      <p class="standfirst e-summary">This catalogue records what each project's own documentation or repository described when checked. Inclusion is not an endorsement.</p>
+      <p class="catalogue-method">Catalogue checked {CATALOGUE_CHECKED_AT}. An unknown lifecycle means the checked source did not establish whether the project is active or archived.</p>
+    </article>
+
+    <!-- Pinned Reference Architecture Fasti Card (Tabler Card with Top Ribbon) -->
+    <section class="mb-4" aria-labelledby="pinned-implementation-title">
+      <div class="card card-stacked fasti-card">
+        <div class="ribbon ribbon-top bg-primary">★ Reference Architecture</div>
+        <div class="card-body">
+          <div class="fasti-card-header">
+            <div class="fasti-identity">
+              <div class="fasti-logo" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="44" height="44" fill="none">
+                  <rect width="512" height="512" rx="112" fill="#11110F"/>
+                  <rect x="8" y="8" width="496" height="496" rx="104" stroke="#22221E" stroke-width="6"/>
+                  <g transform="translate(136, 110)">
+                    <path d="M17 0V290" stroke="#D34B45" stroke-width="13" stroke-linecap="round"/>
+                    <path d="M43 0V290" stroke="#FFFDF8" stroke-width="6.5" stroke-linecap="round"/>
+                    <path d="M60 0V290" stroke="#8A857A" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 12"/>
+                    <path d="M17 13H204C217 13 226 21 226 34V51C226 60 217 68 204 68H43" fill="#D34B45"/>
+                    <path d="M60 34H196" stroke="#F1D06E" stroke-width="6.5" stroke-linecap="round"/>
+                    <path d="M17 132H162C172 132 179 138 179 149V162C179 172 172 179 162 179H43" fill="#2E2E2A"/>
+                    <path d="M60 155H149" stroke="#F1D06E" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="60" y1="77" x2="94" y2="77" stroke="#D34B45" stroke-width="6.5" stroke-linecap="round"/>
+                    <line x1="60" y1="102" x2="81" y2="102" stroke="#8A857A" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="60" y1="205" x2="94" y2="205" stroke="#D34B45" stroke-width="6.5" stroke-linecap="round"/>
+                    <line x1="60" y1="230" x2="81" y2="230" stroke="#8A857A" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="60" y1="256" x2="107" y2="256" stroke="#4B82E8" stroke-width="8.5" stroke-linecap="round"/>
+                    <circle cx="17" cy="155" r="15" fill="#F1D06E" stroke="#11110F" stroke-width="6"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="fasti-title-group">
+                <h2 id="pinned-implementation-title"><a href="https://github.com/Scrobble-dev/Fasti">Fasti</a></h2>
+                <p>A local-first media tracking daemon, cryptographically bound annal, and player-independent recorder.</p>
+              </div>
+            </div>
+            <div class="d-none d-md-flex gap-2">
+              <a class="btn btn-sm btn-primary" href="https://github.com/Scrobble-dev/Fasti" target="_blank" rel="noopener noreferrer">View Fasti on GitHub ↗</a>
+              <a class="btn btn-sm btn-secondary" href="https://github.com/Scrobble-dev/Fasti/issues" target="_blank" rel="noopener noreferrer">Issues & Milestones</a>
+            </div>
+          </div>
+
+          <div class="fasti-grid">
+            <div class="fasti-cell">
+              <span class="fasti-cell-label">Offline Engine</span>
+              <p class="fasti-cell-value">Local-first SQLite storage with cryptographic append-only ledger and verifiable state nonces.</p>
+            </div>
+            <div class="fasti-cell">
+              <span class="fasti-cell-label">Zero Telemetry</span>
+              <p class="fasti-cell-value">Strict privacy floor: no analytics, no cloud lock-in, and zero runtime tracking.</p>
+            </div>
+            <div class="fasti-cell">
+              <span class="fasti-cell-label">Product Boundary</span>
+              <p class="fasti-cell-value">Fasti records, players play. Never re-encodes, decodes or dictates media playback.</p>
+            </div>
+            <div class="fasti-cell">
+              <span class="fasti-cell-label">Open Source & Local</span>
+              <p class="fasti-cell-value">Native self-hosted daemon and desktop workbench. Permissive AGPL-3.0 open source.</p>
+            </div>
+          </div>
+
+          <div class="fasti-footer">
+            <div class="fasti-media-tags" aria-label="Fasti media scope">
+              {MEDIA.map((medium) => {
+                const slug = medium.toLowerCase().replace(/\s+/g, '');
+                return <span class={`badge badge-media-${slug} p-category`}>{medium}</span>;
+              })}
+            </div>
+            <div class="d-flex d-md-none gap-2 w-100 mt-2">
+              <a class="btn btn-sm btn-primary w-100" href="https://github.com/Scrobble-dev/Fasti" target="_blank" rel="noopener noreferrer">View Fasti on GitHub ↗</a>
+              <a class="btn btn-sm btn-secondary w-100" href="https://github.com/Scrobble-dev/Fasti/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <section class="catalogue-band" aria-labelledby="catalogue-title">
-    <div class="shell section">
-      <div class="catalogue-heading"><p class="section-label">{PROJECTS.length} documented projects</p><h2 id="catalogue-title">Find a tracker, client or connector</h2></div>
-      <div class="catalogue">
-        <form class="catalogue-filters" id="catalogue-filters" aria-label="Filter project catalogue">
-          <label>Search projects<input id="query-filter" name="q" type="search" autocomplete="off" placeholder="Name, medium or capture method" /></label>
-          <label>Media<select id="media-filter" name="media"><option>All</option>{MEDIA.map((item) => <option>{item}</option>)}</select></label>
-          <label>Project category<select id="category-filter" name="category"><option>All</option>{CATEGORIES.map((item) => <option>{item}</option>)}</select></label>
-          <details class="more-filters">
-            <summary>More filters</summary>
-            <div>
-              <label>Source state<select id="source-filter" name="source"><option>All</option>{SOURCE_STATES.map((item) => <option>{item}</option>)}</select></label>
-              <label>Licence<select id="license-filter" name="license"><option>All</option>{LICENSE_STATES.map((item) => <option>{item}</option>)}</select></label>
+    <div class="container-xl">
+      <div class="catalogue-heading">
+        <p class="section-label">{PROJECTS.length} documented projects</p>
+        <h2 id="catalogue-title">Find a tracker, client or connector</h2>
+      </div>
+
+      <div class="catalogue-layout">
+        <!-- Left Column: Tabler Filter Sidebar Card -->
+        <aside class="catalogue-sidebar" aria-label="Catalogue filters">
+          <div class="filter-card">
+            <div class="filter-card-header">
+              <h3 class="filter-card-title">Filter projects</h3>
+              <button class="reset-filters-btn reset-filters" id="reset-filters" type="button">Reset filters</button>
             </div>
-          </details>
-          <button class="button reset-filters" id="reset-filters" type="reset">Reset all</button>
-        </form>
-        <div class="catalogue-summary">
-          <div>
-            <p class="catalogue-count" id="catalogue-count" aria-live="polite">Showing {PROJECTS.length} of {PROJECTS.length} projects</p>
-            <p class="active-filters" id="active-filters">No filters applied.</p>
+            <div class="filter-card-body" role="search">
+              <!-- Search Input -->
+              <div class="filter-search-group">
+                <label for="query-filter">Search projects</label>
+                <div class="filter-search-box">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                  <input id="query-filter" name="q" type="search" autocomplete="off" placeholder="Search projects..." class="filter-search-input" />
+                </div>
+              </div>
+
+              <!-- 1. Category Facet (Strict Hierarchy: Category -> Pricing -> Media Types -> Hosting -> Licence) -->
+              <div class="facet-section">
+                <div class="facet-header">
+                  <span class="facet-title">1. Category</span>
+                  <button type="button" class="facet-all-toggle" data-facet="category">All</button>
+                </div>
+                <div class="facet-list" data-facet="category">
+                  {CATEGORIES.map((item) => {
+                    const count = PROJECTS.filter((p) => p.category === item).length;
+                    return (
+                      <label class="facet-item">
+                        <span class="facet-label">
+                          <input type="checkbox" class="facet-checkbox" data-facet="category" data-value={item} />
+                          {item}
+                        </span>
+                        <span class="facet-badge-count">{count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <!-- 2. Pricing Facet -->
+              <div class="facet-section">
+                <div class="facet-header">
+                  <span class="facet-title">2. Pricing</span>
+                  <button type="button" class="facet-all-toggle" data-facet="pricing">All</button>
+                </div>
+                <div class="facet-list" data-facet="pricing">
+                  {PRICING_MODELS.map((item) => {
+                    const count = PROJECTS.filter((p) => p.pricing === item).length;
+                    return (
+                      <label class="facet-item">
+                        <span class="facet-label">
+                          <input type="checkbox" class="facet-checkbox" data-facet="pricing" data-value={item} />
+                          {item}
+                        </span>
+                        <span class="facet-badge-count">{count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <!-- 3. Media Types Facet -->
+              <div class="facet-section">
+                <div class="facet-header">
+                  <span class="facet-title">3. Media types</span>
+                  <button type="button" class="facet-all-toggle" data-facet="media">All media</button>
+                </div>
+                <div class="facet-list" data-facet="media">
+                  {MEDIA.map((item) => {
+                    const count = PROJECTS.filter((p) => p.media.includes(item)).length;
+                    return (
+                      <label class="facet-item">
+                        <span class="facet-label">
+                          <input type="checkbox" class="facet-checkbox" data-facet="media" data-value={item} />
+                          {item}
+                        </span>
+                        <span class="facet-badge-count">{count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <!-- 4. Hosting Facet -->
+              <div class="facet-section">
+                <div class="facet-header">
+                  <span class="facet-title">4. Hosting model</span>
+                  <button type="button" class="facet-all-toggle" data-facet="hosting">All</button>
+                </div>
+                <div class="facet-list" data-facet="hosting">
+                  {HOSTING_MODELS.map((item) => {
+                    const count = PROJECTS.filter((p) => p.hosting === item).length;
+                    return (
+                      <label class="facet-item">
+                        <span class="facet-label">
+                          <input type="checkbox" class="facet-checkbox" data-facet="hosting" data-value={item} />
+                          {item}
+                        </span>
+                        <span class="facet-badge-count">{count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <!-- 5. Source Licence Facet -->
+              <div class="facet-section">
+                <div class="facet-header">
+                  <span class="facet-title">5. Source Licence</span>
+                  <button type="button" class="facet-all-toggle" data-facet="source">All</button>
+                </div>
+                <div class="facet-list" data-facet="source">
+                  {SOURCE_STATES.map((item) => {
+                    const count = PROJECTS.filter((p) => p.sourceState === item).length;
+                    return (
+                      <label class="facet-item">
+                        <span class="facet-label">
+                          <input type="checkbox" class="facet-checkbox" data-facet="source" data-value={item} />
+                          {item}
+                        </span>
+                        <span class="facet-badge-count">{count}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <p class="catalogue-data">Download <a href="/projects.json">JSON</a>, <a href="/projects.csv">CSV</a> or the <a href="/knowledge/projects.md">OKF v0.2 Markdown catalogue</a>. Catalogue metadata is CC0; linked projects and their data keep their own terms. Read the <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf">OKF project</a> and <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md">pinned v0.2 specification</a>.</p>
-            <p class="catalogue-scroll-hint" id="catalogue-scroll-hint">Scroll horizontally to compare every column.</p>
+        </aside>
+
+        <!-- Right Column: Results Toolbar + Datatable -->
+        <div class="catalogue-main">
+          <!-- Results Toolbar -->
+          <div class="catalogue-toolbar">
+            <div class="toolbar-left">
+              <h3 class="catalogue-count-title" id="catalogue-count">Showing {PROJECTS.length} of {PROJECTS.length} projects</h3>
+              <div class="active-filter-tags" id="active-filter-tags"></div>
+            </div>
+            <div class="toolbar-right">
+              <!-- Column Visibility Dropdown -->
+              <div class="column-toggle-wrapper">
+                <button type="button" class="btn btn-sm btn-secondary" id="column-toggle-btn" aria-expanded="false" aria-haspopup="true">
+                  <span>Columns ▾</span>
+                </button>
+                <div class="column-toggle-dropdown" id="column-toggle-dropdown">
+                  <label class="column-toggle-item">
+                    <input type="checkbox" class="col-toggle-checkbox" data-col="col-media" checked />
+                    <span>Media</span>
+                  </label>
+                  <label class="column-toggle-item">
+                    <input type="checkbox" class="col-toggle-checkbox" data-col="col-category" checked />
+                    <span>Category</span>
+                  </label>
+                  <label class="column-toggle-item">
+                    <input type="checkbox" class="col-toggle-checkbox" data-col="col-hosting" checked />
+                    <span>Hosting / Price</span>
+                  </label>
+                  <label class="column-toggle-item">
+                    <input type="checkbox" class="col-toggle-checkbox" data-col="col-capture" checked />
+                    <span>Capture</span>
+                  </label>
+                  <label class="column-toggle-item">
+                    <input type="checkbox" class="col-toggle-checkbox" data-col="col-links" checked />
+                    <span>Links & Evidence</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Export Links -->
+              <div class="catalogue-downloads">
+                <span>Export:</span>
+                <a href="/projects.json" class="tabler-export-link">JSON</a>
+                <a href="/projects.csv" class="tabler-export-link">CSV</a>
+                <a href="/knowledge/projects.md" class="tabler-export-link">OKF MD</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Datatable Card -->
+          <div class="datatable-card">
+            <div class="catalogue-scroll" role="region" aria-label="Scrobbling projects table" tabindex="0">
+              <table class="tabler-table">
+                <caption class="sr-only">Source-linked scrobbling projects. Use the column buttons to sort.</caption>
+                <colgroup>
+                  <col class="col-project" />
+                  <col class="col-media" />
+                  <col class="col-category" />
+                  <col class="col-hosting" />
+                  <col class="col-capture" />
+                  <col class="col-links" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-project" aria-sort="none"><button class="sort-button" type="button" data-sort="name">Project & Access</button></th>
+                    <th scope="col" class="col-media" aria-sort="none"><button class="sort-button" type="button" data-sort="media">Media</button></th>
+                    <th scope="col" class="col-category" aria-sort="none"><button class="sort-button" type="button" data-sort="category">Category</button></th>
+                    <th scope="col" class="col-hosting" aria-sort="none"><button class="sort-button" type="button" data-sort="hosting">Hosting / Price</button></th>
+                    <th scope="col" class="col-capture" aria-sort="none"><button class="sort-button" type="button" data-sort="capture">Capture</button></th>
+                    <th scope="col" class="col-links" aria-sort="none"><button class="sort-button" type="button" data-sort="checkedAt">Links & Evidence</button></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {PROJECTS.map((project) => {
+                    const hostBadgeClass = project.hosting === 'Self-hosted' ? 'badge-selfhosted' : project.hosting === 'Cloud' ? 'badge-cloud' : 'badge-local';
+                    const priceBadgeClass = project.pricing === 'Free' ? 'badge-free' : project.pricing === 'Freemium' ? 'badge-freemium' : 'badge-paid';
+                    return (
+                      <tr
+                        class="h-item"
+                        data-project-row
+                        data-id={project.id}
+                        data-name={project.name}
+                        data-query={`${project.name} ${project.summary} ${project.media.join(' ')} ${project.category} ${project.hosting} ${project.pricing} ${project.capture} ${project.demoCredentials ?? ''}`}
+                        data-media={project.media.join('|')}
+                        data-media-sort={project.media.join(', ')}
+                        data-category={project.category}
+                        data-hosting={project.hosting}
+                        data-pricing={project.pricing}
+                        data-capture={project.capture}
+                        data-source-state={project.sourceState}
+                        data-license={project.license ? 'Published licence' : 'No licence verified'}
+                        data-checked-at={project.checkedAt}
+                      >
+                        <th scope="row" class="col-project">
+                          <a href={project.url} class="project-title-link p-name u-url" target="_blank" rel="noopener noreferrer">{project.name}</a>
+                          <p class="project-summary-text p-summary">{project.summary}</p>
+                          {(project.demoUrl || project.demoCredentials) && (
+                            <div class="demo-access-box">
+                              <div class="demo-btn-group">
+                                {project.demoUrl && (
+                                  <a href={project.demoUrl} class="tabler-demo-badge" target="_blank" rel="noopener noreferrer">
+                                    ▶ Try Demo ↗
+                                  </a>
+                                )}
+                                {project.demoCredentials && (
+                                  <div class="demo-creds-container" title="Click Copy to copy login credentials">
+                                    <span aria-hidden="true">🔑</span>
+                                    <span class="demo-creds-text">
+                                      <code class="demo-creds-code">{project.demoCredentials}</code>
+                                    </span>
+                                    <button type="button" class="copy-creds-btn" data-copy-text={project.demoCredentials} title="Copy credentials to clipboard">
+                                      Copy
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </th>
+                        <td class="col-media">
+                          <div class="media-pills">
+                            {project.media.map((m) => {
+                              const slug = m.toLowerCase().replace(/\s+/g, '');
+                              return <span class={`badge badge-media-${slug} p-category`}>{m}</span>;
+                            })}
+                          </div>
+                        </td>
+                        <td class="col-category">
+                          <span class="badge badge-category p-category">{project.category}</span>
+                        </td>
+                        <td class="col-hosting">
+                          <div class="hosting-price-badges">
+                            <span class={`badge ${hostBadgeClass} p-category`}>{project.hosting}</span>
+                            <span class={`badge ${priceBadgeClass} p-category`}>{project.pricing}</span>
+                          </div>
+                        </td>
+                        <td class="col-capture">
+                          <span style="font-size: 12.5px; color: #334155;">{project.capture}</span>
+                        </td>
+                        <td class="col-links">
+                          <div class="table-actions-cell">
+                            <div class="table-btn-row">
+                              <a href={project.url} class="table-action-btn" target="_blank" rel="noopener noreferrer">Web ↗</a>
+                              {project.repository && <a href={project.repository} class="table-action-btn repo-btn" target="_blank" rel="noopener noreferrer">Repo ↗</a>}
+                            </div>
+                            <div class="table-evidence-text">
+                              <span>{project.sourceState} · {project.license ?? 'No licence verified'}</span>
+                            </div>
+                            <div class="table-evidence-links">
+                              <a href={project.sources[0].url} target="_blank" rel="noopener noreferrer">Primary source</a>
+                              <span>·</span>
+                              <a href={project.contribute} target="_blank" rel="noopener noreferrer" aria-label={`Contribute to ${project.name}`}>Contribute</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div class="catalogue-empty" id="catalogue-empty" hidden>
+            <h4>No projects match your filter selection</h4>
+            <p>Try unchecking some filter facets or clearing the search query to see all documented tools.</p>
+            <button class="btn btn-primary reset-filters" type="button">Reset all filters</button>
+          </div>
+          <p class="sr-only" id="sort-status" aria-live="polite"></p>
+
+          <div class="catalogue-meta-footer" style="margin-top: 14px;">
+            <p class="catalogue-data" style="font-size: 12.5px; color: var(--ink-soft); margin: 0;">Catalogue metadata is CC0; linked projects and their data keep their own terms. Read the <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf">OKF project</a> and <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md">pinned v0.2 specification</a>.</p>
           </div>
         </div>
-        <div class="catalogue-scroll" role="region" aria-label="Scrobbling projects table" aria-describedby="catalogue-scroll-hint" tabindex="0">
-          <table>
-            <caption class="sr-only">Source-linked scrobbling projects. Use the column buttons to sort.</caption>
-            <colgroup>
-              <col class="project-column" />
-              <col class="media-column" />
-              <col class="category-column" />
-              <col class="capture-column" />
-              <col class="evidence-column" />
-            </colgroup>
-            <thead><tr>
-              <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="name">Project</button></th>
-              <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="media">Media</button></th>
-              <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="category">Category</button></th>
-              <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="capture">Capture</button></th>
-              <th scope="col" aria-sort="none"><button class="sort-button" type="button" data-sort="checkedAt">Evidence</button></th>
-            </tr></thead>
-            <tbody>
-              {PROJECTS.map((project) => (
-                <tr
-                  data-project-row
-                  data-id={project.id}
-                  data-name={project.name}
-                  data-query={`${project.name} ${project.summary} ${project.media.join(' ')} ${project.category} ${project.capture}`}
-                  data-media={project.media.join('|')}
-                  data-media-sort={project.media.join(', ')}
-                  data-category={project.category}
-                  data-capture={project.capture}
-                  data-source-state={project.sourceState}
-                  data-license={project.license ? 'Published licence' : 'No licence verified'}
-                  data-checked-at={project.checkedAt}
-                >
-                  <th scope="row"><a href={project.url}>{project.name}</a><span>{project.summary}</span></th>
-                  <td>{project.media.join(', ')}</td>
-                  <td>{project.category}</td>
-                  <td>{project.capture}</td>
-                  <td>
-                    <span>{project.sourceState} · {project.license ?? 'No licence verified'}</span>
-                    <span>{project.lifecycle === 'unknown' ? 'Lifecycle not verified' : `Lifecycle: ${project.lifecycle}`} · {project.checkedAt}</span>
-                    <div class="evidence-links">
-                      <a href={project.sources[0].url}>Primary source</a>
-                      <a href={project.contribute} aria-label={`Contribute to ${project.name}`}>Contribute</a>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p class="catalogue-empty" id="catalogue-empty" hidden>No project matches every selected filter. Remove a filter or reset the catalogue.</p>
-        <p class="sr-only" id="sort-status" aria-live="polite"></p>
       </div>
     </div>
   </section>
 
-  <section class="shell section" aria-labelledby="catalogue-contribute-title">
-    <div class="section-intro">
-      <p class="section-label">Correct or extend the record</p>
-      <h2 id="catalogue-contribute-title">Contribute where the evidence belongs.</h2>
-      <p>Correct a catalogue fact in <a href="https://github.com/Electric-Town/scrobble.dev/issues/new">Scrobble.dev</a>. Reproduce a tracking failure in <a href="https://github.com/dannyvfilms/Floppy/issues">Floppy</a>. Include the source, checked date and the event that did not survive as expected.</p>
-    </div>
-  </section>
+  <div class="container-xl">
+    <section class="section" aria-labelledby="catalogue-contribute-title">
+      <div class="section-intro">
+        <p class="section-label">Correct or extend the record</p>
+        <h2 id="catalogue-contribute-title">Contribute where the evidence belongs.</h2>
+        <p>Correct a catalogue fact or propose a new tracked project in <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">Scrobble.dev</a>. Include the source, checked date and verified documentation.</p>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('#catalogue-filters');
-  const query = document.querySelector<HTMLInputElement>('#query-filter');
-  const media = document.querySelector<HTMLSelectElement>('#media-filter');
-  const category = document.querySelector<HTMLSelectElement>('#category-filter');
-  const source = document.querySelector<HTMLSelectElement>('#source-filter');
-  const license = document.querySelector<HTMLSelectElement>('#license-filter');
+  type FacetKey = 'category' | 'pricing' | 'media' | 'hosting' | 'source';
+  const FACET_KEYS: FacetKey[] = ['category', 'pricing', 'media', 'hosting', 'source'];
+
+  let queryState = '';
+  const facetState: Record<FacetKey, Set<string>> = {
+    category: new Set<string>(),
+    pricing: new Set<string>(),
+    media: new Set<string>(),
+    hosting: new Set<string>(),
+    source: new Set<string>()
+  };
+
+  const searchInput = document.querySelector<HTMLInputElement>('#query-filter');
+  const resetBtns = document.querySelectorAll<HTMLButtonElement>('.reset-filters');
   const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('[data-project-row]'));
-  const count = document.querySelector<HTMLElement>('#catalogue-count');
-  const active = document.querySelector<HTMLElement>('#active-filters');
-  const empty = document.querySelector<HTMLElement>('#catalogue-empty');
-  const body = document.querySelector<HTMLTableSectionElement>('.catalogue tbody');
+  const countEl = document.querySelector<HTMLElement>('#catalogue-count');
+  const activeTagsEl = document.querySelector<HTMLElement>('#active-filter-tags');
+  const emptyEl = document.querySelector<HTMLElement>('#catalogue-empty');
+  const bodyEl = document.querySelector<HTMLTableSectionElement>('.tabler-table tbody');
   const sortStatus = document.querySelector<HTMLElement>('#sort-status');
   const collator = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
-  const params = new URLSearchParams(window.location.search);
 
-  const controls = { q: query, media, category, source, license };
-  for (const [key, control] of Object.entries(controls)) {
-    const value = params.get(key);
-    if (control && value) control.value = value;
+  // Column visibility dropdown
+  const colToggleBtn = document.querySelector<HTMLButtonElement>('#column-toggle-btn');
+  const colToggleDropdown = document.querySelector<HTMLDivElement>('#column-toggle-dropdown');
+  const colCheckboxes = document.querySelectorAll<HTMLInputElement>('.col-toggle-checkbox');
+
+  colToggleBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    colToggleDropdown?.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!colToggleDropdown?.contains(e.target as Node) && e.target !== colToggleBtn) {
+      colToggleDropdown?.classList.remove('show');
+    }
+  });
+
+  colCheckboxes.forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const colName = cb.dataset.col;
+      if (!colName) return;
+      const cells = document.querySelectorAll(`.${colName}`);
+      cells.forEach((cell) => {
+        if (cb.checked) {
+          cell.classList.remove('col-hidden');
+        } else {
+          cell.classList.add('col-hidden');
+        }
+      });
+    });
+  });
+
+  // Read URL params
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('q')) {
+    queryState = params.get('q') || '';
+    if (searchInput) searchInput.value = queryState;
+  }
+  for (const facet of FACET_KEYS) {
+    const val = params.get(facet);
+    if (val) {
+      val.split(',').filter(Boolean).forEach((item) => facetState[facet].add(item));
+    }
+  }
+
+  function updateCheckboxVisuals() {
+    document.querySelectorAll<HTMLInputElement>('.facet-checkbox').forEach((cb) => {
+      const facet = cb.dataset.facet as FacetKey;
+      const value = cb.dataset.value;
+      if (facet && value) {
+        cb.checked = facetState[facet].has(value);
+      }
+    });
   }
 
   function replaceUrl() {
     const next = new URLSearchParams();
-    for (const [key, control] of Object.entries(controls)) {
-      const value = control?.value.trim() ?? '';
-      if (value && value !== 'All') next.set(key, value);
+    if (queryState.trim()) next.set('q', queryState.trim());
+    for (const facet of FACET_KEYS) {
+      const set = facetState[facet];
+      if (set.size > 0) next.set(facet, Array.from(set).join(','));
     }
-    const sorted = document.querySelector<HTMLTableCellElement>('.catalogue thead th[aria-sort="ascending"], .catalogue thead th[aria-sort="descending"]');
+    const sorted = document.querySelector<HTMLTableCellElement>('.tabler-table thead th[aria-sort="ascending"], .tabler-table thead th[aria-sort="descending"]');
     const sortButton = sorted?.querySelector<HTMLButtonElement>('[data-sort]');
     if (sortButton && sorted) {
       next.set('sort', sortButton.dataset.sort ?? 'name');
@@ -195,42 +566,129 @@ const schema = [
     window.history.replaceState({}, '', `${window.location.pathname}${next.size ? `?${next}` : ''}`);
   }
 
+  function renderActiveTags() {
+    if (!activeTagsEl) return;
+    activeTagsEl.innerHTML = '';
+    const activeItems: { facet: FacetKey; value: string }[] = [];
+
+    for (const facet of FACET_KEYS) {
+      facetState[facet].forEach((value) => activeItems.push({ facet, value }));
+    }
+
+    activeItems.forEach(({ facet, value }) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'active-filter-tag';
+      btn.textContent = `${facet}: ${value}`;
+      btn.setAttribute('aria-label', `Remove filter ${facet}: ${value}`);
+      btn.addEventListener('click', () => {
+        facetState[facet].delete(value);
+        updateCatalogue();
+      });
+      activeTagsEl.appendChild(btn);
+    });
+  }
+
   function updateCatalogue() {
-    const search = query?.value.trim().toLocaleLowerCase('en') ?? '';
+    const q = queryState.trim().toLocaleLowerCase('en');
     let visible = 0;
+
     for (const row of rows) {
-      const matches = (!search || row.dataset.query?.toLocaleLowerCase('en').includes(search))
-        && (media?.value === 'All' || row.dataset.media?.split('|').includes(media?.value ?? ''))
-        && (category?.value === 'All' || row.dataset.category === category?.value)
-        && (source?.value === 'All' || row.dataset.sourceState === source?.value)
-        && (license?.value === 'All' || row.dataset.license === license?.value);
+      const queryMatches = !q || (row.dataset.query?.toLocaleLowerCase('en').includes(q) ?? false);
+      const rowMedia = row.dataset.media?.split('|') ?? [];
+      const mediaMatches = facetState.media.size === 0 || Array.from(facetState.media).some((m) => rowMedia.includes(m));
+      const catMatches = facetState.category.size === 0 || facetState.category.has(row.dataset.category ?? '');
+      const hostMatches = facetState.hosting.size === 0 || facetState.hosting.has(row.dataset.hosting ?? '');
+      const priceMatches = facetState.pricing.size === 0 || facetState.pricing.has(row.dataset.pricing ?? '');
+      const sourceMatches = facetState.source.size === 0 || facetState.source.has(row.dataset.sourceState ?? '');
+
+      const matches = queryMatches && mediaMatches && catMatches && hostMatches && priceMatches && sourceMatches;
       row.hidden = !matches;
       if (matches) visible += 1;
     }
-    if (count) count.textContent = `Showing ${visible} of ${rows.length} projects`;
-    if (empty) empty.hidden = visible !== 0;
-    const labels = Object.entries(controls)
-      .map(([key, control]) => control && control.value && control.value !== 'All' ? `${key === 'q' ? 'search' : key}: ${control.value}` : '')
-      .filter(Boolean);
-    if (active) active.textContent = labels.length ? `Active filters: ${labels.join('; ')}.` : 'No filters applied.';
+
+    if (countEl) countEl.textContent = `Showing ${visible} of ${rows.length} projects`;
+    if (emptyEl) emptyEl.hidden = visible !== 0;
+
+    updateCheckboxVisuals();
+    renderActiveTags();
     replaceUrl();
   }
 
-  for (const control of Object.values(controls)) {
-    control?.addEventListener(control === query ? 'input' : 'change', updateCatalogue);
-  }
+  // Checkbox listeners
+  document.querySelectorAll<HTMLInputElement>('.facet-checkbox').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const facet = cb.dataset.facet as FacetKey;
+      const value = cb.dataset.value;
+      if (!facet || !value) return;
 
-  form?.addEventListener('reset', () => window.setTimeout(updateCatalogue));
+      if (cb.checked) {
+        facetState[facet].add(value);
+      } else {
+        facetState[facet].delete(value);
+      }
+      updateCatalogue();
+    });
+  });
 
+  // "All" toggles for facets
+  document.querySelectorAll<HTMLButtonElement>('.facet-all-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const facet = btn.dataset.facet as FacetKey;
+      if (facet && FACET_KEYS.includes(facet)) {
+        facetState[facet].clear();
+        updateCatalogue();
+      }
+    });
+  });
+
+  // Search input handler
+  searchInput?.addEventListener('input', () => {
+    queryState = searchInput.value;
+    updateCatalogue();
+  });
+
+  // Reset button handlers
+  resetBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      queryState = '';
+      if (searchInput) searchInput.value = '';
+      for (const facet of FACET_KEYS) {
+        facetState[facet].clear();
+      }
+      updateCatalogue();
+    });
+  });
+
+  // Copy credentials handlers
+  document.querySelectorAll<HTMLButtonElement>('.copy-creds-btn').forEach((btn) => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const text = btn.dataset.copyText;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy', err);
+      }
+    });
+  });
+
+  // Sorting
   function sortBy(key: string, direction: 'asc' | 'desc', announce = true) {
     const button = document.querySelector<HTMLButtonElement>(`[data-sort="${CSS.escape(key)}"]`);
     const header = button?.closest<HTMLTableCellElement>('th');
-    for (const other of document.querySelectorAll<HTMLTableCellElement>('.catalogue thead th')) {
+    for (const other of document.querySelectorAll<HTMLTableCellElement>('.tabler-table thead th')) {
       other.setAttribute('aria-sort', other === header ? (direction === 'desc' ? 'descending' : 'ascending') : 'none');
     }
     const datasetKey = key === 'media' ? 'mediaSort' : key;
     rows.sort((left, right) => collator.compare(left.dataset[datasetKey] ?? '', right.dataset[datasetKey] ?? '') * (direction === 'desc' ? -1 : 1));
-    for (const row of rows) body?.append(row);
+    for (const row of rows) bodyEl?.append(row);
     if (announce && sortStatus) sortStatus.textContent = `Sorted by ${button?.textContent?.trim()} ${direction === 'desc' ? 'descending' : 'ascending'}.`;
     replaceUrl();
   }
@@ -245,6 +703,9 @@ const schema = [
 
   const initialSort = params.get('sort');
   const initialOrder = params.get('order') === 'desc' ? 'desc' : 'asc';
-  if (initialSort && document.querySelector(`[data-sort="${CSS.escape(initialSort)}"]`)) sortBy(initialSort, initialOrder, false);
+  if (initialSort && document.querySelector(`[data-sort="${CSS.escape(initialSort)}"]`)) {
+    sortBy(initialSort, initialOrder, false);
+  }
+
   updateCatalogue();
 </script>

@@ -9,13 +9,60 @@ const {
   type = 'WebPage',
   schema = [],
   markdown,
-  status,
-  modified
+  status = 'stable',
+  modified = '2026-08-31'
 } = Astro.props;
 
 const canonicalUrl = new URL(canonical, Astro.site ?? 'https://scrobble.dev');
 const pathname = Astro.url.pathname;
 const releaseCommit = process.env.SCROBBLE_RELEASE_SHA || process.env.GITHUB_SHA || 'development';
+
+// Dynamic page source path on GitHub
+const cleanPath = pathname.replace(/^\/|\/$/g, '');
+const sourcePath = cleanPath === ''
+  ? 'src/pages/index.astro'
+  : (cleanPath.endsWith('.astro') ? `src/pages/${cleanPath}` : `src/pages/${cleanPath}/index.astro`);
+const githubEditUrl = `https://github.com/Scrobble-dev/scrobble.dev/blob/main/${sourcePath}`;
+
+// Dynamic BreadcrumbList generation for Google Search Gallery
+const pathSegments = pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+  {
+    '@type': 'ListItem',
+    position: 1,
+    name: 'Home',
+    item: 'https://scrobble.dev/'
+  },
+  ...pathSegments.map((segment, index) => {
+    const segmentUrl = new URL(`/${pathSegments.slice(0, index + 1).join('/')}/`, 'https://scrobble.dev').href;
+    const segmentName = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+    return {
+      '@type': 'ListItem',
+      position: index + 2,
+      name: index === pathSegments.length - 1 ? title.split('—')[0].trim() : segmentName,
+      item: segmentUrl
+    };
+  })
+];
+
+const breadcrumbSchema = pathSegments.length > 0 ? [{
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems
+}] : [];
+
+const maintainerSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://github.com/ryan-winkler#person',
+  name: 'Ryan Winkler',
+  url: 'https://github.com/ryan-winkler',
+  sameAs: [
+    'https://github.com/ryan-winkler',
+    'https://github.com/sponsors/ryan-winkler'
+  ]
+};
+
 const baseSchema = [
   {
     '@context': 'https://schema.org',
@@ -24,8 +71,11 @@ const baseSchema = [
     url: 'https://scrobble.dev/',
     name: 'Scrobble.dev',
     description: SITE.description,
-    inLanguage: 'en'
+    inLanguage: 'en',
+    publisher: { '@id': 'https://github.com/ryan-winkler#person' }
   },
+  maintainerSchema,
+  ...breadcrumbSchema,
   {
     '@context': 'https://schema.org',
     '@type': type,
@@ -34,6 +84,7 @@ const baseSchema = [
     name: title,
     description,
     isPartOf: { '@id': 'https://scrobble.dev/#website' },
+    author: { '@id': 'https://github.com/ryan-winkler#person' },
     inLanguage: 'en',
     ...(modified ? { dateModified: modified } : {})
   },
@@ -44,7 +95,7 @@ const baseSchema = [
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f4f0e7" />
     <meta name="description" content={description} />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -62,55 +113,105 @@ const baseSchema = [
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <title>{title}</title>
+    <script is:inline>
+      (function() {
+        var theme = localStorage.getItem('tabler-theme') || localStorage.getItem('theme');
+        if (!theme) {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+      })();
+    </script>
     {baseSchema.map((item) => <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />)}
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header" id="top">
-      <div class="shell masthead">
-        <a class="wordmark" href="/" aria-label="Scrobble.dev home">scrobble.dev</a>
-        <p>A field guide to media tracking</p>
-      </div>
-      <nav class="shell nav desktop-nav" aria-label="Primary navigation">
-        {SITE.primaryNavigation.map((item) => (
-          <a href={item.href} aria-current={item.match.some((prefix) => pathname.startsWith(prefix)) ? 'page' : undefined}>{item.label}</a>
-        ))}
-      </nav>
-      <details class="site-menu">
-        <summary class="shell">Menu</summary>
-        <nav class="shell mobile-nav" aria-label="Primary navigation, small screens">
-          {SITE.primaryNavigation.map((item) => (
-            <a href={item.href} aria-current={item.match.some((prefix) => pathname.startsWith(prefix)) ? 'page' : undefined}>{item.label}</a>
-          ))}
-        </nav>
-      </details>
-    </header>
-    <main id="main" tabindex="-1"><slot /></main>
-    <footer class="site-footer h-card">
-      <div class="shell footer-grid">
-        <div>
-          <a class="wordmark p-name u-url" href="https://scrobble.dev/">scrobble.dev</a>
-          <p class="p-note">{SITE.description}</p>
-        </div>
-        {SITE.footerSections.map((section) => (
-          <nav aria-label={section.label}>
-            <p>{section.label}</p>
-            {section.links.map((link) => <a href={link.href}>{link.label}</a>)}
+    <div class="page">
+      <a class="skip-link" href="#main">Skip to content</a>
+      <header class="site-header" id="top">
+        <div class="container-xl header-navbar">
+          <div class="navbar-brand-group">
+            <a class="wordmark p-name u-url" href="/" aria-label="Scrobble.dev home">scrobble.dev</a>
+            <span class="brand-subtext">A field guide to media tracking</span>
+          </div>
+          <nav class="shell nav desktop-nav" aria-label="Primary navigation">
+            {SITE.primaryNavigation.map((item) => (
+              <a href={item.href} aria-current={item.match.some((prefix) => pathname.startsWith(prefix)) ? 'page' : undefined}>{item.label}</a>
+            ))}
           </nav>
-        ))}
+          <div class="header-actions">
+            <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light and dark mode">
+              <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+            <a href="https://github.com/Scrobble-dev/scrobble.dev" class="btn btn-sm btn-outline-secondary d-none d-sm-inline-flex" target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+            <a href="https://github.com/sponsors/ryan-winkler" class="btn btn-sm btn-outline-danger d-none d-sm-inline-flex" target="_blank" rel="noopener noreferrer">
+              ♥ Sponsor
+            </a>
+          </div>
+        </div>
+        <details class="site-menu">
+          <summary class="shell">Menu</summary>
+          <nav class="shell mobile-nav" aria-label="Primary navigation, small screens">
+            {SITE.primaryNavigation.map((item) => (
+              <a href={item.href} aria-current={item.match.some((prefix) => pathname.startsWith(prefix)) ? 'page' : undefined}>{item.label}</a>
+            ))}
+          </nav>
+        </details>
+      </header>
+
+      <div class="page-wrapper">
+        <main id="main" class="page-body h-entry" tabindex="-1">
+          <slot />
+        </main>
+
+        <footer class="site-footer h-card">
+          <div class="shell footer-grid">
+            <div>
+              <a class="wordmark p-name u-url" href="https://scrobble.dev/">scrobble.dev</a>
+              <p class="p-note">{SITE.description}</p>
+              <p class="footer-maintainer">Maintained by <a class="p-author h-card u-url" rel="author me" href="https://github.com/ryan-winkler">Ryan Winkler</a></p>
+            </div>
+            {SITE.footerSections.map((section) => (
+              <nav aria-label={section.label}>
+                <p>{section.label}</p>
+                {section.links.map((link) => <a href={link.href}>{link.label}</a>)}
+              </nav>
+            ))}
+          </div>
+          <div class="shell footer-bottom">
+            <nav class="footer-actions" aria-label="Contribution links">
+              <span>Contribute</span>
+              <a href={githubEditUrl} target="_blank" rel="noopener noreferrer">Edit this page on GitHub ↗</a>
+              {SITE.footerActions.map((link) => <a href={link.href}>{link.label}</a>)}
+            </nav>
+            {(status || modified) && (
+              <p class="footer-page-meta">
+                {status && <span>Status: {status}</span>}
+                {modified && <span>Updated <time datetime={modified} class="dt-updated">{modified}</time></span>}
+              </p>
+            )}
+          </div>
+        </footer>
       </div>
-      <div class="shell footer-bottom">
-        <nav class="footer-actions" aria-label="Contribution links">
-          <span>Contribute</span>
-          {SITE.footerActions.map((link) => <a href={link.href}>{link.label}</a>)}
-        </nav>
-        {(status || modified) && (
-          <p class="footer-page-meta">
-            {status && <span>Status: {status}</span>}
-            {modified && <span>Updated <time datetime={modified}>{modified}</time></span>}
-          </p>
-        )}
-      </div>
-    </footer>
+    </div>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        var toggle = document.getElementById('theme-toggle');
+        if (toggle) {
+          toggle.addEventListener('click', function() {
+            var current = document.documentElement.getAttribute('data-theme') || 'light';
+            var next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            document.documentElement.setAttribute('data-bs-theme', next);
+            localStorage.setItem('tabler-theme', next);
+            localStorage.setItem('theme', next);
+          });
+        }
+      });
+    </script>
   </body>
 </html>
+

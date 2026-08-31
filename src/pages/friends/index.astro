@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const FRIENDS = [
+  {
+    name: 'Fasti',
+    role: 'Local-first Media Annal & Daemon',
+    description: 'Cryptographically bound local media history recorder, zero telemetry, and player-independent reference architecture.',
+    url: 'https://github.com/Scrobble-dev/Fasti',
+    feed: 'https://github.com/Scrobble-dev/Fasti/releases.atom',
+    category: 'Architecture',
+    icon: '⚡'
+  },
+  {
+    name: 'MusicBrainz',
+    role: 'Open Music Encyclopedia',
+    description: 'The definitive open-source, community-maintained music database providing canonical universal recording and release identifiers.',
+    url: 'https://musicbrainz.org/',
+    feed: 'https://blog.metabrainz.org/feed/',
+    category: 'Open Metadata',
+    icon: '🎵'
+  },
+  {
+    name: 'ListenBrainz',
+    role: 'Open Listening History Platform',
+    description: 'Non-profit open scrobble repository and recommendation platform operated by the MetaBrainz Foundation.',
+    url: 'https://listenbrainz.org/',
+    category: 'Open Service',
+    icon: '🎧'
+  },
+  {
+    name: 'BookWyrm',
+    role: 'Federated Social Reading',
+    description: 'ActivityPub-powered book tracking and reading log that decentralizes reading history without corporate walled gardens.',
+    url: 'https://joinbookwyrm.com/',
+    feed: 'https://joinbookwyrm.com/feed.xml',
+    category: 'Fediverse',
+    icon: '📚'
+  },
+  {
+    name: 'Audiobookshelf',
+    role: 'Self-Hosted Audiobooks & Podcasts',
+    description: 'Open-source media server for audiobooks and podcasts with multi-device sync, open API, and webhook triggers.',
+    url: 'https://www.audiobookshelf.org/',
+    feed: 'https://github.com/advplyr/audiobookshelf/releases.atom',
+    category: 'Self-Hosted',
+    icon: '🎙️'
+  },
+  {
+    name: 'IndieWeb',
+    role: 'People-Focused Web Standard',
+    description: 'Community and principles for owning your data, your content, and your identity on your own domain.',
+    url: 'https://indieweb.org/',
+    category: 'Standards',
+    icon: '🌐'
+  },
+  {
+    name: 'Open Knowledge Format (OKF)',
+    role: 'Portable Knowledge Catalogs',
+    description: 'Open specification for version-controlled, source-linked markdown knowledge bundles and evidence registries.',
+    url: 'https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf',
+    category: 'Standards',
+    icon: '📖'
+  },
+  {
+    name: 'Open Library',
+    role: 'Universal Book Catalog',
+    description: 'An open, editable library catalog powered by the Internet Archive, working toward a web page for every book ever published.',
+    url: 'https://openlibrary.org/',
+    feed: 'https://blog.openlibrary.org/feed/',
+    category: 'Open Metadata',
+    icon: '🏛️'
+  },
+  {
+    name: 'Slashfriends',
+    role: 'Indie Web /friends Standard',
+    description: 'The movement to restore genuine human discovery, webrings, and peer networks across independent personal websites.',
+    url: 'https://slashfriends.org/',
+    category: 'IndieWeb',
+    icon: '🤝'
+  }
+];
+---
+
+<BaseLayout
+  title="Friends & Allied Initiatives — Scrobble.dev"
+  description="Allied open knowledge, local-first, media preservation, and IndieWeb projects aligned with portable media history."
+  canonical="/friends/"
+  type="CollectionPage"
+  modified="2026-08-31"
+>
+  <article class="shell section friends-page h-entry">
+    <div class="section-intro">
+      <p class="section-label">Allied Initiatives</p>
+      <h1 class="p-name">Friends & Open Knowledge Peers</h1>
+      <p class="article-lead e-content">
+        In the spirit of <a href="https://slashfriends.org/" rel="external">/friends</a> and the independent web,
+        this page recognizes open-source platforms, public metadata initiatives, and decentralized protocols
+        that champion user data sovereignty, portable media history, and open standards.
+      </p>
+    </div>
+
+    <div class="friends-grid h-feed">
+      {FRIENDS.map((friend) => (
+        <article class="friend-card h-card">
+          <div class="friend-card-header">
+            <div class="friend-icon" aria-hidden="true">{friend.icon}</div>
+            <div class="friend-title-wrap">
+              <h2 class="friend-name">
+                <a class="p-name u-url" rel="friend external" href={friend.url} target="_blank">{friend.name}</a>
+              </h2>
+              <span class="friend-role p-role">{friend.role}</span>
+            </div>
+            <span class="badge badge-cloud friend-badge p-category">{friend.category}</span>
+          </div>
+
+          <p class="friend-desc p-note">{friend.description}</p>
+
+          <div class="friend-actions">
+            <a class="btn btn-sm btn-outline-primary" rel="friend external" href={friend.url} target="_blank">
+              Visit Project ↗
+            </a>
+            {friend.feed && (
+              <a class="btn btn-sm btn-ghost" rel="alternate" type="application/atom+xml" href={friend.feed} target="_blank">
+                RSS / Feed
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="friends-footer-note">
+      <h3>Have an allied project?</h3>
+      <p>
+        If you maintain an open-source tracker, metadata catalog, or local-first media tool,{' '}
+        <a href="https://github.com/Scrobble-dev/scrobble.dev/issues/new">propose an addition on GitHub</a>.
+      </p>
+    </section>
+  </article>
+</BaseLayout>

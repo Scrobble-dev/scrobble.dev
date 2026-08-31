@@ -26,7 +26,7 @@ Anime is a separate filter because it helps people find projects that track epis
 
 ## How do common tracking projects differ?
 
-Projects differ in media scope, capture method, hosting model and the records they keep. Some receive playback events, some provide a diary, some keep listening history, and some store a self-hosted record across several media. The [HTML FAQ](https://scrobble.dev/faq/#trackers) compares Floppy, Last.fm, ListenBrainz, Trakt, Simkl, Letterboxd and WeTrakr.
+Projects differ in media scope, capture method, hosting model and the records they keep. Some receive playback events, some provide a diary, some keep listening history, and some store a self-hosted record across several media. The [HTML FAQ](https://scrobble.dev/faq/#trackers) compares Fasti, Last.fm, ListenBrainz, Trakt, Simkl, Letterboxd and WeTrakr.
 
 ## What should a portable scrobble preserve?
 
@@ -38,7 +38,7 @@ Yes. Scrobble.dev releases the catalogue under [CC0](https://creativecommons.org
 
 ## How can I contribute?
 
-Use the [Scrobble.dev issue tracker](https://github.com/Electric-Town/scrobble.dev/issues/new) for a factual correction or project update. Include the claim, a primary source and the date checked. Use the [Floppy issue tracker](https://github.com/dannyvfilms/Floppy/issues) or [FloppyDesktop issue tracker](https://github.com/Electric-Town/FloppyDesktop/issues) for application changes.
+Use the [Scrobble.dev issue tracker](https://github.com/Scrobble-dev/scrobble.dev/issues/new) for a factual correction or project update. Include the claim, a primary source and the date checked. Use the [Fasti issue tracker](https://github.com/Scrobble-dev/Fasti/issues) for application changes.
 
 ## Related concepts
 

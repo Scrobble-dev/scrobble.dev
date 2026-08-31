@@ -2,9 +2,11 @@
 
 ## Mission
 
-Maintain scrobble.dev as a trusted, neutral, implementation-aware knowledge base for scrobbling and portable media tracking. The site must remain useful to people who never use Floppy while providing clear contribution paths into Floppy and FloppyDesktop.
+Maintain scrobble.dev as a trusted, neutral, implementation-aware knowledge base and ecosystem field guide for scrobbling and portable media tracking. The site documents the scrobbling ecosystem neutrally while referencing Fasti as a pinned local-first reference architecture.
 
-## Source-of-truth hierarchy
+---
+
+## Source-of-Truth Hierarchy
 
 1. Domain definitions and interoperability principles in `public/knowledge/`.
 2. Human-facing explanations in `src/pages/`.
@@ -13,131 +15,94 @@ Maintain scrobble.dev as a trusted, neutral, implementation-aware knowledge base
 
 If two sources disagree, do not silently choose one. Record scope, version, provenance, and the unresolved difference.
 
-## Domain boundaries
+---
 
-Keep these concepts distinct unless an explicit relationship is being described:
-- scrobble event
-- media entity / identity
-- user progress state
-- rating / review
-- watchlist / backlog intent
-- collection / ownership
-- list membership
-- derived statistics
-- recommendation signal
-- synchronization operation
+## Domain Boundaries (DDD)
 
-A page may compose them; storage and documentation should not collapse them.
+Keep these concepts strictly distinct unless an explicit relationship is being described:
+- **Scrobble event**: Immutable, append-only assertion of media consumption with verifiable timestamp.
+- **Media entity / identity**: Canonical and source-local identifiers (MusicBrainz, TMDB, OpenLibrary).
+- **User progress state**: Volatile, dirty resume position (seconds, pages, episode numbers).
+- **Rating / review**: Qualitative user judgment.
+- **Watchlist / backlog intent**: Forward-looking intent to consume.
+- **Collection / ownership**: Physical or digital license state.
+- **List membership**: Curated editorial or personal grouping.
+- **Derived statistics**: Aggregated calculations (scrobble counts, listening hours).
+- **Recommendation signal**: Inferred interest vectors.
+- **Synchronization operation**: Transport, relay, and idempotent deduplication.
 
-## Content architecture
+A page may compose them; storage and documentation must not collapse them.
 
-- Put reusable definitions in one canonical concept file.
-- Link rather than duplicate.
-- Give concepts stable paths.
-- Preserve project-specific semantics under project context.
-- Use progressive disclosure: definition → practical examples → edge cases → implementation detail.
-- Keep one clear H1 and descriptive H2/H3 headings.
-- Avoid walls of prose; optimize for scanning without reducing technical precision.
+---
 
-## Knowledge files
+## Content Architecture & Writing Style
 
-Concept documents use Markdown with YAML frontmatter and a non-empty `type`. Prefer these fields when meaningful:
-- `type`
-- `title`
-- `description`
-- `resource`
-- `tags`
-- `status`
-- `stale_after`
-- `generated`
-- `verified`
-- `sources`
+- **ASD-STE100 Simplified Technical English**: Use active voice, direct verbs, short sentences, and concrete nouns. Zero fluff, buzzwords, or marketing hype.
+- **ADHD / AuDHD Scannability**: Use tables, bold leads, structured bullet points, and high-contrast labels. Avoid walls of unbroken prose.
+- **Kathy Sierra Philosophy (*Badass: Making Users Awesome*)**: Focus on helping developers and users master portable media tracking. Provide immediate access to live demos, 1-click credential copying, failure-case reproductions, and clear recovery routes.
+- **Progressive Disclosure**: Definition $\to$ practical examples $\to$ edge cases $\to$ implementation details.
+- **Institutional Narrator**: Maintain a calm, authoritative, third-person voice. Never drift into casual first-person conversational filler.
 
-The root `index.md` may declare `okf_version: "0.2"`. Reserved `index.md` and `log.md` files follow OKF structure and are not ordinary concepts. Use `draft`, `stable` or `deprecated` when `status` is present.
+---
 
-The validator pins the official v0.2 specification revision in `config/okf-v0.2.json`. A release must pass `npm run validate:okf`; a regular expression that only finds frontmatter is not sufficient evidence of conformance.
+## Design System & UI Component Standards (Tabler-First)
 
-Relationships should use normal Markdown links. For externally sourced claims, include source/provenance information when adding or materially changing a concept.
+1. **Tabler Core Component Hierarchy**:
+   - Tabler Core component (direct usage).
+   - Tabler pattern composition (`search-results.html`, `datatables.html`).
+   - Fasti token-skinned Tabler element (`brand/tokens/tokens.json`).
+   - Custom Svelte/Astro component (STRICT EXCEPTION: only if Tabler has zero equivalent; requires explicit documented rationale).
+2. **Typography & Layout**:
+   - Headings: Georgia serif.
+   - Body: Arial sans-serif.
+   - Metadata & Labels: Courier New monospace.
+   - Zero layout shifts (`CLS = 0`). Minimum 44px hitboxes for all interactive elements.
+3. **Chesterton's Fence**:
+   - Never delete, hide, or disable an existing UI affordance, filter facet, or export format without tracing callers, tests, and documented intent.
+   - Mature partial features behind clear unavailable states or TODO markers instead of breaking them.
 
-## Structured data
+---
 
-Use Schema.org types only where they truthfully describe visible content. Default page markup comes from `BaseLayout.astro`. Add page-specific entities for genuinely useful concepts such as `TechArticle`, `DefinedTerm`, `DefinedTermSet`, and `SoftwareApplication`.
+## Accessibility & Interaction QA Rubric
 
-Do not add fake reviews, ratings, authorship, dates, pricing, FAQ markup, or other properties solely for search appearance.
+Before merging material UI changes, audit against:
+- **WCAG 2.2 Level AA**: Minimum 4.5:1 text contrast (7.0:1 on paper cards), 3px high-contrast focus rings with 2px offset, non-obscured focus.
+- **EN 301 549**: Conformance across Clause 9 (Web), Clause 10 (Documents), Clause 11 (Software), and Clause 12 (Documentation).
+- **AskTog Interaction Principles**: Anticipation, Fitts's law, latency reduction, user work protection, and state continuity.
+- **Gestalt Grouping**: Proximity, similarity, common region, continuity, and figure/ground separation.
+- **10 Nielsen Usability Heuristics**: Visibility of system status, match real world, user control/recovery, consistency, error prevention, recognition over recall, flexibility/efficiency, minimalist aesthetic, error diagnosis, and accessible help.
 
-## Design system
+---
 
-The site uses an editorial field-guide system.
-- Tokens belong in `src/styles/global.css`.
-- Prefer flat rules, source notes, tables and linear lists over card grids.
-- Use Georgia for reported headings, Arial for body copy and Courier New for labels.
-- Do not add gradients, backdrop blur, ornamental glows or rounded content containers.
-- Keep motion functional and restrained.
-- Respect `prefers-reduced-motion`.
-- Avoid continuous animation, parallax, attention-stealing glows, and widespread hover scaling.
-- Maintain visible focus and minimum 44px targets.
+## Structured Data, Knowledge Files & IndieWeb
 
-## Accessibility and cognitive accessibility
+- **Open Knowledge Format (OKF v0.2)**: `public/knowledge/` conforms to the pinned OKF v0.2 specification (`config/okf-v0.2.json`). Every concept has a non-empty `type`, `title`, `description`, `status`, and source citations.
+- **Google Search Gallery Schema.org**: `WebSite`, `Person`, `BreadcrumbList`, `Dataset`, `DataDownload`, `ItemList`, `SoftwareApplication`, `TechArticle`, `FAQPage`.
+- **IndieWeb Microformats2**: Markup pages with `h-card` (publisher/author), `h-entry` (articles/concepts), `h-feed`, `e-content`, `p-name`, `p-category`, and `u-url`.
+- **Slashfriends (`/friends/`)**: Implement and maintain `/friends/` according to https://slashfriends.org/ with `rel="friend"` links and peer feed references.
 
-Before merging material UI changes, verify:
-- keyboard navigation and focus visibility
-- semantic landmarks and heading order
-- contrast
-- zoom/reflow at narrow widths
-- reduced-motion behavior
-- link purpose from surrounding text
-- no color-only meaning
-- predictable navigation
-- limited simultaneous calls to action
-- content chunking and descriptive headings
+---
 
-For ADHD/AuDHD usability, prefer stable layouts, low distraction, explicit current context, short task paths, and progressive disclosure over novelty.
+## Reference Implementation & Governance
 
-## UX review
+- **Fasti Engine**: [https://github.com/Scrobble-dev/Fasti](https://github.com/Scrobble-dev/Fasti)
+- **Scrobble.dev Repository**: [https://github.com/Scrobble-dev/scrobble.dev](https://github.com/Scrobble-dev/scrobble.dev)
+- **Maintainer Support**: [https://github.com/sponsors/ryan-winkler](https://github.com/sponsors/ryan-winkler)
 
-Use Nielsen heuristics and Gestalt principles as review lenses, not slogans. Specifically check:
-- visibility of system status
-- match with real-world terminology
-- user control and recovery
-- consistency
-- error prevention
-- recognition over recall
-- flexibility without clutter
-- minimal but sufficient visual design
-- useful recovery guidance
-- help/documentation proximity
-- proximity, similarity, common region, continuity, and figure/ground
+---
 
-## Voice
+## Validation Gate
 
-Write like technical documentation maintained by practitioners.
-- direct, concrete, calm
-- no marketing filler
-- no claims that another tool is inferior
-- no invented consensus
-- no “revolutionary,” “game-changing,” or similar generic hype
-- explain trade-offs and ambiguity directly
-- define jargon at first use
-- maintain a third-person institutional narrator; do not drift into a conversational first-person voice
-- mark proposals, checked dates, sources and project-specific claims explicitly
-
-## Floppy relationship
-
-Floppy is software used to test the guidance and a primary contribution route, not the definition of scrobbling. Link implementation work to `https://github.com/dannyvfilms/Floppy/issues`. FloppyDesktop work belongs at `https://github.com/Electric-Town/FloppyDesktop`.
-
-Keep Sponsor Danny beside Floppy repository and contribution links. Keep Sponsor Ryan under Scrobble.dev maintenance. Do not group Danny under the site's maintainer-support label.
-
-## Public scope
-
-The adjacent identifier-resolution initiative described in private research is out of scope for the public site. Do not teach it, list its repositories or repeat its project vocabulary in public output. `npm run validate:public` scans generated HTML, metadata, JSON-LD, JSON, CSV, Markdown and agent files before release.
-
-## Validation before PR
-
-Run:
+Run the canonical gate before any PR:
 
 ```bash
-npm install
-npm run build
+npm test
 ```
 
-Then inspect generated pages for canonical URLs, sitemap output, `llms.txt`, `robots.txt`, keyboard focus, mobile reflow, and JSON-LD validity. Changes to definitions should update both the relevant knowledge concept and human-facing explanation when both surfaces exist.
+This executes:
+1. `npm run generate:public` (Regenerates `public/knowledge/projects.md`)
+2. `astro check && astro build` (Typecheck & static SSG build)
+3. `scripts/build-sites.mjs` (Sites worker generation)
+4. `npm run validate:okf` (OKF v0.2 JSON schema validation)
+5. `npm run validate:public` (Scope leak detection)
+6. `node --test tests/*.test.mjs` (All unit and contract tests)

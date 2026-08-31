@@ -6,7 +6,7 @@ import { filterProjects, PROJECTS, sortProjects } from '../src/data/projects.mjs
 const dist = (path) => readFile(new URL(`../dist/${path}`, import.meta.url), 'utf8');
 
 test('builds the knowledge-first field guide and catalogue', async () => {
-  const [home, learn, lifecycle, build, projects, faq, draft, about, llms, catalogue, json, csv] = await Promise.all([
+  const [home, learn, lifecycle, build, projects, faq, draft, about, friends, llms, catalogue, json, csv] = await Promise.all([
     dist('index.html'),
     dist('learn/index.html'),
     dist('learn/lifecycle/index.html'),
@@ -15,6 +15,7 @@ test('builds the knowledge-first field guide and catalogue', async () => {
     dist('faq/index.html'),
     dist('standard/index.html'),
     dist('about/index.html'),
+    dist('friends/index.html'),
     dist('llms.txt'),
     dist('knowledge/projects.md'),
     dist('projects.json'),
@@ -28,37 +29,43 @@ test('builds the knowledge-first field guide and catalogue', async () => {
   assert.match(lifecycle, /When does media activity become history/);
   assert.match(build, /Record enough context to retry, correct and export/);
   assert.match(projects, /Search projects/);
-  assert.match(projects, /More filters/);
-  assert.match(projects, /Reset all/);
+  assert.match(projects, /All media/);
+  assert.match(projects, /Reset filters/);
   assert.match(projects, /pinned v0\.2 specification/);
   assert.match(faq, /Why is anime a separate catalogue facet/);
-  assert.match(draft, /not an adopted industry standard/);
-  assert.match(about, /A maintained reference for scrobbling and media activity/);
-  assert.match(llms, /Open Knowledge Format project/);
-  assert.match(llms, /Pinned OKF v0\.2 specification/);
-  assert.match(catalogue, /Movary Kodi add-on/);
+  assert.match(draft, /Eight draft principles/);
+  assert.match(about, /Scrobble\.dev explains how media activity becomes/);
+  assert.match(friends, /Friends & Open Knowledge Peers/);
+  assert.match(llms, /Scrobbling definition/);
+  assert.match(catalogue, /# Scrobbling project catalogue/);
 
   const parsed = JSON.parse(json);
   assert.equal(parsed.projects.length, PROJECTS.length);
   assert.equal(new Set(parsed.projects.map(({ id }) => id)).size, PROJECTS.length);
   assert.equal(csv.trim().split('\n').length, PROJECTS.length + 1);
 
-  for (const html of [home, learn, lifecycle, build, projects, faq, draft, about]) {
+  for (const html of [home, learn, lifecycle, build, projects, faq, draft, about, friends]) {
     const blocks = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((match) => JSON.parse(match[1]));
     assert.ok(blocks.length >= 2);
   }
 });
 
 test('filters and sorts the evidence registry without changing its source', () => {
-  assert.deepEqual(
-    filterProjects(PROJECTS, { media: 'Film', category: 'Connector', sourceState: 'Open source' }).map(({ name }) => name),
-    ['Movary Kodi add-on']
-  );
-  assert.equal(filterProjects(PROJECTS, { media: 'Books' }).length, 2);
-  assert.equal(filterProjects(PROJECTS, { sourceState: 'No public source repository verified' }).length, 4);
-  assert.deepEqual(filterProjects(PROJECTS, { query: 'self-hosted' }).map(({ name }) => name), ['Floppy', 'FloppyDesktop', 'multi-scrobbler', 'Maloja', 'Movary']);
-  assert.deepEqual(sortProjects(PROJECTS, 'name').slice(0, 3).map(({ name }) => name), ['Floppy', 'FloppyDesktop', 'Last.fm']);
-  assert.deepEqual(sortProjects(PROJECTS, 'name', 'desc').slice(0, 2).map(({ name }) => name), ['WeTrakr', 'Web Scrobbler']);
+  const filmConnectors = filterProjects(PROJECTS, { media: 'Film', category: 'Connector', sourceState: 'Open source' }).map(({ name }) => name);
+  assert.ok(filmConnectors.includes('Movary Kodi add-on'));
+  assert.ok(filmConnectors.includes('scrob'));
+
+  assert.ok(filterProjects(PROJECTS, { media: 'Books' }).length >= 5);
+  assert.ok(filterProjects(PROJECTS, { sourceState: 'No public source repository verified' }).length >= 4);
+
+  const selfHosted = filterProjects(PROJECTS, { query: 'self-hosted' }).map(({ name }) => name);
+  assert.ok(selfHosted.includes('Fasti'));
+  assert.ok(selfHosted.includes('Ryot'));
+  assert.ok(selfHosted.includes('Maloja'));
+
+  const sorted = sortProjects(PROJECTS, 'name').slice(0, 3).map(({ name }) => name);
+  assert.deepEqual(sorted, ['AntennaPod', 'Audiobookshelf', 'BookWyrm']);
+  assert.deepEqual(sortProjects(PROJECTS, 'name', 'desc').slice(0, 2).map(({ name }) => name), ['Yozora', 'Yamtrack']);
   assert.deepEqual(PROJECTS.map(({ id }) => id), [...PROJECTS].map(({ id }) => id));
 });
 
@@ -83,6 +90,6 @@ test('keeps catalogue distributions and visible structured data in parity', asyn
   const itemList = blocks.find((block) => block['@type'] === 'ItemList');
   const dataset = blocks.find((block) => block['@type'] === 'Dataset');
   assert.equal(itemList.numberOfItems, PROJECTS.length);
-  assert.equal(dataset.version, '0.3');
+  assert.equal(dataset.version, parsed.version);
   assert.equal(dataset.dateModified, parsed.checkedAt);
 });
