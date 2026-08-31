@@ -1,4 +1,5 @@
 export const CATALOGUE_CHECKED_AT = '2026-08-31';
+export const CATALOGUE_UPDATED_AT = CATALOGUE_CHECKED_AT;
 
 export const MEDIA = ['Film', 'Television', 'Anime', 'Books', 'Manga', 'Comics', 'Music', 'Podcasts', 'Video games', 'Board games', 'Fitness'];
 export const HOSTING_MODELS = ['Self-hosted', 'Cloud', 'Local client'];
@@ -307,29 +308,6 @@ export const PROJECTS = [
     sources: [
       source('multi-scrobbler-repository', 'multi-scrobbler repository', 'https://github.com/FoxxMD/multi-scrobbler'),
       source('multi-scrobbler-docs', 'multi-scrobbler documentation', 'https://docs.multi-scrobbler.app/')
-    ]
-  },
-  {
-    id: 'fasti',
-    name: 'Fasti',
-    summary: 'Local-first media Record and observation service. No supported public release exists.',
-    media: ['Film', 'Television', 'Anime', 'Books', 'Music', 'Podcasts', 'Video games'],
-    category: 'Record system',
-    capture: 'Authenticated API observations and governed imports',
-    sourceState: 'Open source',
-    license: 'AGPL-3.0-or-later',
-    url: 'https://fasti.scrobble.dev/',
-    repository: 'https://github.com/Scrobble-dev/Fasti',
-    contribute: 'https://github.com/Scrobble-dev/Fasti/issues',
-    lifecycle: 'active',
-    checkedAt: CATALOGUE_UPDATED_AT,
-    sources: [
-      source(
-        'fasti-readme',
-        'Fasti repository status and scope',
-        'https://github.com/Scrobble-dev/Fasti/blob/9511a46b6177c1ec27aa9398ac222e3b719b41ea/README.md',
-        CATALOGUE_UPDATED_AT
-      )
     ]
   },
   {

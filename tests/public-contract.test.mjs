@@ -13,6 +13,7 @@ const requiredPrimaryNavigation = [
 
 const requiredFooterLinks = [
   ['Fasti repository', 'https://github.com/Scrobble-dev/Fasti'],
+  ['Fasti documentation', 'https://fasti.scrobble.dev/'],
   ['Fasti issues', 'https://github.com/Scrobble-dev/Fasti/issues'],
   ['Project catalogue', '/projects/'],
   ['About and evidence method', '/about/'],
@@ -48,7 +49,7 @@ test('keeps Fasti with Projects and Ryan with Scrobble.dev maintenance', () => {
 
   assert.deepEqual(
     projects?.links.map(({ label }) => label),
-    ['Fasti repository', 'Fasti issues', 'Project catalogue']
+    ['Fasti repository', 'Fasti documentation', 'Fasti issues', 'Project catalogue']
   );
   assert.deepEqual(support?.links.map(({ label }) => label), ['Sponsor Ryan']);
   assert.deepEqual(SITE.footerActions.map(({ label }) => label), ['Improve this field guide']);

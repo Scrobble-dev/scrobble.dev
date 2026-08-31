@@ -13,6 +13,7 @@ export const SITE = {
       label: 'Projects',
       links: [
         { label: 'Fasti repository', href: 'https://github.com/Scrobble-dev/Fasti' },
+        { label: 'Fasti documentation', href: 'https://fasti.scrobble.dev/' },
         { label: 'Fasti issues', href: 'https://github.com/Scrobble-dev/Fasti/issues' },
         { label: 'Project catalogue', href: '/projects/' }
       ]
@@ -28,16 +29,6 @@ export const SITE = {
         { label: 'Friends & peers', href: '/friends/' },
         { label: 'Open Knowledge Format project', href: 'https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf' },
         { label: 'OKF v0.2 specification', href: 'https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/374e0bc4c644310ff56cdf9c0fe81eccdec862b0/okf/SPEC.md' }
-      ]
-    },
-    {
-      label: 'Projects',
-      links: [
-        { label: 'Floppy', href: 'https://github.com/dannyvfilms/Floppy' },
-        { label: 'Work on Floppy', href: 'https://github.com/dannyvfilms/Floppy/issues' },
-        { label: 'Sponsor Danny', href: 'https://github.com/sponsors/dannyvfilms' },
-        { label: 'FloppyDesktop', href: 'https://github.com/Electric-Town/FloppyDesktop' },
-        { label: 'Fasti documentation', href: 'https://fasti.scrobble.dev/' }
       ]
     },
     {
