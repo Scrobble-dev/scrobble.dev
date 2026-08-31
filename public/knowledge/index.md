@@ -12,6 +12,9 @@ This directory is the machine- and human-readable knowledge layer for scrobbling
 - [Scrobble event](./concepts/scrobble-event.md)
 - [Media identity](./concepts/media-identity.md)
 - [Interoperability](./concepts/interoperability.md)
+- [Audio and podcast activity records](./concepts/audio-and-podcast-activity.md)
+- [Game activity records](./concepts/game-activity.md)
+- [Anime catalogue granularity](./concepts/anime-catalogue-granularity.md)
 - [Frequently asked questions](./faq.md)
 - [Evidence method](./method.md)
 - [Governance](./governance.md)
@@ -37,6 +40,9 @@ This directory is the machine- and human-readable knowledge layer for scrobbling
 ## Human-facing representations
 - https://scrobble.dev/learn/scrobbling/
 - https://scrobble.dev/learn/lifecycle/
+- https://scrobble.dev/learn/audio-and-podcasts/
+- https://scrobble.dev/learn/games/
+- https://scrobble.dev/learn/anime-catalogues/
 - https://scrobble.dev/build/
 - https://scrobble.dev/standard/
 - https://scrobble.dev/projects/floppy/
