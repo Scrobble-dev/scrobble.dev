@@ -1370,13 +1370,14 @@ pre { margin: 0 0 24px; padding: 20px; overflow: auto; border-left: 4px solid va
 .footer-maintainer a { color: inherit; font-weight: 600; }
 
 @media (max-width: 900px) {
-  .home-hero, .history, .knowledge-layout, .article { grid-template-columns: minmax(0, 1fr); }
+  .home-hero, .history, .knowledge-layout, .article, .article-grid { grid-template-columns: minmax(0, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > div { grid-column: 1 / -1; }
   .toc { order: -1; position: static; }
 }
 
 @media (max-width: 640px) {
+  .path-list article { grid-template-columns: 1fr; gap: 8px; }
   .header-inner { min-height: 48px; }
   .wordmark { font-size: 21px; }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
