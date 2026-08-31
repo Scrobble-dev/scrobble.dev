@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { CATALOGUE_CHECKED_AT, PROJECTS } from '../src/data/projects.mjs';
+import { CATALOGUE_UPDATED_AT, PROJECTS } from '../src/data/projects.mjs';
 
 const publicRoot = new URL('../public/', import.meta.url);
 
@@ -14,13 +14,13 @@ function projectCatalogueMarkdown() {
     '---',
     'type: Dataset',
     'title: Scrobbling project catalogue',
-    'description: Source-linked descriptions of scrobbling services, trackers, clients and connectors.',
+    'description: Source-linked descriptions of scrobbling services, record systems, trackers, clients and connectors.',
     'resource: https://scrobble.dev/projects/',
     'tags: [scrobbling, media-tracking, projects]',
     'status: stable',
     'stale_after: 2026-11-11',
-    `generated: { by: process:scrobble-dev-generate, at: ${CATALOGUE_CHECKED_AT}T23:00:00Z }`,
-    `verified: { by: process:project-source-review, at: ${CATALOGUE_CHECKED_AT}T23:00:00Z }`,
+    `generated: { by: process:scrobble-dev-generate, at: ${CATALOGUE_UPDATED_AT}T13:28:00Z }`,
+    `verified: { by: process:project-source-review, at: ${CATALOGUE_UPDATED_AT}T13:28:00Z }`,
     'sources:',
     ...sourceEntries.map((item) => `  - { id: ${item.projectId}-${item.id}, resource: ${yamlString(item.url)}, title: ${yamlString(item.title)}, retrieved_at: ${item.checkedAt} }`),
     '---'
@@ -38,7 +38,7 @@ function projectCatalogueMarkdown() {
 
 # Scrobbling project catalogue
 
-This catalogue records what each project's own documentation or repository described when checked on ${CATALOGUE_CHECKED_AT}. Inclusion is not an endorsement. \`Unknown\` means the checked source did not establish a lifecycle state.
+This catalogue was updated on ${CATALOGUE_UPDATED_AT}. Each row records when its source was checked. Inclusion is not an endorsement. \`Unknown\` means the checked source did not establish a lifecycle state.
 
 | Project | Media | Category | Hosting | Pricing | Capture | Source state | Licence | Lifecycle | Checked | Evidence and contribution |
 |---|---|---|---|---|---|---|---|---|---|---|

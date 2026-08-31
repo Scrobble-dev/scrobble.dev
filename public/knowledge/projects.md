@@ -1,7 +1,7 @@
 ---
 type: Dataset
 title: Scrobbling project catalogue
-description: Source-linked descriptions of scrobbling services, trackers, clients and connectors.
+description: Source-linked descriptions of scrobbling services, record systems, trackers, clients and connectors.
 resource: https://scrobble.dev/projects/
 tags: [scrobbling, media-tracking, projects]
 status: stable

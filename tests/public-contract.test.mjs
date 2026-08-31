@@ -30,6 +30,8 @@ test('keeps primary navigation compact and task-oriented', () => {
 });
 
 test('centralizes every required footer reference', () => {
+  assert.deepEqual(SITE.footerSections.map(({ label }) => label), ['Field guide', 'Projects', 'Support the maintainer']);
+
   const configuredLinks = [
     ...SITE.footerSections.flatMap(({ links }) => links),
     ...SITE.footerActions

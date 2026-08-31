@@ -31,6 +31,16 @@ export const SITE = {
       ]
     },
     {
+      label: 'Projects',
+      links: [
+        { label: 'Floppy', href: 'https://github.com/dannyvfilms/Floppy' },
+        { label: 'Work on Floppy', href: 'https://github.com/dannyvfilms/Floppy/issues' },
+        { label: 'Sponsor Danny', href: 'https://github.com/sponsors/dannyvfilms' },
+        { label: 'FloppyDesktop', href: 'https://github.com/Electric-Town/FloppyDesktop' },
+        { label: 'Fasti documentation', href: 'https://fasti.scrobble.dev/' }
+      ]
+    },
+    {
       label: 'Support the maintainer',
       links: [
         { label: 'Sponsor Ryan', href: 'https://github.com/sponsors/ryan-winkler' }
