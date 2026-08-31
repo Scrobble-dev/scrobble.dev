@@ -106,3 +106,11 @@ This executes:
 4. `npm run validate:okf` (OKF v0.2 JSON schema validation)
 5. `npm run validate:public` (Scope leak detection)
 6. `node --test tests/*.test.mjs` (All unit and contract tests)
+
+---
+
+## Generated Catalogue Contract
+
+- `CATALOGUE_CHECKED_AT` in `src/data/projects.mjs` is the sole published catalogue date. `CATALOGUE_UPDATED_AT` aliases it for generated and schema outputs.
+- Change the registry first. Then run `npm test`. The generated `projects.json` `updatedAt`, Dataset `dateModified`, and `public/knowledge/projects.md` must agree with the registry date.
+- Keep project IDs unique. The rendered catalogue, CSV, JSON, knowledge file, and structured data must describe the same project list.

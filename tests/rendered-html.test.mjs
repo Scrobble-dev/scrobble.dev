@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { filterProjects, PROJECTS, sortProjects } from '../src/data/projects.mjs';
+import { CATALOGUE_CHECKED_AT, filterProjects, PROJECTS, sortProjects } from '../src/data/projects.mjs';
 
 const dist = (path) => readFile(new URL(`../dist/${path}`, import.meta.url), 'utf8');
 
@@ -96,5 +96,6 @@ test('keeps catalogue distributions and visible structured data in parity', asyn
   const dataset = blocks.find((block) => block['@type'] === 'Dataset');
   assert.equal(itemList.numberOfItems, PROJECTS.length);
   assert.equal(dataset.version, parsed.version);
-  assert.equal(dataset.dateModified, parsed.checkedAt);
+  assert.equal(parsed.updatedAt, CATALOGUE_CHECKED_AT);
+  assert.equal(dataset.dateModified, parsed.updatedAt);
 });

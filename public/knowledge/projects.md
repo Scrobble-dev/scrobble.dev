@@ -6,8 +6,8 @@ resource: https://scrobble.dev/projects/
 tags: [scrobbling, media-tracking, projects]
 status: stable
 stale_after: 2026-11-11
-generated: { by: process:scrobble-dev-generate, at: 2026-08-31T23:00:00Z }
-verified: { by: process:project-source-review, at: 2026-08-31T23:00:00Z }
+generated: { by: process:scrobble-dev-generate, at: 2026-08-31T13:28:00Z }
+verified: { by: process:project-source-review, at: 2026-08-31T13:28:00Z }
 sources:
   - { id: fasti-fasti-repository, resource: "https://github.com/Scrobble-dev/Fasti", title: "Fasti repository", retrieved_at: 2026-08-31 }
   - { id: ryot-ryot-homepage, resource: "https://ryot.io/", title: "Ryot website", retrieved_at: 2026-08-31 }
@@ -61,7 +61,7 @@ sources:
 
 # Scrobbling project catalogue
 
-This catalogue records what each project's own documentation or repository described when checked on 2026-08-31. Inclusion is not an endorsement. `Unknown` means the checked source did not establish a lifecycle state.
+This catalogue was updated on 2026-08-31. Each row records when its source was checked. Inclusion is not an endorsement. `Unknown` means the checked source did not establish a lifecycle state.
 
 | Project | Media | Category | Hosting | Pricing | Capture | Source state | Licence | Lifecycle | Checked | Evidence and contribution |
 |---|---|---|---|---|---|---|---|---|---|---|
